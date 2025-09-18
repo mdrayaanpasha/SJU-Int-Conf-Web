@@ -24,7 +24,10 @@ export const GlassNavbar: React.FC = () => {
   const handleNavClick = () => setOpen(false);
 
   return (
-    <header className="fixed w-full z-50 backdrop-blur-md bg-white/30 shadow-lg" role="banner">
+    <header
+      className="fixed w-full z-50 backdrop-blur-md bg-white/30 shadow-lg"
+      role="banner"
+    >
       <div className="container mx-auto flex justify-between items-center py-4 px-6">
         {/* Logo */}
         <a href="#" className="text-2xl font-bold" aria-label="ICRAC 2026 Home">
