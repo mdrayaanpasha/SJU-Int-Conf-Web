@@ -1,6 +1,39 @@
 import { HeroGeometric } from "../components/ui/shape-landing-hero";
 import Navbar from "../components/ui/header";
 import { Timeline } from "../components/ui/timeline";
+import FeaturedSpeakersSection from "../components/ui/featured-section";
+import CallForPapersComponent from "../components/ui/areas";
+import { motion } from "framer-motion";
+import { FiMail, FiPhone, FiGlobe, FiMapPin } from "react-icons/fi";
+import Footer from "../components/ui/footer";
+// --- Contact Information ---
+const contactDetails = [
+  {
+    icon: <FiMail />,
+    title: "General Inquiries",
+    contact: "icrac2026@gmail.com",
+    href: "mailto:icrac2026@gmail.com",
+  },
+  {
+    icon: <FiPhone />,
+    title: "Phone Support",
+    contact: "+91 9207483215 , +91 9774335503", // Added other numbers
+    href: "tel:+919207483215",
+  },
+  {
+    icon: <FiGlobe />,
+    title: "Website",
+    contact: "icrac2026.com", // Replace with your actual domain
+    href: "#", // Replace with your actual URL
+  },
+];
+
+const venue = {
+    name: "St. Joseph's University",
+    address: "36, Lal Bagh Main Rd, Bengaluru, Karnataka 560027",
+    // OpenStreetMap URL for sharing/linking
+    mapLink: "https://www.openstreetmap.org/?mlat=12.9616&mlon=77.5978#map=17/12.9616/77.5978",
+};
 
 export default function Home() {
  const data = [
@@ -109,6 +142,73 @@ export default function Home() {
       <Navbar />
       <HeroGeometric badge="ICRAC 2026" title1="Elevate Your" title2="Tech Vision" />
         <Timeline data={data} />
+        <FeaturedSpeakersSection/>
+        <CallForPapersComponent />
+        <div className="bg-black py-16 px-4 sm:px-6 md:px-8">
+                <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        
+                  {/* Contact Cards */}
+                  <motion.div 
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ staggerChildren: 0.15 }}
+                    className="w-full flex flex-col gap-6"
+                  >
+                    <h2 className="text-3xl font-bold text-white mb-4">Contact Information</h2>
+                    {contactDetails.map((item) => (
+                      <motion.a
+                        key={item.title}
+                        href={item.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        variants={{
+                            hidden: { opacity: 0, x: -30 },
+                            visible: { opacity: 1, x: 0 }
+                        }}
+                        whileHover={{ scale: 1.02 }}
+                        className="flex items-center gap-6 p-6 bg-neutral-900/ ৫০ border border-white/10 rounded-2xl transition-all hover:border-indigo-500/50 hover:bg-neutral-900"
+                      >
+                        <div className="text-2xl text-indigo-400">{item.icon}</div>
+                        <div>
+                          <h3 className="font-semibold text-white">{item.title}</h3>
+                          <p className="text-neutral-400 text-sm mt-1">{item.contact}</p>
+                        </div>
+                      </motion.a>
+                    ))}
+                  </motion.div>
+        
+                  {/* --- Map Section (Now using OpenStreetMap) --- */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.7 }}
+                    className="w-full h-[500px] lg:h-full p-6 bg-neutral-900/50 border border-white/10 rounded-2xl"
+                  >
+                    <div className="flex items-center gap-3 mb-4">
+                      <FiMapPin className="text-rose-400 text-2xl"/>
+                      <div>
+                        <h3 className="font-semibold text-white">{venue.name}</h3>
+                        <p className="text-neutral-500 text-xs">{venue.address}</p>
+                      </div>
+                    </div>
+                    <a href={venue.mapLink} target="_blank" rel="noopener noreferrer" className="block w-full h-[calc(100%-52px)] rounded-lg overflow-hidden group">
+                      <iframe
+                        title="OpenStreetMap Location"
+                        width="100%"
+                        height="100%"
+                        style={{ border: 0 }}
+                        loading="lazy"
+                        src="https://www.openstreetmap.org/export/embed.html?bbox=77.5951,12.9599,77.6005,12.9633&amp;layer=mapnik&amp;marker=12.9616,77.5978"
+                        className="grayscale group-hover:grayscale-0 transition-all duration-300"
+                      ></iframe>
+                    </a>
+                  </motion.div>
+        
+                </div>
+        </div>
+        <Footer></Footer>
       
     </>
   );

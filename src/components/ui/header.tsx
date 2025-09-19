@@ -6,12 +6,10 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
-    { name: "HOME", to: "/" },
-    { name: "ABOUT US", to: "/about" },
     { name: "CALL FOR PAPERS", to: "/callforpapers" },
-    { name: "PUBLICATION", to: "/publication" },
-    { name: "REGISTRATION", to: "/registration" },
     { name: "COMMITTEES", to: "/committees" },
+    { name: "PUBLICATION", to: "/submission" },
+    { name: "ABOUT US", to: "/about" },
     { name: "CONTACT", to: "/contact" },
   ];
 
@@ -43,7 +41,7 @@ const Navbar: React.FC = () => {
         {/* CTA (Desktop) */}
         <div className="hidden lg:flex">
           <Link
-            to="/submit-paper"
+            to="/submission"
             className="ml-6 px-5 py-2.5 bg-white text-gray-900 text-sm font-bold rounded-full shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-white/20"
           >
             SUBMIT PAPER

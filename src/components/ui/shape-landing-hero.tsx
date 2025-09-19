@@ -1,8 +1,7 @@
 "use client";
 
-import { motion, useMotionValue, useTransform, animate } from "framer-motion";
+import { motion } from "framer-motion";
 import { Circle } from "lucide-react";
-import { useEffect, useState } from "react";
 import { cn } from "../../lib/utils";
 
 
@@ -89,7 +88,7 @@ function HeroGeometric({
             transition: {
                 duration: 1,
                 delay: 0.5 + i * 0.2,
-                ease: [0.42, 0, 0.58, 1], // cubic bezier for easeInOut
+                ease: [0.42, 0, 0.58, 1] as const, // cubic bezier for easeInOut
             },
         }),
     };

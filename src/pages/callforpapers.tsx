@@ -1,272 +1,210 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, useMotionValue, useTransform } from "framer-motion";
 import Navbar from "../components/ui/header";
+import { FiFileText, FiUsers, FiClock, FiCpu, FiGitMerge, FiLock, FiCloud, FiDivideCircle, FiPackage } from "react-icons/fi";
 
 const researchAreas = [
-  {
-    title: "Machine Learning and Deep Learning",
-    description:
-      "Innovations in Image processing, Signal Processing, reinforcement learning, computer vision, augmented reality, virtual reality. Computer Vision & Image Processing.",
-  },
-  {
-    title: "Artificial Intelligence & Data Science",
-    description:
-      "AI and Healthcare data analytics, AI and business intelligence, bio informatics, and AI algorithms.",
-  },
-  {
-    title: "Networks and Cyber Security",
-    description:
-      "Wireless networks, Internet of Things and big data applications, Network security and cryptography, blockchain.",
-  },
-  {
-    title: "Data Mining and Cloud Computing",
-    description: "Distributed computing, quantum computing, data mining, sustainable technologies.",
-  },
-  {
-    title: "Fuzzy Logic and Mathematical Modelling",
-    description:
-      "Fuzzy graph Models, optimization-based mathematical modelling, predictive fuzzy systems, network analysis using graph theory, advanced optimization techniques through hybrid fuzzy, optimization frameworks for complex problem solving.",
-  },
-  {
-    title: "Emerging Technologies",
-    description:
-      "Blockchain and Decentralized Applications, Edge and Fog Computing, Internet of Things (IoT) and Smart Systems, Human–Computer Interaction and Augmented Reality, Digital Twins and Simulation Technologies.",
-  },
+    {
+        icon: <FiGitMerge />,
+        title: "Machine Learning & Deep Learning",
+        description: "Innovations in image processing, reinforcement learning, computer vision, AR/VR, and signal processing.",
+    },
+    {
+        icon: <FiCpu />,
+        title: "Artificial Intelligence & Data Science",
+        description: "AI in healthcare, business intelligence, bioinformatics, and advanced AI algorithms.",
+    },
+    {
+        icon: <FiLock />,
+        title: "Networks & Cyber Security",
+        description: "Wireless networks, IoT applications, network security, cryptography, and blockchain technologies.",
+    },
+    {
+        icon: <FiCloud />,
+        title: "Data Mining & Cloud Computing",
+        description: "Distributed computing, quantum computing, large-scale data mining, and sustainable technologies.",
+    },
+    {
+        icon: <FiDivideCircle />,
+        title: "Fuzzy Logic & Mathematical Modelling",
+        description: "Fuzzy graph models, optimization-based modelling, predictive fuzzy systems, and hybrid optimization frameworks.",
+    },
+    {
+        icon: <FiPackage />,
+        title: "Emerging Technologies",
+        description: "Blockchain, Edge/Fog Computing, Smart Systems, HCI, Augmented Reality, and Digital Twins.",
+    },
 ];
 
 const additionalInfo = [
-  {
-    title: "Original Research",
-    description: "All submissions must present original, unpublished research work",
-    icon: "document",
-  },
-  {
-    title: "Peer Review",
-    description: "Rigorous peer review process by international experts",
-    icon: "users",
-  },
-  {
-    title: "Important Dates",
-    description: "Check submission deadlines and conference dates",
-    icon: "clock",
-  },
+    {
+        title: "Original Research",
+        description: "Submissions must present original, unpublished work.",
+        icon: <FiFileText />,
+    },
+    {
+        title: "Peer Review",
+        description: "A rigorous review process by international experts.",
+        icon: <FiUsers />,
+    },
+    {
+        title: "Important Dates",
+        description: "Submission deadline is 15th December 2025.",
+        icon: <FiClock />,
+    },
 ];
 
+// A new component for the "good looking" static card with a spotlight hover effect
+const ResearchCard = ({ icon, title, description }:any) => {
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
+
+    const handleMouseMove = ({ currentTarget, clientX, clientY }:any) => {
+        const { left, top } = currentTarget.getBoundingClientRect();
+        mouseX.set(clientX - left);
+        mouseY.set(clientY - top);
+    };
+    
+    // Create a radial gradient style that follows the mouse
+    const spotlightStyle = useTransform(
+        [mouseX, mouseY],
+        ([x, y]) => `radial-gradient(circle at ${x}px ${y}px, rgba(139, 92, 246, 0.15), transparent 80%)`
+    );
+
+    return (
+        <motion.div
+            onMouseMove={handleMouseMove}
+            onMouseLeave={() => { mouseX.set(150); mouseY.set(150); }}
+            className="relative p-8 h-full bg-neutral-900/50 border border-white/10 rounded-2xl overflow-hidden"
+            variants={{
+                hidden: { opacity: 0, y: 30 },
+                visible: { opacity: 1, y: 0 }
+            }}
+        >
+            <motion.div
+                className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition-opacity duration-300"
+                style={{ background: spotlightStyle }}
+            />
+            <div className="text-4xl text-indigo-300 mb-4">{icon}</div>
+            <h3 className="text-xl font-bold text-white mb-3">{title}</h3>
+            <p className="text-neutral-400 text-sm leading-relaxed">{description}</p>
+        </motion.div>
+    );
+};
+
+
 export default function CallForPapers() {
-  return (
-    <>
-      <Navbar />
-      <div className="min-h-screen bg-neutral-950 text-white px-4 sm:px-6 md:px-8 py-12">
-        {/* Header Section */}
-        <motion.div
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center max-w-4xl mx-auto mb-12 mt-15"
-        >
-          <h1 className="text-4xl sm:text-5xl font-extrabold mb-4 bg-gradient-to-r from-cyan-400 to-purple-500 text-transparent bg-clip-text">
-            CALL FOR PAPERS
-          </h1>
-          <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-gray-300">
-            ICRAC-2026
-          </h2>
-          <p className="text-gray-400 text-base sm:text-lg leading-relaxed">
-            ICRAC-2026 solicits original research papers contributing to the foundations 
-            and applications of Data Analytics, Machine Learning, Artificial Intelligence, 
-            Computer Science and in the following broad areas, but are not limited to:
-          </p>
-        </motion.div>
-
-        {/* Research Areas */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-          layout
-          className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-16"
-        >
-          <AnimatePresence>
-            {researchAreas.map((area, index) => (
-              <motion.div
-                key={index}
-                layout
-                initial={{ opacity: 0, y: 30, scale: 0.9 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 30, scale: 0.9 }}
-                transition={{ duration: 0.4 }}
-                whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
-                className="bg-neutral-800 rounded-lg p-6 shadow-lg hover:shadow-cyan-500/20 transition-all border border-neutral-700 w-full"
-              >
-                <div className="flex items-center mb-4">
-                  <motion.div
-                    className="w-1 h-8 bg-gradient-to-b from-cyan-400 to-purple-500 mr-4 rounded"
-                    initial={{ height: 0 }}
-                    animate={{ height: 32 }}
-                    transition={{ delay: 0.8 + index * 0.15, duration: 0.4, ease: "easeOut" }}
-                  />
-                  <motion.h3
-                    className="text-xl font-bold text-cyan-400"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.9 + index * 0.15, duration: 0.5, ease: "easeOut" }}
-                  >
-                    {area.title}
-                  </motion.h3>
-                </div>
-                <motion.p
-                  className="text-gray-300 leading-relaxed text-sm"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.1 + index * 0.15, duration: 0.5, ease: "easeOut" }}
+    return (
+        <div className="min-h-screen bg-black text-white bg-dot-white/[0.1]">
+            <Navbar />
+            
+            {/* --- Hero Section --- */}
+            <div className="relative h-[80vh] flex flex-col items-center justify-center text-center px-4 z-10 overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-b from-black via-black/80 to-transparent z-0"></div>
+                <div className="absolute pointer-events-none inset-0 bg-[radial-gradient(ellipse_at_center,rgba(129,140,248,0.15),transparent_60%)]"></div>
+                
+                <motion.h1
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, ease: "easeInOut" }}
+                    className="relative text-5xl md:text-7xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-white/90 to-rose-300"
                 >
-                  {area.description}
+                    Call For Papers
+                </motion.h1>
+                <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.2, ease: "easeInOut" }}
+                    className="relative mt-4 max-w-3xl text-base md:text-lg text-neutral-400"
+                >
+                    ICRAC-2026 invites original research papers on the foundations and applications of modern computing. Share your work and shape the future of technology.
                 </motion.p>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
+            </div>
 
-        {/* Call to Action Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2.5, duration: 0.6, ease: "easeOut" }}
-          className="max-w-4xl mx-auto bg-neutral-800 rounded-lg p-8 text-center border border-neutral-700 mb-12"
-        >
-          <motion.h3
-            className="text-3xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-purple-500 text-transparent bg-clip-text"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 2.8, duration: 0.5, ease: "easeOut" }}
-          >
-            Ready to Submit Your Research?
-          </motion.h3>
-          <motion.p
-            className="text-gray-400 text-base sm:text-lg mb-8 leading-relaxed"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 3.0, duration: 0.5, ease: "easeOut" }}
-          >
-            Join researchers from around the world in advancing the frontiers of 
-            technology and innovation. Share your groundbreaking work with the ICRAC-2026 community.
-          </motion.p>
-          <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 3.2, duration: 0.5, ease: "easeOut" }}
-          >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-cyan-500 hover:bg-cyan-600 text-white font-semibold py-3 px-8 rounded-full transition-all shadow-lg shadow-cyan-500/40"
-            >
-              Submit Paper
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="border-2 border-purple-500 hover:bg-purple-500 text-purple-400 hover:text-white font-semibold py-3 px-8 rounded-full transition-all"
-            >
-              View Guidelines
-            </motion.button>
-          </motion.div>
-        </motion.div>
-
-        {/* Additional Info Section */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 3.5, duration: 0.5 }}
-          layout
-          className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
-        >
-          <AnimatePresence>
-            {additionalInfo.map((info, index) => (
-              <motion.div
-                key={index}
-                layout
-                initial={{ opacity: 0, y: 30, scale: 0.9 }}
-                animate={{ opacity: 1, y: 0, scale: 1 }}
-                exit={{ opacity: 0, y: 30, scale: 0.9 }}
-                transition={{ duration: 0.6, delay: 3.7 + index * 0.15, ease: "easeOut" }}
-                whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
-                className="text-center p-6 bg-neutral-800 rounded-lg border border-neutral-700 w-full"
-              >
+            {/* --- Static Card Grid Section for Research Areas --- */}
+            <div className="w-full py-24 px-4 sm:px-6 md:px-8">
                 <motion.div
-                  className="w-16 h-16 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4 opacity-80"
-                  initial={{ scale: 0, rotate: -180 }}
-                  animate={{ scale: 1, rotate: 0 }}
-                  transition={{ delay: 4.0 + index * 0.15, duration: 0.6, type: "spring", stiffness: 200 }}
-                >{/*The svg here is generated with ai*/}
-                  {info.icon === "document" && (
-                    <svg
-                      className="w-8 h-8 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                      />
-                    </svg>
-                  )}
-                  {info.icon === "users" && (
-                    <svg
-                      className="w-8 h-8 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                      />
-                    </svg>
-                  )}
-                  {info.icon === "clock" && (
-                    <svg
-                      className="w-8 h-8 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                      />
-                    </svg>
-                  )}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    transition={{ duration: 0.8 }}
+                    className="text-center mb-12"
+                >
+                    <h2 className="text-3xl md:text-4xl font-bold text-neutral-200">Research Areas</h2>
+                    <p className="text-neutral-400 mt-2">We invite submissions across a range of cutting-edge topics.</p>
                 </motion.div>
-                <motion.h4
-                  className="text-xl font-bold text-cyan-400 mb-2"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 4.2 + index * 0.15, duration: 0.5, ease: "easeOut" }}
+                
+                <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ staggerChildren: 0.1 }}
+                    className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
                 >
-                  {info.title}
-                </motion.h4>
-                <motion.p
-                  className="text-gray-400 text-sm"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 4.4 + index * 0.15, duration: 0.5, ease: "easeOut" }}
-                >
-                  {info.description}
-                </motion.p>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
-      </div>
-    </>
-  );
+                    {researchAreas.map((area, index) => (
+                        <ResearchCard key={index} {...area} />
+                    ))}
+                </motion.div>
+            </div>
+
+            {/* --- Key Info & CTA Section --- */}
+            <div className="py-24 px-4 sm:px-6 md:px-8">
+                <div className="max-w-5xl mx-auto text-center">
+                    <motion.div
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, amount: 0.3 }}
+                        transition={{ staggerChildren: 0.2 }}
+                        className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16"
+                    >
+                        {additionalInfo.map((info, index) => (
+                            <motion.div
+                                key={index}
+                                variants={{
+                                    hidden: { opacity: 0, y: 20 },
+                                    visible: { opacity: 1, y: 0 }
+                                }}
+                                className="p-6 bg-neutral-900/50 border border-white/10 rounded-xl"
+                            >
+                                <div className="text-rose-400 text-4xl mb-4 inline-block">{info.icon}</div>
+                                <h4 className="text-xl font-semibold text-white mb-2">{info.title}</h4>
+                                <p className="text-neutral-400 text-sm">{info.description}</p>
+                            </motion.div>
+                        ))}
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.5 }}
+                        transition={{ duration: 0.6 }}
+                    >
+                        <h3 className="text-3xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-white/90 to-rose-300">
+                            Ready to Contribute?
+                        </h3>
+                        <p className="text-neutral-400 max-w-2xl mx-auto mb-8">
+                            Join us in advancing the frontiers of technology. We look forward to your innovative contributions.
+                        </p>
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                            <motion.button
+                                whileHover={{ scale: 1.05, y: -2 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="bg-gradient-to-r from-indigo-500 to-rose-500 text-white font-semibold py-3 px-8 rounded-lg transition-all shadow-lg shadow-indigo-500/30"
+                            >
+                                Submit Your Paper
+                            </motion.button>
+                            <motion.button
+                                whileHover={{ scale: 1.05, y: -2 }}
+                                whileTap={{ scale: 0.95 }}
+                                className="bg-transparent border-2 border-neutral-600 hover:border-white text-white font-semibold py-3 px-8 rounded-lg transition-all"
+                            >
+                                View Guidelines
+                            </motion.button>
+                        </div>
+                    </motion.div>
+                </div>
+            </div>
+        </div>
+    );
 }

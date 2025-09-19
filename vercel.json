@@ -1,0 +1,28 @@
+{
+    "routes": [
+      {
+        "src": "/",
+        "dest": "/"
+      },
+    {
+        "src": "/about",
+        "dest": "/"
+    },
+     {
+        "src": "/contact",
+        "dest": "/"
+    },
+    {
+        "src": "/callforpapers",
+        "dest": "/"
+    },
+    {
+        "src": "/committees",
+        "dest": "/committees"
+    },
+    {
+        "src": "/submission",
+        "dest": "/"
+    }
+    ]
+}
