@@ -1567,7 +1567,6 @@ const Contact: FC = memo(() => {
 
 const Footer: FC = memo(() => (
   <footer className="relative bg-neutral-950 text-white overflow-hidden">
-    {/* Background Elements */}
     <div className="absolute top-0 left-0 w-96 h-96 bg-electric-500/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
     <div className="absolute bottom-0 right-0 w-96 h-96 bg-violet-500/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
     
@@ -1594,7 +1593,6 @@ const Footer: FC = memo(() => (
           <h4 className="font-black text-white text-lg mb-6">Quick Links</h4>
           <nav className="flex flex-col space-y-4">
             {navItems.map((item) => (
-              // FIXED: Changed from <Link> to <a> for in-page anchor links
               <a 
                 key={item.name}
                 href={item.to} 
@@ -1630,14 +1628,18 @@ const Footer: FC = memo(() => (
         </div>
       </div>
       
-      <div className="border-t border-white/10 pt-8 text-center">
+      <div className="border-t border-white/10 pt-8 text-center space-y-4">
         <p className="text-white/40 text-lg font-medium">
           &copy; 2026 ICRAC - St. Joseph's University, Bengaluru. All rights reserved.
+        </p>
+        <p className="text-white/40 text-sm max-w-3xl mx-auto">
+          The Microsoft CMT service was used for managing the peer reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support.
         </p>
       </div>
     </div>
   </footer>
 ));
+
 
 // --- MAIN PAGE COMPONENT ---
 export default function Home() {
