@@ -7,8 +7,7 @@ import {
   CheckCircle, 
   AlertCircle, 
   Terminal,
-  Server, // Added for the Azure/Microsoft reference
-  Info
+  Server
 } from "lucide-react";
 
 // --- REUSABLE COMPONENTS FOR THIS SECTION ---
@@ -36,51 +35,58 @@ const TemplateCard = ({ title, type, icon: Icon, color }: any) => (
   </motion.div>
 );
 
+// --- NEW: MASSIVE ACKNOWLEDGMENT BANNER ---
 const CmtAcknowledgmentBanner = () => (
   <motion.div 
-    initial={{ opacity: 0, y: -20 }}
-    whileInView={{ opacity: 1, y: 0 }}
+    initial={{ opacity: 0, scale: 0.95, y: 20 }}
+    whileInView={{ opacity: 1, scale: 1, y: 0 }}
     viewport={{ once: true }}
-    className="relative w-full mb-16 overflow-hidden rounded-2xl bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 shadow-lg"
+    className="relative w-full mb-24 overflow-hidden rounded-3xl bg-white border border-neutral-200 shadow-[0_0_60px_-15px_rgba(37,99,235,0.2)]"
   >
-    <div className="absolute top-0 right-0 p-4 opacity-5">
-      <Server size={120} />
-    </div>
+    {/* Top Highlight Bar - Microsoft Blue/Azure Gradient */}
+    <div className="absolute top-0 left-0 right-0 h-3 bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-700" />
     
-    <div className="relative z-10 p-6 md:p-8 flex flex-col md:flex-row gap-6 items-start md:items-center">
-      <div className="flex-shrink-0">
-        <div className="w-14 h-14 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-blue-200 shadow-xl">
-          <Info size={32} />
-        </div>
-      </div>
+    {/* Subtle Background Pattern */}
+    <div className="absolute inset-0 bg-[radial-gradient(#3b82f6_1px,transparent_1px)] [background-size:20px_20px] opacity-[0.03]"></div>
+
+    <div className="relative z-10 p-10 md:p-16 flex flex-col items-center text-center">
       
-      <div className="flex-1">
-        <h3 className="text-xl md:text-2xl font-black text-blue-900 mb-2 tracking-tight">
-          CMT ACKNOWLEDGMENT
-        </h3>
-        <p className="text-blue-800/80 leading-relaxed text-sm md:text-base font-medium">
-          The Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support.
-        </p>
+      {/* Icon Badge */}
+      <div className="w-20 h-20 bg-blue-50 rounded-2xl flex items-center justify-center text-blue-600 mb-8 shadow-inner ring-4 ring-blue-50/50">
+        <Server size={40} strokeWidth={1.5} />
       </div>
+
+      {/* Big Title matching the image style */}
+      <h3 className="text-3xl md:text-5xl font-black text-neutral-900 mb-8 uppercase tracking-wider">
+        CMT Acknowledgment
+      </h3>
+      
+      {/* Divider */}
+      <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full mb-8"></div>
+
+      {/* The Text */}
+      <p className="max-w-5xl mx-auto text-lg md:text-2xl text-neutral-600 font-medium leading-relaxed">
+        <span className="text-blue-700 font-bold">CMT ACKNOWLEDGMENT:</span> The Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support.
+      </p>
     </div>
   </motion.div>
 );
 
 const SubmissionPortal = memo(() => {
   return (
-    <section className="relative bg-neutral-50 py-24 overflow-hidden">
+    <section className="relative bg-neutral-50 pt-20 pb-32 overflow-hidden">
       {/* Background Decor */}
       <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-neutral-300 to-transparent" />
-      <div className="absolute right-0 top-1/4 w-64 h-64 bg-violet-500/5 rounded-full blur-3xl" />
-      <div className="absolute left-0 bottom-1/4 w-64 h-64 bg-electric-500/5 rounded-full blur-3xl" />
+      <div className="absolute right-0 top-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl" />
+      <div className="absolute left-0 bottom-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* 0. NEW: Top Acknowledgment Banner (Requested from Image) */}
+        {/* 1. THE BIG ACKNOWLEDGMENT BANNER (First thing) */}
         <CmtAcknowledgmentBanner />
 
-        {/* 1. Header & Rules */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-16">
+        {/* 2. Header & Rules */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-16 mt-20">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -120,7 +126,7 @@ const SubmissionPortal = memo(() => {
             </div>
           </motion.div>
 
-          {/* 2. Download Templates */}
+          {/* 3. Download Templates */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -144,7 +150,7 @@ const SubmissionPortal = memo(() => {
           </motion.div>
         </div>
 
-        {/* 3. Main CMT Action Card */}
+        {/* 4. Main CMT Action Card */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
