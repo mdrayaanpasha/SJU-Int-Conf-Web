@@ -1,5 +1,6 @@
-import { memo } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect, memo } from "react";
+import type { FC } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { 
   Download, 
   ExternalLink, 
@@ -7,10 +8,106 @@ import {
   CheckCircle, 
   AlertCircle, 
   Terminal,
-  Server
+  Server,
+  Menu,
+  X
 } from "lucide-react";
 
-// --- REUSABLE COMPONENTS FOR THIS SECTION ---
+// --- DATA ---
+const navItems = [
+  { name: "ABOUT", to: "#about" },
+  { name: "CALL FOR PAPERS", to: "#call-for-papers" },
+  { name: "PUBLICATION", to: "#submission" },
+  { name: "COMMITTEES", to: "#committees" },
+  { name: "CONTACT", to: "#contact" },
+];
+
+// --- NAVBAR COMPONENT (Fixed: Submission Button Removed) ---
+export const Navbar: FC<{ isOpen: boolean; onToggle: () => void; scrolled: boolean }> = memo(({ isOpen, onToggle, scrolled }) => (
+  <motion.nav 
+    initial={{ y: -100 }}
+    animate={{ y: 0 }}
+    className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      scrolled ? 'bg-white/95 backdrop-blur-xl shadow-2xl border-b border-neutral-200/50' : 'bg-transparent'
+    }`}
+  >
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="flex justify-between items-center py-4">
+        <motion.a 
+          href="/" 
+          className="flex items-center space-x-3"
+          whileHover={{ scale: 1.05 }}
+        >
+          <div className={`text-2xl font-black ${scrolled ? 'text-neutral-900' : 'text-white'}`}>
+            <span className="bg-gradient-to-r from-electric-600 to-violet-600 bg-clip-text text-transparent">ICRAC</span>
+            <span className="text-electric-600">2026</span>
+          </div>
+        </motion.a>
+
+        {/* Desktop Navigation - Button Removed */}
+        <div className="hidden lg:flex items-center space-x-8">
+          {navItems.map((item) => (
+            <motion.a
+              key={item.name}
+              href={item.to}
+              className={`text-sm font-semibold transition-all duration-300 relative ${
+                scrolled ? 'text-neutral-700 hover:text-electric-600' : 'text-white/90 hover:text-white'
+              }`}
+              whileHover={{ y: -2 }}
+            >
+              {item.name}
+              <motion.div 
+                className="absolute -bottom-2 left-0 w-0 h-1 bg-gradient-to-r from-electric-500 to-violet-500 rounded-full"
+                whileHover={{ width: '100%' }}
+                transition={{ duration: 0.3 }}
+              />
+            </motion.a>
+          ))}
+        </div>
+
+        {/* Mobile menu button */}
+        <motion.button
+          className={`lg:hidden p-3 rounded-2xl transition-colors ${
+            scrolled ? 'text-neutral-700 hover:bg-neutral-100' : 'text-white hover:bg-white/10'
+          }`}
+          onClick={onToggle}
+          whileTap={{ scale: 0.9 }}
+          aria-label="Toggle navigation menu"
+        >
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
+        </motion.button>
+      </div>
+
+      {/* Mobile Navigation - Button Removed */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            className="lg:hidden bg-white/95 backdrop-blur-xl rounded-3xl mt-2 overflow-hidden border border-neutral-200/50 shadow-2xl"
+          >
+            <div className="py-4 space-y-1">
+              {navItems.map((item) => (
+                <motion.a
+                  key={item.name}
+                  href={item.to}
+                  className="block px-6 py-4 text-neutral-700 font-semibold hover:bg-electric-50 hover:text-electric-600 transition-colors rounded-xl mx-2"
+                  onClick={onToggle}
+                  whileHover={{ x: 8 }}
+                >
+                  {item.name}
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  </motion.nav>
+));
+
+// --- REUSABLE COMPONENTS FOR SUBMISSION SECTION ---
 
 const TemplateCard = ({ title, type, icon: Icon, color }: any) => (
   <motion.div 
@@ -35,7 +132,7 @@ const TemplateCard = ({ title, type, icon: Icon, color }: any) => (
   </motion.div>
 );
 
-// --- NEW: MASSIVE ACKNOWLEDGMENT BANNER ---
+// --- MASSIVE ACKNOWLEDGMENT BANNER ---
 const CmtAcknowledgmentBanner = () => (
   <motion.div 
     initial={{ opacity: 0, scale: 0.95, y: 20 }}
@@ -72,6 +169,7 @@ const CmtAcknowledgmentBanner = () => (
   </motion.div>
 );
 
+// --- SUBMISSION PORTAL COMPONENT ---
 const SubmissionPortal = memo(() => {
   return (
     <section className="relative bg-neutral-50 pt-20 pb-32 overflow-hidden">
