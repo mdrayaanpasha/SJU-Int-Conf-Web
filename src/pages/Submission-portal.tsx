@@ -1,4 +1,4 @@
-import  { memo } from "react";
+import { memo } from "react";
 import { motion } from "framer-motion";
 import { 
   Download, 
@@ -7,7 +7,8 @@ import {
   CheckCircle, 
   AlertCircle, 
   Terminal,
-  
+  Server, // Added for the Azure/Microsoft reference
+  Info
 } from "lucide-react";
 
 // --- REUSABLE COMPONENTS FOR THIS SECTION ---
@@ -35,6 +36,36 @@ const TemplateCard = ({ title, type, icon: Icon, color }: any) => (
   </motion.div>
 );
 
+const CmtAcknowledgmentBanner = () => (
+  <motion.div 
+    initial={{ opacity: 0, y: -20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    className="relative w-full mb-16 overflow-hidden rounded-2xl bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 shadow-lg"
+  >
+    <div className="absolute top-0 right-0 p-4 opacity-5">
+      <Server size={120} />
+    </div>
+    
+    <div className="relative z-10 p-6 md:p-8 flex flex-col md:flex-row gap-6 items-start md:items-center">
+      <div className="flex-shrink-0">
+        <div className="w-14 h-14 bg-blue-600 rounded-xl flex items-center justify-center text-white shadow-blue-200 shadow-xl">
+          <Info size={32} />
+        </div>
+      </div>
+      
+      <div className="flex-1">
+        <h3 className="text-xl md:text-2xl font-black text-blue-900 mb-2 tracking-tight">
+          CMT ACKNOWLEDGMENT
+        </h3>
+        <p className="text-blue-800/80 leading-relaxed text-sm md:text-base font-medium">
+          The Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support.
+        </p>
+      </div>
+    </div>
+  </motion.div>
+);
+
 const SubmissionPortal = memo(() => {
   return (
     <section className="relative bg-neutral-50 py-24 overflow-hidden">
@@ -45,6 +76,9 @@ const SubmissionPortal = memo(() => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
+        {/* 0. NEW: Top Acknowledgment Banner (Requested from Image) */}
+        <CmtAcknowledgmentBanner />
+
         {/* 1. Header & Rules */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-16">
           <motion.div
@@ -141,10 +175,6 @@ const SubmissionPortal = memo(() => {
               Go to Submission Portal
               <ExternalLink size={20} />
             </motion.a>
-
-            <p className="mt-8 text-white/40 text-xs max-w-3xl mx-auto border-t border-white/10 pt-6">
-              The Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support.
-            </p>
           </div>
         </motion.div>
 
