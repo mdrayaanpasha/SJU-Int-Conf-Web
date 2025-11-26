@@ -118,7 +118,7 @@ const Navbar: FC<NavbarProps> = memo(({ isOpen, onToggle, scrolled }) => (
 ));
 
 // 2. TEMPLATE CARD
-const TemplateCard = ({ title, type, icon: Icon, color }: any) => (
+const TemplateCard = ({ title, type, icon: Icon, color }:any) => (
   <motion.div 
     whileHover={{ y: -5 }}
     className="group relative bg-white rounded-2xl p-6 border border-neutral-200 shadow-xl overflow-hidden"

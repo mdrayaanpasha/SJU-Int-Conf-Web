@@ -33,9 +33,6 @@ import DrDeepakDSouza from "../assets/IMAGES/Dr Deepak D’Souza.png";
 import DrNarahari from "../assets/IMAGES/Dr Narahari.png";
 import DrJayanthiSivaswamy from "../assets/IMAGES/Dr Jayanthi Sivaswamy.png";
 import DrXiaoZhiGao from "../assets/IMAGES/Dr Xiao-Zhi Gao.png";
-import RevVictorLoboSJ from "../assets/IMAGES/Rev Fr (Dr) Victor Lobo SJ .png";
-import DrAMBojamma from "../assets/IMAGES/Dr A M Bojamma .png";
-import DrJayatiBhadra from "../assets/IMAGES/Dr Jayati Bhadra.png";
 import DrMadhuSNair from "../assets/IMAGES/Dr Madhu S Nair.png";
 import uttyler from "../assets/IMAGES/uttyler.jpg";
 import acmMeerut from "../assets/IMAGES/ACM merrut.png"
