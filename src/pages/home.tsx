@@ -110,15 +110,12 @@ const venue = {
 };
 
 const featuredAcademics: Academic[] = [
-    { name: "Rev Fr (Dr) Victor Lobo SJ", title: "Patron", image: RevVictorLoboSJ }, 
     { name: "Dr Deepak D'Souza", title: "Professor, IISc, Bengaluru", image: DrDeepakDSouza }, 
     { name: "Dr Monika Aggarwal", title: "Professor, IIT, Delhi", image: DrMonikaAggarwal }, 
     { name: "Dr Shamala Subramaniam", title: "Universiti of Putra, Malaysia", image: DrShamalaSubramaniam }, 
     { name: "Dr Narahari", title: "Professor, IISc, Bengaluru", image: DrNarahari }, 
     { name: "Dr Shameer Khader", title: "Sanofi, Cambridge MA, USA", image: DrShameerKhader }, 
     { name: "Dr Jayanthi Sivaswamy", title: "Professor Emeritus, IIIT, Hyderabad", image: DrJayanthiSivaswamy }, 
-    { name: "Dr A M Bojamma", title: "Conference Chair", image: DrAMBojamma }, 
-    { name: "Dr Jayati Bhadra", title: "Organizing Chair", image: DrJayatiBhadra }, 
     { name: "Dr Srinivas Bhogle", title: "Scientist, CSIR Lab, Delhi", image: DrSrinivasBhogle }, 
     { name: "Dr Xiao-Zhi Gao", title: "University of Eastern Finland", image: DrXiaoZhiGao }, 
     { name: "Dr Madhu S Nair", title: "Professor, CUSAT, Kerala", image: DrMadhuSNair },
