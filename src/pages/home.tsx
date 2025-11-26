@@ -14,9 +14,12 @@ import {
   FiClock,
   FiFileText,
   FiEdit3,
+  FiCheckCircle,
+
+  FiArrowRight
   
 } from "react-icons/fi";
-
+import { Link } from "react-router-dom";
 
 // --- ASSET IMPORTS ---
 // For larger projects, consider creating an index.ts in the IMAGES folder
@@ -93,6 +96,7 @@ const navItems: NavItem[] = [
   { name: "PUBLICATION", to: "#submission" },
   { name: "COMMITTEES", to: "#committees" },
   { name: "CONTACT", to: "#contact" },
+  {name:"MICROSOFT CMT",to:"#"}
 ];
 const researchAreas = [
     { icon: BrainCircuit, title: "Machine Learning & Deep Learning", description: "Innovations in image processing, reinforcement learning, computer vision, AR/VR, and signal processing.", color: "from-electric-500 to-violet-600" },
@@ -515,12 +519,12 @@ const Hero: FC = memo(() => {
                     </h3>
                     <div className="flex justify-center items-center gap-8 sm:gap-12">
                         <div className="text-center">
-                            <img src={uttyler} alt="UTTylor Logo" className="h-10 sm:h-12 mx-auto mb-2 opacity-80" />
+                            <img src={uttyler} alt="UTTylor Logo" className="h-20 rounded-md mx-auto mb-2 opacity-80" />
                             <p className="text-xs sm:text-sm text-white/70">UTTylor, USA</p>
                         </div>
                         <div className="h-12 w-px bg-white/20"></div>
                         <div className="text-center">
-                            <img src={acmMeerut} alt="ACM Meerut Logo" className="h-10 sm:h-12 mx-auto mb-2 opacity-80" />
+                            <img src={acmMeerut} alt="ACM Meerut Logo" className="h-20 rounded-md mx-auto mb-2 opacity-80" />
                             <p className="text-xs sm:text-sm text-white/70">ACM Meerut</p>
                         </div>
                     </div>
@@ -858,6 +862,8 @@ const CallForPapers: FC = memo(() => (
         title="Call For Papers" 
         subtitle="Join the forefront of technological innovation. ICRAC 2026 invites groundbreaking research that will shape the future of computing and digital transformation." 
       />
+
+    
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
         {researchAreas.map((area, index) => (
@@ -880,7 +886,31 @@ const CallForPapers: FC = memo(() => (
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.3 }}
       >
+          {/* --- ADDED: Microsoft CMT Acknowledgement --- */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="max-w-4xl mx-auto mb-16 bg-sky-50 border border-sky-200 rounded-3xl p-6 shadow-sm relative overflow-hidden"
+      >
+         {/* Decorative Azure element */}
+        <div className="absolute top-0 right-0 w-24 h-24 bg-sky-200/40 rounded-full blur-xl translate-x-10 -translate-y-10"></div>
+        
+        <div className="flex flex-col md:flex-row gap-5 items-start md:items-center relative z-10">
+            <div className="p-3 bg-white rounded-xl shadow-sm shrink-0">
+               <FiCheckCircle className="w-6 h-6 text-sky-600" />
+            </div>
+            <div>
+                <h3 className="text-lg font-bold text-sky-900 mb-1">Microsoft CMT Acknowledgement</h3>
+                <p className="text-sky-800/90 text-sm leading-relaxed">
+                    The Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support.
+                </p>
+            </div>
+        </div>
+      </motion.div>
+      {/* ------------------------------------------- */}
         <motion.a 
+
           href="#submission" 
           className="group inline-flex items-center bg-gradient-to-r from-electric-500 to-violet-600 text-white font-black py-5 px-12 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 text-lg"
           whileHover={{ scale: 1.05, y: -4 }}
@@ -889,6 +919,7 @@ const CallForPapers: FC = memo(() => (
           Submit Your Research
           <ChevronRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform duration-300" />
         </motion.a>
+
       </motion.div>
     </div>
   </section>
@@ -957,45 +988,44 @@ const FeaturedSpeakers: FC = memo(() => {
         </section>
     );
 });
+ // Keep your existing import
 
 const Submission: FC = memo(() => {
   const [activeStep, setActiveStep] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
 
   const steps = [
     { 
       icon: FiFileText, 
       title: "Original Research", 
-      description: "Papers must be original and not previously published or under consideration elsewhere.",
+      description: "Papers must be original and not previously published.",
       color: "from-electric-500 to-blue-600"
     },
     { 
       icon: FiEdit3, 
       title: "Springer Format", 
-      description: "The full manuscript must be submitted in the official Springer format.",
+      description: "Manuscripts must follow the official Springer format.",
       color: "from-emerald-500 to-green-600"
     },
     { 
       icon: FiUsers, 
       title: "Rigorous Peer-Review", 
-      description: "All submitted papers will undergo a strict peer-review process by experts.",
+      description: "Strict peer-review process by domain experts.",
       color: "from-amber-500 to-orange-600"
     },
     { 
       icon: FiAward, 
-      title: "Scopus Indexed Publication", 
-      description: "Selected papers will be published in a Scopus indexed Springer book series (subject to approval).",
+      title: "Scopus Publication", 
+      description: "Published in Scopus indexed Springer book series.",
       color: "from-violet-500 to-purple-600"
     }
   ];
 
   return (
-    <section id="submission" className="relative bg-gradient-to-br from-white via-neutral-50 to-electric-50 py-32 overflow-hidden">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0">
+    <section id="submission" className="relative bg-gradient-to-br from-white via-neutral-50 to-electric-50 py-24 overflow-hidden">
+      {/* --- Original Animated Background Elements --- */}
+      <div className="absolute inset-0 pointer-events-none">
         <div className="absolute top-0 left-0 w-96 h-96 bg-electric-200/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-violet-200/20 rounded-full blur-3xl translate-x-1/2 translate-y-1/2 animate-pulse delay-1000"></div>
-        {/* Floating Elements */}
         <motion.div
           animate={{ y: [0, -20, 0], x: [0, 10, 0] }}
           transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
@@ -1010,12 +1040,12 @@ const Submission: FC = memo(() => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Header Section */}
+        {/* --- Original Header Styling --- */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-20"
+          className="text-center mb-16"
         >
           <div className="inline-flex items-center gap-4 text-electric-600 font-semibold text-sm uppercase tracking-widest mb-6">
             <Star className="w-4 h-4" />
@@ -1030,185 +1060,145 @@ const Submission: FC = memo(() => {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start mb-20">
-          
-          {/* Left Side - Interactive Process Steps */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+        {/* --- 1. Microsoft Acknowledgement (Full Width) --- */}
+        <motion.div 
+            initial={{ opacity: 0, scale: 0.98 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="space-y-8"
-          >
-            {/* Process Navigation */}
-            <div className="flex gap-4 mb-8">
-              {steps.map((step, index) => (
-                <motion.button
-                  key={index}
-                  onClick={() => setActiveStep(index)}
-                  className={`flex-1 py-4 rounded-2xl font-bold transition-all duration-500 ${
-                    activeStep === index
-                      ? `bg-gradient-to-r ${step.color} text-white shadow-2xl scale-105`
-                      : 'bg-white text-neutral-600 hover:text-electric-600 border border-neutral-200 hover:border-electric-300 hover:shadow-lg'
-                  }`}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Step {index + 1}
-                </motion.button>
-              ))}
+            className="w-full bg-sky-50 border border-sky-200 rounded-3xl p-8 mb-12 shadow-sm relative overflow-hidden"
+        >
+             {/* Decorative Azure bg element */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-sky-200/30 rounded-full blur-2xl translate-x-10 -translate-y-10"></div>
+            
+            <div className="flex flex-col md:flex-row gap-6 items-start md:items-center relative z-10">
+                <div className="p-4 bg-white rounded-2xl shadow-sm shrink-0">
+                    <FiCheckCircle className="w-8 h-8 text-sky-600" />
+                </div>
+                <div>
+                    <h3 className="text-xl font-bold text-sky-900 mb-2">Microsoft CMT Acknowledgement</h3>
+                    <p className="text-sky-800/90 text-base leading-relaxed">
+                        The Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support.
+                    </p>
+                </div>
             </div>
+        </motion.div>
 
-            {/* Active Step Display */}
-            <motion.div
-              key={activeStep}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="bg-white rounded-3xl p-8 border border-neutral-200/80 shadow-2xl"
-            >
-              <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${steps[activeStep].color} flex items-center justify-center text-white text-2xl mb-6`}>
-                {React.createElement(steps[activeStep].icon)}
-              </div>
-              <h3 className="text-3xl font-black text-neutral-900 mb-4">{steps[activeStep].title}</h3>
-              <p className="text-neutral-600 leading-relaxed text-lg">{steps[activeStep].description}</p>
-              
-              {/* Progress Bar */}
-              <div className="mt-8">
-                <div className="flex justify-between text-sm text-neutral-500 mb-2">
-                  <span>Progress</span>
-                  <span>{Math.round(((activeStep + 1) / steps.length) * 100)}%</span>
-                </div>
-                <div className="w-full bg-neutral-200 rounded-full h-2">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    animate={{ width: `${((activeStep + 1) / steps.length) * 100}%` }}
-                    transition={{ duration: 0.5 }}
-                    className={`h-2 rounded-full bg-gradient-to-r ${steps[activeStep].color}`}
-                  />
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Step Indicators */}
-            <div className="flex justify-center gap-3">
-              {steps.map((_, index) => (
+        {/* --- 2. Compact Grid Layout --- */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+          
+          {/* Left Column: Interactive Steps (Compact) */}
+          <div className="space-y-6">
+            <h3 className="text-2xl font-bold text-neutral-900 px-2">Steps to Publish</h3>
+            
+            {/* Horizontal Tabs */}
+            <div className="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
+              {steps.map((step, index) => (
                 <button
                   key={index}
                   onClick={() => setActiveStep(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    activeStep === index 
-                      ? 'bg-electric-500 scale-125' 
-                      : 'bg-neutral-300 hover:bg-neutral-400'
+                  className={`whitespace-nowrap px-6 py-3 rounded-xl text-sm font-bold transition-all duration-300 ${
+                    activeStep === index
+                      ? `bg-gradient-to-r ${step.color} text-white shadow-lg`
+                      : 'bg-white text-neutral-600 border border-neutral-200 hover:border-electric-300'
                   }`}
-                />
+                >
+                  Step {index + 1}
+                </button>
               ))}
             </div>
-          </motion.div>
 
-          {/* Right Side - Publishing Partner & Timeline */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="space-y-8"
-          >
-            {/* Springer Partner Card */}
+            {/* Active Card */}
             <motion.div
-              whileHover={{ scale: 1.02, y: -4 }}
-              className="bg-white rounded-3xl p-8 border border-neutral-200/80 shadow-2xl hover:shadow-3xl transition-all duration-500 text-center"
+              key={activeStep}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+              className="bg-white rounded-3xl p-8 border border-neutral-200 shadow-xl min-h-[240px] flex flex-col justify-center"
             >
-              <div className="inline-flex items-center gap-4 text-electric-600 font-semibold text-sm uppercase tracking-widest mb-6">
-                <Star className="w-4 h-4" />
-                Publishing Partner
-                <Star className="w-4 h-4" />
-              </div>
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
-                <img src={SpringerLogo} alt="Springer Logo" className="h-20 mx-auto mb-6 filter brightness-110" />
-              </motion.div>
-              <p className="text-neutral-600 text-lg leading-relaxed font-medium mb-4">
-                Partnering with Springer for prestigious, high-impact publications in their renowned computing series.
-              </p>
-              <div className="flex gap-2 justify-center">
-                <span className="px-3 py-1 bg-electric-500/10 text-electric-600 rounded-full text-sm font-semibold">Scopus Indexed</span>
-                <span className="px-3 py-1 bg-violet-500/10 text-violet-600 rounded-full text-sm font-semibold">Global Reach</span>
-              </div>
-            </motion.div>
-
-            {/* Timeline Card */}
-            <motion.div
-              whileHover={{ scale: 1.02, y: -4 }}
-              className="bg-gradient-to-br from-electric-500 to-violet-600 rounded-3xl p-8 text-white shadow-2xl hover:shadow-3xl transition-all duration-500"
-            >
-              <div className="flex items-center gap-4 mb-6">
-                <FiClock className="w-8 h-8 text-white/90" />
-                <h3 className="text-2xl font-black">Important Dates</h3>
-              </div>
-              <div className="space-y-4">
-                <div className="flex justify-between items-center py-3 border-b border-white/20">
-                  <span className="font-semibold">Submission Deadline</span>
-                  <span className="font-black">Dec 15, 2025</span>
+              <div className="flex items-center gap-5 mb-5">
+                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-r ${steps[activeStep].color} flex items-center justify-center text-white text-2xl shadow-md`}>
+                  {React.createElement(steps[activeStep].icon)}
                 </div>
-                <div className="flex justify-between items-center py-3 border-b border-white/20">
-                  <span className="font-semibold">Review Period</span>
-                  <span className="font-black">Dec 2025 - Jan 2026</span>
-                </div>
-                <div className="flex justify-between items-center py-3">
-                  <span className="font-semibold">Conference Dates</span>
-                  <span className="font-black">Feb 20-21, 2026</span>
-                </div>
+                <h3 className="text-2xl font-black text-neutral-900">{steps[activeStep].title}</h3>
               </div>
-            </motion.div>
-          </motion.div>
-        </div>
-
-        {/* Coming Soon CTA */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="max-w-4xl mx-auto"
-        >
-          <motion.div
-            onHoverStart={() => setIsHovered(true)}
-            onHoverEnd={() => setIsHovered(false)}
-            className="relative bg-gradient-to-br from-electric-500 via-violet-500 to-electric-600 rounded-3xl p-12 text-center text-white shadow-2xl hover:shadow-3xl transition-all duration-500 overflow-hidden"
-          >
-            {/* Animated Background */}
-            <motion.div
-              animate={isHovered ? { scale: 1.1 } : { scale: 1 }}
-              className="absolute inset-0 bg-gradient-to-br from-electric-600 via-violet-600 to-electric-700 opacity-50"
-            />
-            
-            <div className="relative z-10">
-              <motion.div
-                animate={isHovered ? { rotate: 360 } : { rotate: 0 }}
-                transition={{ duration: 2, ease: "linear" }}
-              >
-                <FiClock className="mx-auto text-6xl mb-8 text-white/90" />
-              </motion.div>
-              <h2 className="text-4xl lg:text-5xl font-black mb-6">Detailed Guidelines</h2>
-              <motion.p
-                animate={isHovered ? { scale: 1.05 } : { scale: 1 }}
-                className="text-6xl lg:text-7xl font-black mb-6 animate-pulse"
-              >
-                Coming Soon!
-              </motion.p>
-              <p className="text-white/90 text-xl leading-relaxed font-medium">
-                Complete manuscript preparation and submission instructions will be available shortly.
-                <br />Stay tuned for the official announcement and template downloads.
+              <p className="text-lg text-neutral-600 leading-relaxed mb-6">
+                {steps[activeStep].description}
               </p>
               
-           
+              {/* Simple Progress Bar */}
+              <div className="w-full bg-neutral-100 rounded-full h-2">
+                <motion.div
+                  initial={{ width: 0 }}
+                  animate={{ width: `${((activeStep + 1) / steps.length) * 100}%` }}
+                  className={`h-2 rounded-full bg-gradient-to-r ${steps[activeStep].color}`}
+                />
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Right Column: Other Info & CTA */}
+          <div className="space-y-6 lg:pt-14">
+            
+            {/* Springer & Timeline Split */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+               {/* Springer */}
+               <div className="bg-white rounded-3xl p-6 border border-neutral-200 shadow-lg flex flex-col items-center justify-center text-center hover:scale-[1.02] transition-transform">
+                  <img src={SpringerLogo} alt="Springer" className="h-10 mb-4 object-contain" />
+                  <span className="px-3 py-1 bg-electric-50 text-electric-700 rounded-lg text-xs font-bold uppercase tracking-wide">
+                    Scopus Indexed
+                  </span>
+               </div>
+
+               {/* Timeline */}
+               <div className="bg-gradient-to-br from-electric-600 to-violet-700 rounded-3xl p-6 text-white shadow-lg hover:scale-[1.02] transition-transform">
+                  <div className="flex items-center gap-2 mb-4 opacity-90">
+                    <FiClock className="w-5 h-5" />
+                    <span className="font-bold text-sm uppercase tracking-wider">Deadlines</span>
+                  </div>
+                  <div className="space-y-3">
+                     <div className="flex justify-between items-center text-sm border-b border-white/20 pb-2">
+                       <span>Submission</span>
+                       <span className="font-bold text-lg">Dec 15</span>
+                     </div>
+                     <div className="flex justify-between items-center text-sm pt-1">
+                       <span>Conference</span>
+                       <span className="font-bold text-lg">Feb 20</span>
+                     </div>
+                  </div>
+               </div>
             </div>
-          </motion.div>
-        </motion.div>
+
+            {/* CTA Button Link */}
+            <Link to="/submission" className="block group">
+              <motion.div 
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                className="relative bg-neutral-900 rounded-3xl p-1 shadow-2xl overflow-hidden"
+              >
+                 <div className="relative bg-neutral-900 rounded-[22px] px-8 py-6 flex items-center justify-between z-10">
+                    <div>
+                        <h4 className="text-white font-black text-xl mb-1 group-hover:text-electric-300 transition-colors">Submit Paper</h4>
+                        <p className="text-neutral-400 text-sm">View guidelines & templates</p>
+                    </div>
+                    <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-electric-500 group-hover:text-white text-white transition-all duration-300">
+                        <FiArrowRight className="w-6 h-6" />
+                    </div>
+                 </div>
+                 {/* Button Hover Glow */}
+                 <div className="absolute inset-0 bg-gradient-to-r from-electric-600 to-violet-600 opacity-0 group-hover:opacity-20 transition-opacity duration-500" />
+              </motion.div>
+            </Link>
+
+          </div>
+        </div>
+
       </div>
     </section>
   );
 });
+
+
+
 
 const Contact: FC = memo(() => {
   const [activeContact, setActiveContact] = useState(0);
@@ -1246,7 +1236,7 @@ const Contact: FC = memo(() => {
     { name: "Call for Papers", href: "#call-for-papers" },
     { name: "Submission Guidelines", href: "#submission" },
     { name: "Committees", href: "#committees" },
-    { name: "Registration", href: "#" },
+    {name:"Microsoft CMT", href:"#"}
   ];
 
   return (
