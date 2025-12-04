@@ -118,7 +118,7 @@ const Navbar: FC<NavbarProps> = memo(({ isOpen, onToggle, scrolled }) => (
 ));
 
 // 2. TEMPLATE CARD
-const TemplateCard = ({ title, type, icon: Icon, color }:any) => (
+const TemplateCard = ({ title, type, icon: Icon, color, link }: any) => (
   <motion.div 
     whileHover={{ y: -5 }}
     className="group relative bg-white rounded-2xl p-6 border border-neutral-200 shadow-xl overflow-hidden"
@@ -131,15 +131,23 @@ const TemplateCard = ({ title, type, icon: Icon, color }:any) => (
       </div>
       
       <h4 className="text-xl font-bold text-neutral-900 mb-2">{title}</h4>
-      <p className="text-neutral-500 text-sm mb-6">Official Springer {type} template for manuscript preparation.</p>
-      
-      <button className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-neutral-900 group-hover:text-electric-600 transition-colors">
+      <p className="text-neutral-500 text-sm mb-6">
+        Official Springer {type} template for manuscript preparation.
+      </p>
+
+      <a 
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-neutral-900 group-hover:text-electric-600 transition-colors"
+      >
         <Download size={16} />
         Download Template
-      </button>
+      </a>
     </div>
   </motion.div>
 );
+
 
 // 3. MASSIVE ACKNOWLEDGMENT BANNER
 const CmtAcknowledgmentBanner = () => (
@@ -260,20 +268,22 @@ export default function SubmissionPage() {
               viewport={{ once: true }}
               className="grid grid-cols-1 sm:grid-cols-2 gap-6"
             >
-               {/* Word Template */}
-              <TemplateCard 
-                title="Word Template" 
-                type="DOCX" 
-                icon={FileText} 
-                color="from-blue-500 to-blue-600" 
-              />
-              {/* Latex Template */}
-              <TemplateCard 
-                title="LaTeX Template" 
-                type="TeX" 
-                icon={Terminal} 
-                color="from-neutral-700 to-neutral-900" 
-              />
+            <TemplateCard 
+  title="Word Template" 
+  type="DOCX" 
+  icon={FileText} 
+  color="from-blue-500 to-blue-600" 
+  link="https://docs.google.com/document/d/1nNwi5ovU9B_lq_nJN2MfbyX1oqIknPBj/edit?usp=sharing&ouid=103312802439461728160&rtpof=true&sd=true"
+/>
+
+<TemplateCard 
+  title="LaTeX Template" 
+  type="TeX" 
+  icon={Terminal} 
+  color="from-neutral-700 to-neutral-900" 
+  link="https://www.overleaf.com/gallery/tagged/ieee-official"
+/>
+
             </motion.div>
           </div>
 
