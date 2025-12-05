@@ -1647,7 +1647,7 @@ export default function Home() {
         <Hero />
         <AboutUs/>
         <CallForPapers />
-        <FeaturedSpeakers />
+        {/* <FeaturedSpeakers /> */}
         <Submission />
         <Contact />
       </main>
