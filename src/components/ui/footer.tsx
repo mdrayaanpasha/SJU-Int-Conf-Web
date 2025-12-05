@@ -7,7 +7,7 @@ export default function Footer() {
         
         <div className="text-center sm:text-left max-w-lg">
           <p className="text-sm font-semibold text-black/70">ICRAC 2026</p>
-          <p className="text-xs text-neutral-500">&copy; 2026 St. Joseph's University, Bengaluru.</p>
+          <p className="text-xs text-neutral-500">&copy; 2026 St Joseph's University, Bengaluru.</p>
           <p className="text-xs text-neutral-500 mt-2">
             The Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support.
           </p>
