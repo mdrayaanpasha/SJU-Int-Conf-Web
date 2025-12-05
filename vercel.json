@@ -18,7 +18,7 @@
     },
     {
         "src": "/committees",
-        "dest": "/committees"
+        "dest": "/"
     },
     {
         "src": "/submission",
