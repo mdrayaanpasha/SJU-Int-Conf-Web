@@ -318,7 +318,7 @@ const Navbar: FC<{ isOpen: boolean; onToggle: () => void; scrolled: boolean }> =
           whileHover={{ scale: 1.05 }}
         >
           <div className={`text-2xl font-black ${scrolled ? 'text-neutral-900' : 'text-white'}`}>
-            <span className="bg-gradient-to-r from-electric-600 to-violet-600 bg-clip-text text-transparent">ICRAC</span>
+            <span className="text-electric-600">ICRAC</span>
             <span className="text-electric-600">2026</span>
           </div>
         </motion.a>
