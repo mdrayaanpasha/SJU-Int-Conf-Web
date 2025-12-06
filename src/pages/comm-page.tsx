@@ -1,226 +1,309 @@
-import React, { memo } from "react";
+// Converted to TSX
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Star, ChevronRight, User, Award, Layers, Globe } from "lucide-react";
-// Assuming you have a Navbar and Footer component, otherwise we can inline them
-import { Navbar,Footer } from "./home";
+import {
+  Users,
+  Cpu,
+  Monitor,
+  Megaphone,
+  DollarSign,
+  Coffee,
+  Globe,
+  Server,
+  MapPin,
+  Heart,
+  Award,
+  FileText,
+  Mic,
+  Star,
+  ChevronRight,
+  ShieldCheck,
+  ClipboardList
+} from "lucide-react";
 
-// --- TYPES ---
-interface CommitteeMember {
-  name: string;
-  affiliation: string;
-  image?: string; // Optional: URL to image
-}
+import { Navbar, Footer } from "../pages/home";
 
-interface CommitteeCategory {
+type Committee = {
   title: string;
-  icon: React.ElementType;
-  members: CommitteeMember[];
-}
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+  members: string[];
+};
 
-// --- DATA: FILL YOUR MEMBERS HERE ---
-const committeeData: CommitteeCategory[] = [
+const committeesData: Committee[] = [
   {
-    title: "Chief Patrons",
+    title: "Technical Program Committee",
+    icon: Cpu,
+    members: [
+      "Dr. Francis Densil Raj (Coordinator)",
+      "Dr. Sanjay (Coordinator)",
+      "Dr. Sivakannan S",
+      "Dr. Asha K",
+      "Dr. Puneeth S",
+      "Dr. B Nithya",
+      "Dr. Mrinmoyee",
+      "Dr. Shashikala",
+      "Dr. Annie Syrien",
+      "Dr. Puneeth Kumar B S",
+      "Dr. Deepa Nagalavi",
+      "Dr. Periyasamy P",
+      "Dr. Manivannan T",
+      "Dr. P Selvaperumal",
+      "Dr. Shiv Kumar",
+      "Dr. Harish"
+    ]
+  },
+  {
+    title: "Session Track Monitoring",
+    icon: Monitor,
+    members: [
+      "Dr. Mrinmoyee (Sending acceptance)",
+      "Dr. Sanjay (Plagiarism check)",
+      "Dr. Asha (Model slides)"
+    ]
+  },
+  {
+    title: "Registration Committee",
+    icon: ClipboardList,
+    members: [
+      "Ms. Jeshma (Coordinator)",
+      "Ms. Sruthi Surendran P",
+      "Dr. Deepa Nagalavi (Online registration)"
+    ]
+  },
+  {
+    title: "Publicity & Certificate",
+    icon: Megaphone,
+    members: [
+      "Mr. Melwyn Amrithraj (Coordinator)",
+      "Ms. Saranya M",
+      "Ms. Shalini S"
+    ]
+  },
+  {
+    title: "Finance Committee",
+    icon: DollarSign,
+    members: [
+      "Dr. Shashikala",
+      "Ms. Jeshma Nishitha Dsouza (Coordinator)",
+      "Ms. Pooja A"
+    ]
+  },
+  {
+    title: "Hospitality Committee",
+    icon: Coffee,
+    members: [
+      "Mr. Selwyn Paul (Coordinator)",
+      "Mr. Mueen Pasha",
+      "Ms. Junaida"
+    ]
+  },
+  {
+    title: "Brochure & Website",
+    icon: Globe,
+    members: ["Mr. Aaran Lawrence (Coordinator)", "Dr. Manivannan", "Mr. Anand"]
+  },
+  {
+    title: "IT & Infrastructure",
+    icon: Server,
+    members: [
+      "Dr. Puneeth Kumar B S (Coordinator)",
+      "Dr. Francis Densil Raj",
+      "Ms. Banu M"
+    ]
+  },
+  {
+    title: "Venue & Logistics",
+    icon: MapPin,
+    members: ["Ms. Sara Kutty (Coordinator)", "Dr. Puneeth S"]
+  },
+  {
+    title: "Volunteer Management",
+    icon: Heart,
+    members: ["Mr. Prasad C N (Coordinator)", "Mr. Timothy Paul"]
+  },
+  {
+    title: "Sponsorship & Exhibition",
     icon: Award,
     members: [
-      { name: "Rev. Dr. Victor Lobo SJ", affiliation: "Vice Chancellor, St. Joseph’s University" },
-    ],
+      "Dr. Annie Syrien (Coordinator)",
+      "Mr. Prem Sagar",
+      "Dr. Jayati Bhadra",
+      "Dr. Prashanthi",
+      "Dr. Mrinmoyee"
+    ]
   },
   {
-    title: "Patrons",
-    icon: Star,
-    members: [
-      { name: "Dr Syed Wajeed ", affiliation: "Registrar, St. Joseph’s University" },
-      { name: "Rev. Fr. Denzil Lobo SJ", affiliation: "Director of IT, SJU" },
-    ],
+    title: "Feedback & Evaluation",
+    icon: ShieldCheck,
+    members: ["Ms. Mary Merline Rani (Coordinator)", "Dr. Sivakannan S", "Dr. Periyasamy"]
   },
   {
-    title: "General Chairs",
-    icon: Layers,
-    members: [
-      { name: "Dr.", affiliation: "Dean, School of IT, SJU" },
-      { name: "Dr. Sasikumar M", affiliation: "Professor, IIT Roorkee" },
-    ],
+    title: "Inauguration & Valedictory",
+    icon: Mic,
+    members: ["Ms. Sandhya N (Coordinator)", "Mr. Aaran Lawrence", "Ms. Prakruthi Thapa"]
   },
   {
-    title: "Advisory Committee",
-    icon: Globe,
-    members: [
-      { name: "Dr. Narahari", affiliation: "Professor, IISc, Bengaluru" },
-      { name: "Dr. Deepak D'Souza", affiliation: "Professor, IISc, Bengaluru" },
-      { name: "Dr. Shamala Subramaniam", affiliation: "Universiti of Putra, Malaysia" },
-      { name: "Dr. Xiao-Zhi Gao", affiliation: "University of Eastern Finland" },
-      { name: "Dr. Madhu S Nair", affiliation: "CUSAT, Kerala" },
-      { name: "Dr. Srinivas Bhogle", affiliation: "CSIR Lab, Delhi" },
-    ],
+    title: "Food & Refreshments",
+    icon: Coffee,
+    members: ["Dr. Puneeth S (Coordinator)", "Mr. Selwyn Paul"]
   },
   {
-    title: "Organizing Committee",
-    icon: User,
-    members: [
-      { name: "Prof. Johnson", affiliation: "St. Joseph’s University" },
-      { name: "Prof. Rekha", affiliation: "St. Joseph’s University" },
-      { name: "Prof. Karthik", affiliation: "St. Joseph’s University" },
-      { name: "Prof. Sarah", affiliation: "St. Joseph’s University" },
-    ],
+    title: "Documentation",
+    icon: FileText,
+    members: ["Ms. Prakruthi Thapa (Coordinator)", "Ms. Pooja A", "Ms. Junaida"]
   },
+  {
+    title: "Resource Persons",
+    icon: Users,
+    members: ["Core Committee"]
+  }
 ];
 
-// --- COMPONENTS ---
+type CommitteeCardProps = Committee & { index: number };
 
-const HeaderInfo = memo(() => (
-  <div className="text-center pb-12 pt-4 px-4">
-    <motion.h3 
-      initial={{ opacity: 0 }} 
-      animate={{ opacity: 1 }}
-      className="text-electric-300 font-bold tracking-widest text-xs md:text-sm uppercase mb-2"
-    >
-      St. Joseph’s University, Bengaluru
-    </motion.h3>
-    <motion.p 
-      initial={{ opacity: 0 }} 
-      animate={{ opacity: 1 }}
-      transition={{ delay: 0.1 }}
-      className="text-white/60 text-xs md:text-sm max-w-2xl mx-auto"
-    >
-      A Public-Private Partnership University under RUSA 2.0 of MHRD (GOI)
-    </motion.p>
-  </div>
-));
-
-const MemberCard: React.FC<{ member: CommitteeMember; index: number }> = memo(({ member, index }) => (
+const CommitteeCard: React.FC<CommitteeCardProps> = ({ title, icon: Icon, members, index }) => (
   <motion.div
-    initial={{ opacity: 0, y: 20 }}
+    initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ delay: index * 0.05 }}
     whileHover={{ y: -5 }}
-    className="group relative bg-white rounded-2xl p-6 border border-neutral-100 shadow-lg hover:shadow-2xl transition-all duration-300"
+    className="group relative bg-white rounded-3xl p-6 md:p-8 border border-neutral-200 shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300"
   >
-    {/* Gradient Border Bottom */}
-    <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-electric-500 to-violet-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 rounded-b-2xl" />
-    
-    <div className="flex items-start gap-4">
-      {/* Avatar / Icon */}
-      <div className="shrink-0 w-12 h-12 rounded-xl bg-gradient-to-br from-electric-50 to-violet-50 flex items-center justify-center text-electric-600 group-hover:bg-electric-500 group-hover:text-white transition-colors duration-300">
-        {member.image ? (
-          <img src={member.image} alt={member.name} className="w-full h-full object-cover rounded-xl" />
-        ) : (
-          <User size={20} />
-        )}
-      </div>
-      
-      {/* Details */}
-      <div>
-        <h4 className="text-lg font-bold text-neutral-900 group-hover:text-electric-700 transition-colors leading-tight mb-1">
-          {member.name}
-        </h4>
-        <p className="text-sm text-neutral-500 font-medium leading-relaxed">
-          {member.affiliation}
-        </p>
-      </div>
-    </div>
-  </motion.div>
-));
+    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-electric-50 to-violet-50 rounded-bl-full opacity-50 group-hover:scale-110 transition-transform duration-500" />
 
-const CategorySection: React.FC<{ category: CommitteeCategory; index: number }> = memo(({ category, index }) => {
-  const Icon = category.icon;
-  return (
-    <div className="mb-20 last:mb-0">
-      <motion.div 
-        initial={{ opacity: 0, x: -20 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        viewport={{ once: true }}
-        className="flex items-center gap-4 mb-8"
-      >
-        <div className="p-3 rounded-2xl bg-gradient-to-br from-electric-500 to-violet-600 text-white shadow-lg">
-          <Icon size={24} />
+    <div className="relative z-10">
+      <div className="flex items-center gap-4 mb-6">
+        <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-electric-500 to-violet-600 flex items-center justify-center shadow-lg group-hover:rotate-6 transition-transform duration-300">
+          <Icon className="text-white w-6 h-6" />
         </div>
-        <h2 className="text-3xl md:text-4xl font-black text-neutral-900 tracking-tight">
-          {category.title}
-        </h2>
-        <div className="h-px flex-grow bg-gradient-to-r from-neutral-200 to-transparent ml-4" />
-      </motion.div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {category.members.map((member, idx) => (
-          <MemberCard key={`${member.name}-${idx}`} member={member} index={idx} />
-        ))}
+        <h3 className="text-xl font-bold text-neutral-900 leading-tight group-hover:text-electric-600 transition-colors">
+          {title}
+        </h3>
       </div>
-    </div>
-  );
-});
 
-export default function CommitteesPage() {
-  // Using simplified state for navbar toggle just for structure
-  const [isOpen, setIsOpen] = React.useState(false);
+      <ul className="space-y-3">
+        {members.map((member, i) => {
+          const isCoordinator = member.toLowerCase().includes("coordinator");
+          const [name] = member.split("(");
+
+          return (
+            <li key={i} className="flex items-start gap-3 text-sm md:text-base text-neutral-600">
+              <div className="mt-1.5 w-1.5 h-1.5 rounded-full bg-electric-400 shrink-0" />
+              <span className={isCoordinator ? "font-bold text-neutral-800" : ""}>
+                {isCoordinator ? (
+                  <>
+                    {name}
+                    <span className="text-electric-600 text-xs font-bold uppercase tracking-wider ml-1 block sm:inline sm:ml-2">
+                      (Coordinator)
+                    </span>
+                  </>
+                ) : (
+                  member
+                )}
+              </span>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+
+    <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-electric-500 to-violet-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+  </motion.div>
+);
+
+const CommitteesPage: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  const toggleMenu = () => setIsOpen(!isOpen);
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Reuse your existing Navbar here */}
-      <Navbar isOpen={isOpen} onToggle={() => setIsOpen(!isOpen)} scrolled={true} />
+    <div className="min-h-screen bg-neutral-50 font-sans selection:bg-electric-200 selection:text-electric-900">
+      <Navbar isOpen={isOpen} onToggle={toggleMenu} scrolled={scrolled} />
 
-      <main className="pt-24">
-        {/* HERO SECTION */}
-        <section className="relative bg-gradient-to-br from-neutral-900 via-electric-900 to-violet-900 py-20 overflow-hidden">
-          {/* Background Decor */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-electric-500/20 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-violet-500/20 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]"></div>
+      <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden bg-neutral-900">
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-electric-600/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
+          <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-violet-600/20 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2"></div>
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]"></div>
+        </div>
+
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-3 text-electric-400 font-bold text-sm uppercase tracking-[0.2em] mb-6"
+          >
+            <Star className="w-4 h-4" />
+            <span>Behind the Scenes</span>
+            <Star className="w-4 h-4" />
+          </motion.div>
+
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.1 }}
+            className="text-5xl md:text-7xl font-black text-white tracking-tight mb-8"
+          >
+            Committee <span className="bg-gradient-to-r from-electric-400 to-violet-400 bg-clip-text text-transparent">Members</span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="max-w-2xl mx-auto text-xl text-neutral-400 leading-relaxed"
+          >
+            The dedicated team of professors, experts, and volunteers working tirelessly to make ICRAC 2026 a grand success.
+          </motion.p>
+        </div>
+      </section>
+
+      <section className="relative py-20 md:py-32 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mb-16 text-center">
+            <h2 className="text-3xl md:text-4xl font-black text-neutral-900 mb-4">Core Organizing Teams</h2>
+            <div className="w-24 h-1.5 bg-gradient-to-r from-electric-500 to-violet-600 mx-auto rounded-full"></div>
           </div>
 
-          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <HeaderInfo />
-            
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8 }}
-            >
-              <div className="inline-flex items-center gap-3 text-electric-400 font-bold text-sm uppercase tracking-widest mb-4 bg-white/5 border border-white/10 rounded-full px-4 py-1 backdrop-blur-md">
-                <Star size={14} /> ICRAC 2026 Committee
-              </div>
-              <h1 className="text-5xl md:text-7xl font-black text-white mb-6 tracking-tight">
-                Leadership & <span className="text-transparent bg-clip-text bg-gradient-to-r from-electric-400 to-violet-400">Vision</span>
-              </h1>
-              <p className="text-xl text-neutral-300 max-w-3xl mx-auto leading-relaxed">
-                The distinguished academics, researchers, and industry leaders guiding the 2nd International Conference on Recent Trends in Advanced Computing.
-              </p>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* COMMITTEE LIST SECTION */}
-        <section className="relative py-24 bg-gradient-to-b from-white to-neutral-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {committeeData.map((category, index) => (
-              <CategorySection key={category.title} category={category} index={index} />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+            {committeesData.map((committee, index) => (
+              <CommitteeCard key={index} index={index} {...committee} />
             ))}
           </div>
-        </section>
 
-        {/* JOIN CTA */}
-        <section className="py-20 bg-white border-t border-neutral-100">
-          <div className="max-w-4xl mx-auto text-center px-4">
-            <h2 className="text-3xl font-bold text-neutral-900 mb-6">Want to be part of the committee?</h2>
-            <p className="text-neutral-600 mb-8 text-lg">
-              We are always looking for dedicated reviewers and session chairs to join our growing community.
-            </p>
-            <motion.a 
-              href="#contact" 
-              className="inline-flex items-center gap-2 bg-neutral-900 text-white font-bold py-4 px-8 rounded-2xl hover:bg-electric-600 transition-colors duration-300"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Contact Organizing Chair <ChevronRight size={20} />
-            </motion.a>
-          </div>
-        </section>
-      </main>
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-24 bg-neutral-900 rounded-3xl p-8 md:p-12 text-center relative overflow-hidden"
+          >
+            <div className="absolute top-0 right-0 w-64 h-64 bg-electric-500/20 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2"></div>
 
-      {/* Reuse your existing Footer here */}
+            <div className="relative z-10">
+              <h2 className="text-3xl md:text-4xl font-black text-white mb-6">Interested in Volunteering?</h2>
+              <p className="text-neutral-400 text-lg mb-8 max-w-2xl mx-auto">
+                Be a part of this prestigious international conference. Join us in organizing events, managing logistics, and guiding participants.
+              </p>
+              <a href="#contact" className="inline-flex items-center gap-2 bg-white text-neutral-900 px-8 py-4 rounded-xl font-bold hover:bg-electric-50 transition-colors">
+                Contact Us
+                <ChevronRight className="w-5 h-5" />
+              </a>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
       <Footer />
     </div>
   );
-}
+};
+
+export default CommitteesPage;
