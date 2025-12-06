@@ -252,7 +252,7 @@ const CommitteesPage: React.FC = () => {
             transition={{ delay: 0.1 }}
             className="text-5xl md:text-7xl font-black text-white tracking-tight mb-8"
           >
-            Committee <span className="bg-gradient-to-r from-electric-400 to-violet-400 bg-clip-text text-transparent">Members</span>
+            Committee Members
           </motion.h1>
 
           <motion.p
