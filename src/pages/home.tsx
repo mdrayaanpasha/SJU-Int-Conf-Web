@@ -347,7 +347,7 @@ const Navbar: FC<{ isOpen: boolean; onToggle: () => void; scrolled: boolean }> =
         {/* CTA Button */}
         <div className="hidden lg:flex">
           <motion.a 
-            href="#submission" // FIXED: Pointed to the correct submission section
+            href="./#submission" // FIXED: Pointed to the correct submission section
             className={`px-6 py-3 rounded-2xl font-bold text-sm transition-all duration-300 ${
               scrolled 
                 ? 'bg-gradient-to-r from-electric-500 to-violet-600 text-white shadow-lg hover:shadow-xl' 
@@ -972,9 +972,10 @@ const FeaturedSpeakers: FC = memo(() => {
                     transition={{ duration: 0.6 }}
                 >
                     <motion.a 
-                        href="/committees"
+                        href="/commities"
                         whileHover={{ scale: 1.05, y: -4 }}
                         whileTap={{ scale: 0.95 }}
+
                         className="inline-flex items-center bg-white text-neutral-900 font-black py-4 px-8 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 group"
                     >
                         View Complete Committees
