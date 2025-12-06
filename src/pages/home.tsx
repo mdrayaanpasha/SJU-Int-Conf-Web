@@ -1591,7 +1591,7 @@ const Footer: FC = memo(() => (
           <div className="text-white/60 text-lg space-y-4">
             <div className="flex justify-between items-center">
               <span className="font-medium">Submission Deadline:</span>
-              <span className="font-black text-electric-400">Jan 15, 2025</span>
+              <span className="font-black text-electric-400">Jan 15, 2026</span>
             </div>
             <div className="flex justify-between items-center">
               <span className="font-medium">Conference Dates:</span>
