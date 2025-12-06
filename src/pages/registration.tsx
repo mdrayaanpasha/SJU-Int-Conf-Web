@@ -83,7 +83,7 @@ const Navbar: FC<NavbarProps> = memo(({ isOpen, onToggle, scrolled }) => (
       <div className="flex justify-between items-center py-4">
         <motion.a href="/" className="flex items-center space-x-3" whileHover={{ scale: 1.05 }}>
           <div className={`text-2xl font-black ${scrolled ? 'text-neutral-900' : 'text-neutral-900'}`}>
-            <span className="bg-gradient-to-r from-electric-600 to-violet-600 bg-clip-text text-transparent">ICRAC</span>
+            <span className="bg-black bg-clip-text text-transparent">ICRAC</span>
             <span className="text-electric-600">2026</span>
           </div>
         </motion.a>
@@ -229,7 +229,7 @@ export default function RegistrationPage() {
               className="text-4xl md:text-5xl font-black text-neutral-900 mb-6"
             >
               Registration & <br/>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-electric-600 to-violet-600">
+              <span className="text-neutral-900">
                 Payment Details
               </span>
             </motion.h1>
