@@ -1156,7 +1156,7 @@ const Submission: FC = memo(() => {
                   <div className="space-y-3">
                      <div className="flex justify-between items-center text-sm border-b border-white/20 pb-2">
                        <span>Submission</span>
-                       <span className="font-bold text-lg">Dec 15</span>
+                       <span className="font-bold text-lg">Jan 15</span>
                      </div>
                      <div className="flex justify-between items-center text-sm pt-1">
                        <span>Conference</span>
@@ -1481,7 +1481,7 @@ const Contact: FC = memo(() => {
           <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10 text-center">
             <FiClock className="w-8 h-8 text-emerald-400 mx-auto mb-3" />
             <h4 className="font-black text-white text-lg mb-2">Submission Deadline</h4>
-            <p className="text-neutral-300">December 15, 2025</p>
+            <p className="text-neutral-300">January 15, 2026</p>
           </div>
           <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10 text-center">
             <MapPin className="w-8 h-8 text-violet-400 mx-auto mb-3" />
@@ -1594,7 +1594,7 @@ const Footer: FC = memo(() => (
           <div className="text-white/60 text-lg space-y-4">
             <div className="flex justify-between items-center">
               <span className="font-medium">Submission Deadline:</span>
-              <span className="font-black text-electric-400">Dec 15, 2025</span>
+              <span className="font-black text-electric-400">Jan 15, 2025</span>
             </div>
             <div className="flex justify-between items-center">
               <span className="font-medium">Conference Dates:</span>
