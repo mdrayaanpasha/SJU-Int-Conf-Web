@@ -9,7 +9,7 @@ import {
   Tag,
   Building2,
   QrCode,
-  Copy,
+  
   CheckCircle2
 } from "lucide-react";
 
