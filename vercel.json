@@ -13,7 +13,7 @@
         "dest": "/"
     },
     {
-        "src": "/callforpapers",
+        "src": "/register",
         "dest": "/"
     },
     {
