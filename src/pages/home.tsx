@@ -105,7 +105,7 @@ const researchAreas = [
 
 
 const venue = {
-  name: "St. Joseph's University",
+  name: "St  Joseph's University",
   address: "36, Lal Bagh Main Rd, Bengaluru, Karnataka 560027",
   mapLink: "https://www.openstreetmap.org/?mlat=12.9616&mlon=77.5978#map=17/12.9616/77.5978",
 };
@@ -500,7 +500,7 @@ const Hero: FC = memo(() => {
                     transition={{ duration: 0.8, delay: 0.6 }}
                     className="text-lg sm:text-xl text-white/80"
                 >
-                    <p>February 20-21, 2026 | St. Joseph’s University</p>
+                    <p>February 20-21, 2026 | St  Joseph’s University</p>
                     <p className="font-semibold">(Hybrid Mode)</p>
                 </motion.div>
 
@@ -559,15 +559,15 @@ const AboutUs: FC = memo(() => {
       icon: "🎯",
       color: "from-electric-500 to-violet-600",
       bgColor: "bg-gradient-to-br from-electric-50 to-violet-100",
-      content: `The 2nd International Conference on Recent Trends in Advanced Computing (ICRAC)-2026 will be organized by the School of Information Technology, St. Joseph's University, Bengaluru, Karnataka, India, during February 20-21, 2026 (Hybrid Mode). ICRAC-2026 continues the legacy of a premier global platform for researchers and practitioners to share groundbreaking research findings, innovative ideas, and practical experiences in the fields of Data Science and Computer Science fostering collaboration, advancing knowledge, and shaping the future of technology-driven solutions worldwide. The conference proposes publishing research papers on advanced engineering, science and technology techniques, experimental analysis and theoretical reviews. This conference will serve as a platform for academicians, industrialists, and students to learn more about the latest technologies in data science. Selected papers at the conference will be considered for Scopus indexed conference proceedings.`
+      content: `The 2nd International Conference on Recent Trends in Advanced Computing (ICRAC)-2026 will be organized by the School of Information Technology, St  Joseph's University, Bengaluru, Karnataka, India, during February 20-21, 2026 (Hybrid Mode). ICRAC-2026 continues the legacy of a premier global platform for researchers and practitioners to share groundbreaking research findings, innovative ideas, and practical experiences in the fields of Data Science and Computer Science fostering collaboration, advancing knowledge, and shaping the future of technology-driven solutions worldwide. The conference proposes publishing research papers on advanced engineering, science and technology techniques, experimental analysis and theoretical reviews. This conference will serve as a platform for academicians, industrialists, and students to learn more about the latest technologies in data science. Selected papers at the conference will be considered for Scopus indexed conference proceedings.`
     },
     {
       id: 1,
-      title: "St. Joseph's University",
+      title: "St  Joseph's University",
       icon: "🏛️",
       color: "from-emerald-500 to-electric-600",
       bgColor: "bg-gradient-to-br from-emerald-50 to-electric-100",
-      content: `St. Joseph's University (SJU) is a Jesuit University at the heart of Bengaluru, the Silicon City of India established in 1882 by Paris Foreign Fathers, the college management was handed over to the Jesuit Order (Society of Jesus) in 1937. The college was first affiliated with the University of Madras and later with the Mysore and Bangalore Universities. In 1986, St. Joseph's College became the first affiliated college in Karnataka to offer postgraduate courses. In 1988, it became the first college in Karnataka to get a research center, and in 2005, it was one of the five colleges in Karnataka that was awarded academic autonomy. In February 2021, the St. Joseph's University bill was presented in the Karnataka Legislative Council. The college received its university status on 2nd July 2022 and was inaugurated as India's first Public-Private-Partnership University by the Hon'ble President of India, Smt. Droupadi Murmu on 27th September 2022.`
+      content: `St  Joseph's University (SJU) is a Jesuit University at the heart of Bengaluru, the Silicon City of India established in 1882 by Paris Foreign Fathers, the college management was handed over to the Jesuit Order (Society of Jesus) in 1937. The college was first affiliated with the University of Madras and later with the Mysore and Bangalore Universities. In 1986, St  Joseph's College became the first affiliated college in Karnataka to offer postgraduate courses. In 1988, it became the first college in Karnataka to get a research center, and in 2005, it was one of the five colleges in Karnataka that was awarded academic autonomy. In February 2021, the St  Joseph's University bill was presented in the Karnataka Legislative Council. The college received its university status on 2nd July 2022 and was inaugurated as India's first Public-Private-Partnership University by the Hon'ble President of India, Smt. Droupadi Murmu on 27th September 2022.`
     },
     {
       id: 2,
@@ -1486,7 +1486,7 @@ const Contact: FC = memo(() => {
           <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10 text-center">
             <MapPin className="w-8 h-8 text-violet-400 mx-auto mb-3" />
             <h4 className="font-black text-white text-lg mb-2">Venue</h4>
-            <p className="text-neutral-300">St. Joseph's University</p>
+            <p className="text-neutral-300">St  Joseph's University</p>
           </div>
         </motion.div>
       </div>
@@ -1607,7 +1607,7 @@ const Footer: FC = memo(() => (
           <h4 className="font-black text-white text-lg mb-6">Contact</h4>
           <div className="text-white/60 text-lg space-y-3 font-medium">
             <p>icrac2026@gmail.com</p>
-            <p>St. Joseph's University</p>
+            <p>St  Joseph's University</p>
             <p>Bengaluru, India</p>
           </div>
         </div>
@@ -1615,7 +1615,7 @@ const Footer: FC = memo(() => (
       
       <div className="border-t border-white/10 pt-8 text-center space-y-4">
         <p className="text-white/40 text-lg font-medium">
-          &copy; 2026 ICRAC - St. Joseph's University, Bengaluru. All rights reserved.
+          &copy; 2026 ICRAC - St  Joseph's University, Bengaluru. All rights reserved.
         </p>
         <p className="text-white/40 text-sm max-w-3xl mx-auto">
           The Microsoft CMT service was used for managing the peer reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support.
