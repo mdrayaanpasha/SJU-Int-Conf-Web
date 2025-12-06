@@ -26,22 +26,58 @@ import { Link } from "react-router-dom";
 // For larger projects, consider creating an index.ts in the IMAGES folder
 // to export all images from a single file for cleaner imports.
 import SpringerLogo from "../assets/IMAGES/springer.png";
-import DrShamalaSubramaniam from "../assets/IMAGES/Dr Shamala Subramaniam.png";
-import DrShameerKhader from "../assets/IMAGES/Dr Shameer Khader.png";
-import DrSrinivasBhogle from "../assets/IMAGES/Dr Srinivas Bhogle.png";
-import DrMonikaAggarwal from "../assets/IMAGES/Dr Monika Aggarwal.png";
-import DrDeepakDSouza from "../assets/IMAGES/Dr Deepak D’Souza.png";
-import DrNarahari from "../assets/IMAGES/Dr Narahari.png";
-import DrJayanthiSivaswamy from "../assets/IMAGES/Dr Jayanthi Sivaswamy.png";
-import DrXiaoZhiGao from "../assets/IMAGES/Dr Xiao-Zhi Gao.png";
-import DrMadhuSNair from "../assets/IMAGES/Dr Madhu S Nair.png";
+
 import uttyler from "../assets/IMAGES/uttyler.jpg";
 import acmMeerut from "../assets/IMAGES/ACM merrut.png"
+import Marquee from "react-fast-marquee";
 
 // --- TYPE DEFINITIONS ---
 interface NavItem { name: string; to: string; }
-interface Academic { name: string; title: string; image: string; }
-interface MarqueeProps { items: Academic[]; direction?: 'left' | 'right'; }
+// interface Academic { name: string; title: string; image: string; }
+// interface MarqueeProps { items: Academic[]; direction?: 'left' | 'right'; }
+
+
+// IMPROVEMENT: Moved Marquee component out of FeaturedSpeakers to prevent re-declaration on renders.
+// const Marquee: FC<MarqueeProps> = ({ items, direction = 'left' }) => (
+//     <motion.div 
+//         className="flex gap-8 py-8"
+//         animate={{ x: direction === 'left' ? '-100%' : '0%' }}
+//         transition={{ 
+//             x: { 
+//                 repeat: Infinity, 
+//                 duration: 40, 
+//                 ease: "linear" 
+//             } 
+//         }}
+//         initial={{ x: direction === 'left' ? '0%' : '-100%' }}
+//     >
+//         {[...items, ...items].map((item, index) => (
+//             <motion.div 
+//                 key={`${item.name}-${index}`}
+//                 whileHover={{ scale: 1.05, y: -8 }}
+//                 className="flex-shrink-0 flex flex-col items-center text-center w-56 bg-white/10 backdrop-blur-lg rounded-3xl p-6 border border-white/20 hover:border-white/40 transition-all duration-500 shadow-2xl hover:shadow-3xl"
+//             >
+//                 <div className="relative mb-4">
+//                     <div className="w-36 h-36 rounded-2xl overflow-hidden border-4 border-white/20 shadow-2xl">
+//                         <img 
+//                             src={item.image} 
+//                             alt={item.name} 
+//                             className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+//                             loading="lazy" 
+//                         />
+//                     </div>
+//                     <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-gradient-to-br from-electric-500 to-violet-600 rounded-full flex items-center justify-center shadow-lg">
+//                         <Star className="w-3 h-3 text-white" />
+//                     </div>
+//                 </div>
+//                 <p className="font-bold text-white text-lg mb-2 leading-tight">{item.name}</p>
+//                 <p className="text-white/80 text-sm leading-relaxed">{item.title}</p>
+//             </motion.div>
+//         ))}
+//     </motion.div>
+// );
+
+
 
 // --- CUSTOM SVG ICONS ---
 // These are custom components for visually distinct icons.
@@ -145,17 +181,7 @@ const venue = {
   mapLink: "https://www.openstreetmap.org/?mlat=12.9616&mlon=77.5978#map=17/12.9616/77.5978",
 };
 
-const featuredAcademics: Academic[] = [
-    { name: "Dr Deepak D'Souza", title: "Professor, IISc, Bengaluru", image: DrDeepakDSouza }, 
-    { name: "Dr Monika Aggarwal", title: "Professor, IIT, Delhi", image: DrMonikaAggarwal }, 
-    { name: "Dr Shamala Subramaniam", title: "Universiti of Putra, Malaysia", image: DrShamalaSubramaniam }, 
-    { name: "Dr Narahari", title: "Professor, IISc, Bengaluru", image: DrNarahari }, 
-    { name: "Dr Shameer Khader", title: "Sanofi, Cambridge MA, USA", image: DrShameerKhader }, 
-    { name: "Dr Jayanthi Sivaswamy", title: "Professor Emeritus, IIIT, Hyderabad", image: DrJayanthiSivaswamy }, 
-    { name: "Dr Srinivas Bhogle", title: "Scientist, CSIR Lab, Delhi", image: DrSrinivasBhogle }, 
-    { name: "Dr Xiao-Zhi Gao", title: "University of Eastern Finland", image: DrXiaoZhiGao }, 
-    { name: "Dr Madhu S Nair", title: "Professor, CUSAT, Kerala", image: DrMadhuSNair },
-];
+
 
 // --- REUSABLE UI COMPONENTS ---
 const SectionHeader: FC<{ title: string; subtitle: string; className?: string }> = memo(({ title, subtitle, className }) => (
@@ -287,45 +313,7 @@ const ScrollToTop: FC = memo(() => {
     );
 });
 
-// IMPROVEMENT: Moved Marquee component out of FeaturedSpeakers to prevent re-declaration on renders.
-const Marquee: FC<MarqueeProps> = ({ items, direction = 'left' }) => (
-    <motion.div 
-        className="flex gap-8 py-8"
-        animate={{ x: direction === 'left' ? '-100%' : '0%' }}
-        transition={{ 
-            x: { 
-                repeat: Infinity, 
-                duration: 40, 
-                ease: "linear" 
-            } 
-        }}
-        initial={{ x: direction === 'left' ? '0%' : '-100%' }}
-    >
-        {[...items, ...items].map((item, index) => (
-            <motion.div 
-                key={`${item.name}-${index}`}
-                whileHover={{ scale: 1.05, y: -8 }}
-                className="flex-shrink-0 flex flex-col items-center text-center w-56 bg-white/10 backdrop-blur-lg rounded-3xl p-6 border border-white/20 hover:border-white/40 transition-all duration-500 shadow-2xl hover:shadow-3xl"
-            >
-                <div className="relative mb-4">
-                    <div className="w-36 h-36 rounded-2xl overflow-hidden border-4 border-white/20 shadow-2xl">
-                        <img 
-                            src={item.image} 
-                            alt={item.name} 
-                            className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
-                            loading="lazy" 
-                        />
-                    </div>
-                    <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-gradient-to-br from-electric-500 to-violet-600 rounded-full flex items-center justify-center shadow-lg">
-                        <Star className="w-3 h-3 text-white" />
-                    </div>
-                </div>
-                <p className="font-bold text-white text-lg mb-2 leading-tight">{item.name}</p>
-                <p className="text-white/80 text-sm leading-relaxed">{item.title}</p>
-            </motion.div>
-        ))}
-    </motion.div>
-);
+
 
 // --- PAGE SECTIONS ---
 const Navbar: FC<{ isOpen: boolean; onToggle: () => void; scrolled: boolean }> = memo(({ isOpen, onToggle, scrolled }) => (
@@ -994,70 +982,150 @@ const CallForPapers: FC = memo(() => {
   );
 });
 
+import {   Globe,  User, Award } from 'lucide-react';
+
+// --- 1. DATA STRUCTURES (Text Only) ---
+
+const internationalCommittee = [
+  { name: "Dr. Sagnik Dakshit", role: "University of Texas at Tyler, USA" },
+  { name: "Dr. Shameer Khader", role: "Sanofi, Cambridge MA, USA" },
+  { name: "Dr. Xiao-Zhi Gao", role: "University of Eastern Finland" },
+  { name: "Dr. Rajasekaran S", role: "University of Tech & Applied Sciences, Oman" },
+  { name: "Dr. Christopher Vas", role: "South East Corridor Councils Alliance, Australia" },
+  { name: "Dr. Mary Immaculate Sheela", role: "Pentecost University, Ghana" },
+  { name: "Dr. N. Pratheesh", role: "Eastern University, Sri Lanka" },
+  { name: "Dr. Dileep Kumar M", role: "Hensard University, Nigeria" },
+  { name: "Dr. Karthikeyan K", role: "AMBO University, Ethiopia" },
+  { name: "Dr. Sultan Senan Mahde", role: "Albaydha University, Yemen" },
+  { name: "Dr. Shadi Ibrahim Khalaf", role: "Ministry of Education, Palestine" }
+];
+
+const nationalCommittee = [
+  { name: "Dr. Srinivas Bhogle", role: "Scientist, CSIR-4PI, Delhi" },
+  { name: "Dr. Deepak D’Souza", role: "IISc, Bengaluru" },
+  { name: "Dr. Bibhas Ghoshal", role: "IIT Allahabad, Prayagraj" },
+  { name: "Dr. Narahari", role: "IISc, Bengaluru" },
+  { name: "Dr. Prathosh A. P", role: "IIT Delhi" },
+  { name: "Dr. Hanumanthappa H", role: "Bangalore University" },
+  { name: "Dr. Sharmila Kumari M", role: "PA Engineering College, Mangalore" },
+  { name: "Dr. Muralidhara B L", role: "Bangalore University" },
+  { name: "Dr. Somashekara M T", role: "Bangalore University" },
+  { name: "Dr. Tuhin Utsab Paul", role: "St. Xavier’s University, Kolkata" },
+  { name: "Dr. Piyush Kumar Pareek", role: "NMIT, Bengaluru" },
+  { name: "Dr. T. Bhaskar Reddy", role: "S. K. University, Anantapur" }
+];
+
+// --- 2. TEXT CARD COMPONENT ---
+const CommitteeCard = ({ name, role, variant = "neutral" }: { name: string, role: string, variant?: "neutral" | "electric" }) => (
+  <div className={`
+    w-80 mx-4 p-6 rounded-2xl border backdrop-blur-md transition-all duration-300 group
+    ${variant === 'electric' 
+      ? 'bg-electric-900/20 border-electric-500/30 hover:bg-electric-900/40 hover:border-electric-400' 
+      : 'bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20'
+    }
+  `}>
+    <div className="flex items-start gap-4">
+      <div className={`
+        mt-1 p-2 rounded-lg shrink-0
+        ${variant === 'electric' ? 'bg-electric-500/20 text-electric-300' : 'bg-violet-500/20 text-violet-300'}
+      `}>
+        <User className="w-5 h-5" />
+      </div>
+      <div>
+        <h4 className="text-lg font-bold text-white mb-1 group-hover:text-electric-300 transition-colors">
+          {name}
+        </h4>
+        <div className="flex items-start gap-1.5 text-sm text-neutral-400">
+          <MapPin className="w-3.5 h-3.5 mt-0.5 shrink-0 opacity-70" />
+          <span className="leading-snug">{role}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
+// --- 3. MAIN COMPONENT ---
+
 const FeaturedSpeakers: FC = memo(() => {
-    // Combine all speakers into one list for a single, long marquee flow
-    const allAcademics = featuredAcademics; 
-    
-    return (
-        <section id="committees" className="relative w-full bg-gradient-to-br from-neutral-900 via-electric-900 to-violet-900 py-24 sm:py-32 overflow-hidden">
-            {/* Animated Background - Reduced opacity for a cleaner look */}
-            <div className="absolute inset-0">
-                <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-white/5 to-transparent"></div>
-                <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-white/5 to-transparent"></div>
+  return (
+    <section id="committees" className="relative w-full bg-neutral-900 py-24 sm:py-32 overflow-hidden">
+        {/* Background Gradients */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-electric-600/10 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2"></div>
+            <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-violet-600/10 rounded-full blur-[100px] translate-y-1/2 -translate-x-1/2"></div>
+        </div>
+
+      <div className="relative z-10">
+        
+        {/* Header */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-20 text-center">
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+            >
+                <div className="inline-flex items-center gap-2 text-electric-400 font-bold text-sm uppercase tracking-wider mb-4">
+                    <Award className="w-4 h-4" />
+                    <span>Advisory Board</span>
+                </div>
+                <h2 className="text-4xl md:text-6xl font-black text-white mb-6">
+                    Distinguished <span className="text-transparent bg-clip-text bg-white">Committees</span>
+                </h2>
+                <p className="max-w-2xl mx-auto text-neutral-400 text-lg">
+                    Guided by world-renowned academics and pioneering researchers from top institutions across the globe.
+                </p>
+            </motion.div>
+        </div>
+
+        {/* --- INTERNATIONAL TRACK (Left Scroll) --- */}
+        <div className="mb-16">
+            <div className="max-w-7xl mx-auto px-4 mb-8 flex items-center gap-3">
+                <div className="p-2 bg-electric-500/10 rounded-lg">
+                    <Globe className="w-6 h-6 text-electric-400" />
+                </div>
+                <h3 className="text-2xl font-bold text-white">International Advisory Committee</h3>
             </div>
             
-            <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-16"
-                >
-                    <div className="inline-flex items-center gap-4 text-electric-400 font-semibold text-sm uppercase tracking-widest mb-6">
-                        <Star className="w-4 h-4 text-white" />
-                        <p className="text-white">DISTINGUISHED COMMITTEES</p>
-                        <Star className="w-4 h-4 text-white" />
-                    </div>
-                    <h2 className="text-5xl md:text-7xl font-black tracking-tight bg-gradient-to-r from-white to-electric-300 bg-clip-text text-transparent mb-6">
-                        Meet Our Experts
-                    </h2>
-                    <p className="max-w-3xl mx-auto text-xl text-neutral-300 leading-relaxed">
-                        World-renowned academics, pioneering researchers, and industry visionaries guiding ICRAC 2026 towards excellence.
-                    </p>
-                </motion.div>
-                {/* Single, unified view of all committees in one Marquee */}
-                <div className="relative pt-8">
-                    {/* Removed the fake filter gradient overlays for a full-width look */}
-                    
-                    <div className="flex overflow-hidden">
-                        {/* Use the entire list in one Marquee. Direction set to left (default). */}
-                        <Marquee items={allAcademics} direction="left" />
-                    </div>
-                </div>
-                
-                {/* CTA Button remains */}
-                <motion.div 
-                    className="text-center mt-16"
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
-                >
-                    <motion.a 
-                        href="/commities"
-                        whileHover={{ scale: 1.05, y: -4 }}
-                        whileTap={{ scale: 0.95 }}
+            <Marquee gradient={true} gradientColor="rgb(23, 23, 23)" speed={40}>
+                {internationalCommittee.map((member, index) => (
+                    <CommitteeCard key={index} {...member} variant="electric" />
+                ))}
+            </Marquee>
+        </div>
 
-                        className="inline-flex items-center bg-white text-neutral-900 font-black py-4 px-8 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 group"
-                    >
-                        View Complete Committees
-                        <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-                    </motion.a>
-                </motion.div>
+        {/* --- NATIONAL TRACK (Right Scroll) --- */}
+        <div className="mb-16">
+             <div className="max-w-7xl mx-auto px-4 mb-8 flex items-center gap-3 justify-end md:justify-start">
+                <div className="p-2 bg-violet-500/10 rounded-lg">
+                    <MapPin className="w-6 h-6 text-violet-400" />
+                </div>
+                <h3 className="text-2xl font-bold text-white">National Advisory Committee</h3>
             </div>
-        </section>
-    );
+
+            <Marquee gradient={true} gradientColor="rgb(23, 23, 23)" speed={40} direction="right">
+                {nationalCommittee.map((member, index) => (
+                    <CommitteeCard key={index} {...member} variant="neutral" />
+                ))}
+            </Marquee>
+        </div>
+
+        {/* CTA */}
+        <div className="text-center mt-12">
+            <motion.a 
+                href="/commities"
+                className="inline-flex items-center gap-2 text-neutral-400 hover:text-white transition-colors duration-300 font-semibold border-b border-transparent hover:border-electric-500 pb-1"
+                whileHover={{ x: 5 }}
+            >
+                View Full Committee List
+                <ChevronRight className="w-4 h-4" />
+            </motion.a>
+        </div>
+
+      </div>
+    </section>
+  );
 });
+
  // Keep your existing import
 
 const Submission: FC = memo(() => {

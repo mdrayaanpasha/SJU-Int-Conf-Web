@@ -16,7 +16,7 @@ import {
   FileText,
   Mic,
   Star,
-  ChevronRight,
+
   ShieldCheck,
   ClipboardList
 } from "lucide-react";
@@ -286,25 +286,7 @@ const CommitteesPage: React.FC = () => {
             ))}
           </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mt-24 bg-neutral-900 rounded-3xl p-8 md:p-12 text-center relative overflow-hidden"
-          >
-            <div className="absolute top-0 right-0 w-64 h-64 bg-electric-500/20 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2"></div>
-
-            <div className="relative z-10">
-              <h2 className="text-3xl md:text-4xl font-black text-white mb-6">Interested in Volunteering?</h2>
-              <p className="text-neutral-400 text-lg mb-8 max-w-2xl mx-auto">
-                Be a part of this prestigious international conference. Join us in organizing events, managing logistics, and guiding participants.
-              </p>
-              <a href="#contact" className="inline-flex items-center gap-2 bg-white text-neutral-900 px-8 py-4 rounded-xl font-bold hover:bg-electric-50 transition-colors">
-                Contact Us
-                <ChevronRight className="w-5 h-5" />
-              </a>
-            </div>
-          </motion.div>
+   
         </div>
       </section>
 
