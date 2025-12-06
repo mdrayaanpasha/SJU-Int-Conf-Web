@@ -36,7 +36,7 @@ const committeesData: Committee[] = [
     icon: Monitor,
     members: [
       "Dr. Asha K",
-      "Dr. Mrinmoyee Bhatacharya",
+      "Dr. Mrinmoyee Bhattacharya",
       "Dr. Sanjay Dutta"
     ]
   },
@@ -67,7 +67,7 @@ const committeesData: Committee[] = [
     title: "Session Track Monitoring",
     icon: Monitor,
     members: [
-      "Dr. Mrinmoyee Bhatacharya",
+      "Dr. Mrinmoyee Bhattacharya",
       "Dr. Sanjay Dutta",
       "Dr. Asha K"
     ]

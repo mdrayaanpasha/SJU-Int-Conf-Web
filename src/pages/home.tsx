@@ -428,157 +428,168 @@ const Navbar: FC<{ isOpen: boolean; onToggle: () => void; scrolled: boolean }> =
 ));
 
 
-// Using memo for performance optimization, preventing re-renders if props don't change.
+
+
+
 const Hero: FC = memo(() => {
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start start", "end start"]
     });
-    
-    // Applying parallax effects based on scroll progress
-    const y = useTransform(scrollYProgress, [0, 1], [0, 200]);
-    const opacity = useTransform(scrollYProgress, [0, 1], [1, 0]);
+
+    const y = useTransform(scrollYProgress, [0, 1], [0, 100]);
+    const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
     return (
-        // Restoring your original section with gradient, parallax, and animations
         <motion.section 
             ref={containerRef}
             id="home" 
-            className="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden bg-gradient-to-br from-neutral-900 via-electric-900 to-violet-900"
-            style={{ y, opacity }}
+            className="relative h-[100dvh] w-full flex flex-col items-center justify-center overflow-hidden bg-neutral-950 selection:bg-electric-500/30"
+            style={{ opacity }}
         >
-            {/* All original animated background elements are preserved */}
-            <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-electric-500/20 rounded-full blur-3xl animate-pulse"></div>
-                <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-violet-500/20 rounded-full blur-3xl animate-pulse delay-1000"></div>
-                <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-amber-400/10 rounded-full blur-2xl animate-pulse delay-500"></div>
+            {/* --- BACKGROUND ELEMENTS --- */}
+            <div className="absolute inset-0 bg-gradient-to-b from-neutral-950 via-neutral-900 to-violet-950/50"></div>
+            <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]"></div>
+            <motion.div 
+                animate={{ opacity: [0.3, 0.5, 0.3], scale: [1, 1.1, 1] }}
+                transition={{ duration: 8, repeat: Infinity }}
+                className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-violet-600/20 rounded-[100%] blur-[120px] pointer-events-none"
+            />
+
+            {/* --- MAIN CONTENT CONTAINER --- */}
+            <motion.div 
+                style={{ y }}
+                className="relative z-10 w-full max-w-7xl mx-auto px-4 flex flex-col items-center text-center h-full justify-center pt-12 sm:pt-0"
+            >
                 
-                {/* Floating Elements */}
+                {/* 1. Badge */}
                 <motion.div
-                    animate={{ y: [0, -20, 0], rotate: [0, 5, 0] }}
-                    transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-                    className="absolute top-20 left-20 w-8 h-8 bg-electric-400/30 rounded-lg"
-                />
-                <motion.div
-                    animate={{ y: [0, 20, 0], rotate: [0, -5, 0] }}
-                    transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                    className="absolute bottom-32 right-32 w-6 h-6 bg-violet-400/30 rounded-full"
-                />
-                <motion.div
-                    animate={{ y: [0, -15, 0], rotate: [0, 8, 0] }}
-                    transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 2 }}
-                    className="absolute top-1/3 right-1/4 w-4 h-4 bg-amber-300/30 rounded-lg"
-                />
-            </div>
-
-            {/* Original Grid Pattern */}
-            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]"></div>
-
-            <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-                
-                {/* UPDATED CONTENT: Conference Title */}
-                <motion.h2
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8 }}
-                  className="text-xl sm:text-2xl font-semibold text-gray-200 tracking-wide uppercase"
-                >
-                  2nd International Conference on
-                </motion.h2>
-
-                <motion.h1 
-                    initial={{ opacity: 0, y: 40 }}
+                    initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    className="text-6xl sm:text-4xl lg:text-6xl font-black tracking-tight text-white mt-2 mb-4"
+                    transition={{ duration: 0.6 }}
+                    className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md mb-4"
                 >
-                    <span className="block bg-gradient-to-r from-white via-electric-200 to-violet-200 bg-clip-text text-transparent">
-                      Recent Trends in Advanced Computing
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-electric-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-electric-500"></span>
                     </span>
-                </motion.h1>
-
-                <motion.p
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.4 }}
-                    className="text-6xl sm:text-8xl lg:text-8xl font-black tracking-tighter text-white/90 mb-6"
-                >
-                    ICRAC 2026
-                </motion.p>
-                
-                {/* UPDATED CONTENT: Date, Venue, and Mode */}
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.6 }}
-                    className="text-lg sm:text-xl text-white/80"
-                >
-                    <p>February 20-21, 2026 | St  Joseph’s University</p>
-                    <p className="font-semibold">(Hybrid Mode)</p>
+                    <span className="text-[10px] sm:text-xs font-medium text-white tracking-wider uppercase">
+                        2nd International Conference
+                    </span>
                 </motion.div>
 
-                   {/* 5. NEW: Call to Actions */}
-                <motion.div
+                {/* 2. Main Title */}
+                <motion.h1 
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5, delay: 0.7 }}
-                    className="flex flex-col mt-10 sm:flex-row gap-4 sm:gap-6 mb-12 w-full max-w-md sm:max-w-none justify-center"
+                    transition={{ duration: 0.8 }}
+                    className="text-6xl sm:text-8xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/40 mb-2 leading-none"
                 >
-                    {/* Primary CTA: Submit Paper */}
+                    ICRAC 2026
+                </motion.h1>
+
+                <motion.h2
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className="text-lg sm:text-2xl md:text-3xl font-light text-neutral-300 max-w-3xl mx-auto mb-6 sm:mb-8"
+                >
+                    Recent Trends in <span className="text-electric-300 font-semibold">Advanced Computing</span>
+                </motion.h2>
+                
+                {/* 3. Date & Venue Card */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8, delay: 0.3 }}
+                    className="flex flex-wrap justify-center gap-3 sm:gap-6 text-xs sm:text-sm text-neutral-300 bg-white/5 border border-white/10 px-6 py-3 rounded-2xl backdrop-blur-sm mb-6"
+                >
+                    <div className="flex items-center gap-2">
+                        <Calendar className="text-electric-400" size={16} />
+                        <span className="font-medium">Feb 20-21, 2026</span>
+                    </div>
+                    <div className="w-px h-5 bg-white/10 hidden sm:block"></div>
+                    <div className="flex items-center gap-2">
+                        <MapPin className="text-electric-400" size={16} />
+                        <span>St. Joseph’s University</span>
+                    </div>
+                    <div className="w-px h-5 bg-white/10 hidden sm:block"></div>
+                    <div className="flex items-center gap-2">
+                        <Globe className="text-electric-400" size={16} />
+                        <span className="bg-electric-500/20 text-electric-200 px-1.5 py-0.5 rounded text-[10px] font-bold uppercase">Hybrid</span>
+                    </div>
+                </motion.div>
+
+                {/* 4. PARTNERS SECTION (Updated: Massive Logos) */}
+                <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 1, delay: 0.4 }}
+                    className="mb-8 w-full max-w-2xl"
+                >
+                    <p className="text-[10px] font-bold text-neutral-500 uppercase tracking-[0.2em] mb-4">
+                        In Association With
+                    </p>
+                    <div className="flex justify-center items-center gap-8 sm:gap-16">
+                        {/* Partner 1 */}
+                        <div className="flex flex-col items-center gap-3 group cursor-pointer">
+                            {/* Increased Container: h-24/w-24 mobile, h-32/w-32 desktop */}
+                            <div className="h-24 w-24 sm:h-32 sm:w-32 bg-neutral-800/50 rounded-2xl flex items-center justify-center border border-white/5 group-hover:border-electric-500/30 transition-colors p-4">
+                                {/* Increased Image: h-16 mobile, h-24 desktop (approx 96px) */}
+                                <img src={uttyler} alt="UT Tyler" className="h-16 sm:h-24 w-auto object-contain" /> 
+                            </div>
+                            <span className="text-xs text-neutral-400 group-hover:text-white transition-colors font-medium">UT Tyler, USA</span>
+                        </div>
+
+                        {/* Divider */}
+                        <div className="h-16 w-px bg-white/10"></div>
+
+                        {/* Partner 2 */}
+                        <div className="flex flex-col items-center gap-3 group cursor-pointer">
+                            {/* Increased Container */}
+                            <div className="h-24 w-24 sm:h-32 sm:w-32 bg-neutral-800/50 rounded-2xl flex items-center justify-center border border-white/5 group-hover:border-electric-500/30 transition-colors p-4">
+                                {/* Increased Image */}
+                                <img src={acmMeerut} alt="ACM" className="h-16 sm:h-24 w-auto object-contain" />
+                            </div>
+                            <span className="text-xs text-neutral-400 group-hover:text-white transition-colors font-medium">ACM Meerut</span>
+                        </div>
+                    </div>
+                </motion.div>
+
+                {/* 5. CALL TO ACTIONS */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.5 }}
+                    className="flex flex-col sm:flex-row gap-4 w-full justify-center"
+                >
                     <motion.a
                         href="./register"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="group flex items-center justify-center gap-2 px-8 py-4 bg-white text-neutral-900 rounded-xl font-bold text-lg shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] transition-all"
+                        className="group flex items-center justify-center gap-2 px-8 py-3.5 bg-white text-neutral-950 rounded-xl font-bold text-base sm:text-lg shadow-[0_0_30px_-10px_rgba(255,255,255,0.3)] hover:shadow-[0_0_40px_-5px_rgba(255,255,255,0.5)] transition-all"
                     >
-                        <FileText size={20} className="group-hover:rotate-12 transition-transform" />
+                        <FileText size={18} className="group-hover:-rotate-12 transition-transform duration-300" />
                         Register Now
                     </motion.a>
 
-                    {/* Secondary CTA: Register */}
                     <motion.a
                         href="./submission"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="group flex items-center justify-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-xl font-bold text-lg hover:bg-white/20 transition-all"
+                        className="group flex items-center justify-center gap-2 px-8 py-3.5 bg-transparent border border-white/20 text-white rounded-xl font-bold text-base sm:text-lg hover:bg-white/10 transition-all backdrop-blur-sm"
                     >
-                        <UserPlus size={20} />
+                        <UserPlus size={18} />
                         Submit Paper
                         <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                     </motion.a>
                 </motion.div>
 
-
-                {/* UPDATED CONTENT: Collaborating Partners */}
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.8 }}
-                    className="mt-16"
-                >
-                    <h3 className="text-sm font-bold text-white/60 tracking-widest uppercase mb-6">
-                        Collaborating Partners
-                    </h3>
-                    <div className="flex justify-center items-center gap-8 sm:gap-12">
-                        <div className="text-center">
-                            <img src={uttyler} alt="UTTylor Logo" className="h-20 rounded-md mx-auto mb-2 opacity-80" />
-                            <p className="text-xs sm:text-sm text-white/70">UTTylor, USA</p>
-                        </div>
-                        <div className="h-12 w-px bg-white/20"></div>
-                        <div className="text-center">
-                            <img src={acmMeerut} alt="ACM Meerut Logo" className="h-20 rounded-md mx-auto mb-2 opacity-80" />
-                            <p className="text-xs sm:text-sm text-white/70">ACM Meerut</p>
-                        </div>
-                    </div>
-                </motion.div>
-            </div>
-
-           
+            </motion.div>
         </motion.section>
     );
 });
-
 // Assuming 'motion' is from 'framer-motion' and icons (Star, ChevronRight, FiAward, FiUsers) are imported
 // from a library like 'lucide-react' or 'react-icons'
 
@@ -594,26 +605,29 @@ const FiAward = (props: React.SVGProps<SVGSVGElement>) => <svg {...props} xmlns=
 const FiUsers = (props: React.SVGProps<SVGSVGElement>) => <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>;
 // End Placeholder components/icons
 
+// Updated AboutUs component with one full row layout
+// Please paste your existing imports above
 const AboutUs: FC = memo(() => {
   const [activeSection, setActiveSection] = useState(0);
 
   const sections = [
-    // ... (sections data remains the same)
     {
       id: 0,
       title: "ICRAC 2026",
       icon: "🎯",
       color: "from-electric-500 to-violet-600",
       bgColor: "bg-gradient-to-br from-electric-50 to-violet-100",
-      content: `The 2nd International Conference on Recent Trends in Advanced Computing (ICRAC)-2026 will be organized by the School of Information Technology, St  Joseph's University, Bengaluru, Karnataka, India, during February 20-21, 2026 (Hybrid Mode). ICRAC-2026 continues the legacy of a premier global platform for researchers and practitioners to share groundbreaking research findings, innovative ideas, and practical experiences in the fields of Data Science and Computer Science fostering collaboration, advancing knowledge, and shaping the future of technology-driven solutions worldwide. The conference proposes publishing research papers on advanced engineering, science and technology techniques, experimental analysis and theoretical reviews. This conference will serve as a platform for academicians, industrialists, and students to learn more about the latest technologies in data science. Selected papers at the conference will be considered for Scopus indexed conference proceedings.`
+      content:
+        "The 2nd International Conference on Recent Trends in Advanced Computing (ICRAC)-2026 will be organized by the School of Information Technology, St Joseph's University, Bengaluru, Karnataka, India, during February 20-21, 2026 (Hybrid Mode). ICRAC-2026 continues the legacy of a premier global platform for researchers and practitioners to share groundbreaking research findings, innovative ideas, and practical experiences in the fields of Data Science and Computer Science fostering collaboration, advancing knowledge, and shaping the future of technology-driven solutions worldwide. The conference proposes publishing research papers on advanced engineering, science and technology techniques, experimental analysis and theoretical reviews. This conference will serve as a platform for academicians, industrialists, and students to learn more about the latest technologies in data science. Selected papers at the conference will be considered for Scopus indexed conference proceedings."
     },
     {
       id: 1,
-      title: "St  Joseph's University",
+      title: "St Joseph's University",
       icon: "🏛️",
       color: "from-emerald-500 to-electric-600",
       bgColor: "bg-gradient-to-br from-emerald-50 to-electric-100",
-      content: `St  Joseph's University (SJU) is a Jesuit University at the heart of Bengaluru, the Silicon City of India established in 1882 by Paris Foreign Fathers, the college management was handed over to the Jesuit Order (Society of Jesus) in 1937. The college was first affiliated with the University of Madras and later with the Mysore and Bangalore Universities. In 1986, St  Joseph's College became the first affiliated college in Karnataka to offer postgraduate courses. In 1988, it became the first college in Karnataka to get a research center, and in 2005, it was one of the five colleges in Karnataka that was awarded academic autonomy. In February 2021, the St  Joseph's University bill was presented in the Karnataka Legislative Council. The college received its university status on 2nd July 2022 and was inaugurated as India's first Public-Private-Partnership University by the Hon'ble President of India, Smt. Droupadi Murmu on 27th September 2022.`
+      content:
+        "St Joseph's University (SJU) is a Jesuit University at the heart of Bengaluru established in 1882 by Paris Foreign Fathers and handed over to the Jesuit Order in 1937. It was affiliated with the University of Madras and later with Mysore and Bangalore Universities. In 1986, it became the first affiliated college in Karnataka to offer postgraduate courses. In 1988, it became the first in Karnataka to receive a research center and in 2005 received academic autonomy. In 2021 the university bill was placed in the Karnataka Legislative Council and it was inaugurated as India's first Public Private Partnership University on 27 September 2022."
     },
     {
       id: 2,
@@ -621,40 +635,17 @@ const AboutUs: FC = memo(() => {
       icon: "💻",
       color: "from-violet-500 to-electric-600",
       bgColor: "bg-gradient-to-br from-violet-50 to-electric-100",
-      content: `The School of IT consists of the Department of Computer Science and the Department of Advanced Computing. The School of Information Technology (SIT) offers programs related to:
-
-Data analytics
-
-Computer science
-
-Computer applications
-
-Domain-specific applications
-
-SIT focuses on holistic learning that helps students make major contributions to the IT industry and serve society at large. The school has more than 2000 students and 40 committed faculty members, along with many visiting professors and working professionals from industry, research, and development organizations.
-
-Students are provided opportunities to apply acquired knowledge to solve real-world problems and gain research experience. The placement record of SIT is always exceptional.`
+      content:
+        "The School of IT consists of the Department of Computer Science and the Department of Advanced Computing. SIT offers programs in data analytics, computer science, computer applications and domain specific applications. The school focuses on holistic learning and supports more than 2000 students guided by 40 faculty members along with visiting researchers and industry professionals. Students solve real world problems and gain research experience. Its placement record remains exceptional."
     }
   ];
 
   return (
-    <section id="about" className="relative min-h-screen bg-gradient-to-br from-white via-neutral-50 to-electric-50 py-16 md:py-32 overflow-hidden">
-      {/* Animated Background Elements - Reduced size and blur for smaller screens */}
-      <div className="absolute top-0 left-0 w-64 h-64 md:w-96 md:h-96 bg-electric-200/20 rounded-full blur-2xl md:blur-3xl -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
-      <div className="absolute bottom-0 right-0 w-64 h-64 md:w-96 md:h-96 bg-violet-200/20 rounded-full blur-2xl md:blur-3xl translate-x-1/2 translate-y-1/2 animate-pulse delay-1000"></div>
-      
+    <section className="relative min-h-screen bg-gradient-to-br from-white via-neutral-50 to-electric-50 py-16 md:py-32 overflow-hidden">
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12 md:mb-20"
-        >
+        <motion.div className="text-center mb-12 md:mb-20" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <div className="inline-flex items-center gap-4 text-electric-600 font-semibold text-xs md:text-sm uppercase tracking-widest mb-4 md:mb-6">
-            <Star className="w-3 h-3 md:w-4 md:h-4" />
             ABOUT THE CONFERENCE
-            <Star className="w-3 h-3 md:w-4 md:h-4" />
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-7xl font-black tracking-tight bg-gradient-to-r from-neutral-900 to-electric-700 bg-clip-text text-transparent mb-4 md:mb-8">
             Our Story
@@ -664,196 +655,46 @@ Students are provided opportunities to apply acquired knowledge to solve real-wo
           </p>
         </motion.div>
 
-        {/* Interactive Navigation Tabs */}
-        {/* KEY CHANGE: Use flex-col and space-y-3 on small screens, then wrap/center on medium screens */}
-       <motion.div 
-  className="flex flex-row justify-center gap-3 md:gap-4 mb-8 md:mb-12 overflow-x-auto whitespace-nowrap"
-  initial={{ opacity: 0, y: 20 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true }}
->
-
+        {/* Full Row Tabs */}
+        <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-10" initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           {sections.map((section, index) => (
             <motion.button
               key={section.id}
               onClick={() => setActiveSection(index)}
-              className={`w-full sm:w-auto px-6 py-3 md:px-8 md:py-4 rounded-xl md:rounded-2xl font-bold text-base md:text-lg text-left transition-all duration-500 ${
+              className={`w-full px-6 py-5 rounded-xl font-bold text-lg transition-all duration-500 text-center ${
                 activeSection === index
-                  ? `bg-gradient-to-r ${section.color} text-white shadow-xl md:shadow-2xl scale-[1.02] sm:scale-105`
-                  : 'bg-white text-neutral-600 hover:text-electric-600 border border-neutral-200 hover:border-electric-300 hover:shadow-lg'
+                  ? `bg-gradient-to-r ${section.color} text-white shadow-xl scale-[1.02]`
+                  : "bg-white text-neutral-600 border border-neutral-200 hover:text-electric-600 hover:border-electric-300 hover:shadow-lg"
               }`}
-              whileHover={{ scale: 1.02 }} // Slightly less scaling on hover for mobile
-              whileTap={{ scale: 0.98 }} // Slightly less scaling on tap for mobile
+              whileHover={{ scale: 1.02 }}
             >
-              <span className="mr-3">{section.icon}</span>
+              <span className="mr-2">{section.icon}</span>
               {section.title}
             </motion.button>
           ))}
         </motion.div>
 
-        {/* Main Content Area */}
-        {/* KEY CHANGE: Use standard grid-cols-1 on small screens, then lg:grid-cols-3 on large screens */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 md:gap-8 items-start">
-          {/* Left Side - Visual Timeline / Navigation on Desktop */}
-          {/* KEY CHANGE: Hide this section on small screens to de-clutter, as the content is displayed below. Only show on medium/large screens. */}
-          <motion.div 
-            className="hidden md:block lg:col-span-1 space-y-6 md:space-y-8"
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-          >
-            
+        {/* Content */}
+        <motion.div key={activeSection} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
+          <div className={`rounded-2xl p-8 border border-neutral-200 shadow-xl ${sections[activeSection].bgColor}`}>
+            <h3 className="text-3xl md:text-4xl font-black text-neutral-900 mb-4 flex items-center gap-3">
+              <div className={`w-14 h-14 rounded-xl bg-gradient-to-r ${sections[activeSection].color} flex items-center justify-center text-2xl text-white`}>{sections[activeSection].icon}</div>
+              {sections[activeSection].title}
+            </h3>
 
-      
-          </motion.div>
-
-          {/* Right Side - Content Display */}
-          <motion.div 
-            className="lg:col-span-2"
-            key={activeSection}
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            {/* Reduced padding on small screens */}
-            <div className={`rounded-2xl md:rounded-3xl p-6 md:p-8 border border-neutral-200 shadow-xl md:shadow-2xl ${sections[activeSection].bgColor}`}>
-              {/* Header */}
-              <div className="flex items-center gap-4 mb-6 md:mb-8">
-                {/* Reduced icon size */}
-                <div className={`w-12 h-12 md:w-16 md:h-16 rounded-xl md:rounded-2xl bg-gradient-to-r ${sections[activeSection].color} flex items-center justify-center text-xl md:text-2xl text-white`}>
-                  {sections[activeSection].icon}
-                </div>
-                <div>
-                  {/* Reduced header size */}
-                  <h3 className="text-2xl md:text-4xl font-black text-neutral-900 mb-1 md:mb-2">{sections[activeSection].title}</h3>
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-electric-500 animate-pulse"></div>
-                    <span className="text-sm md:text-base text-electric-600 font-semibold">Currently Viewing</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Content */}
-              {/* KEY CHANGE: Adjusted prose classes for better mobile readability */}
-              <div className="prose max-w-none">
-                <div className="text-neutral-700 leading-relaxed text-base md:text-lg space-y-4">
-                  {sections[activeSection].content.split('. ').map((sentence, index, array) => (
-                    <motion.p
-                      key={index}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                      className="text-justify"
-                    >
-                      {sentence}{index < array.length - 1 ? '.' : ''}
-                    </motion.p>
-                  ))}
-                </div>
-
-                {/* Highlight Boxes - Reduced padding/text size for mobile */}
-                {activeSection === 0 && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.5 }}
-                    className="mt-6 md:mt-8 p-4 md:p-6 bg-white rounded-xl md:rounded-2xl border-l-4 border-electric-500 shadow-lg"
-                  >
-                    <div className="flex items-center gap-3">
-                      <FiAward className="w-5 h-5 md:w-6 md:h-6 text-electric-500" />
-                      <span className="font-black text-sm md:text-base text-electric-700">Scopus Indexed Publications</span>
-                    </div>
-                    <p className="text-electric-800 mt-2 font-medium text-sm">
-                      Selected papers will be considered for prestigious Scopus indexed conference proceedings
-                    </p>
-                  </motion.div>
-                )}
-
-                {activeSection === 2 && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.5 }}
-                    className="mt-6 md:mt-8 p-4 md:p-6 bg-white rounded-xl md:rounded-2xl border-l-4 border-violet-500 shadow-lg"
-                  >
-                    <div className="flex items-center gap-3">
-                      <FiUsers className="w-5 h-5 md:w-6 md:h-6 text-violet-500" />
-                      <span className="font-black text-sm md:text-base text-violet-700">Exceptional Placement Record</span>
-                    </div>
-                    <p className="text-violet-800 mt-2 font-medium text-sm">
-                      School of IT maintains outstanding placement opportunities for all students
-                    </p>
-                  </motion.div>
-                )}
-              </div>
-            </div>
-
-            {/* Navigation Dots - Still present for easy content switching on mobile */}
-            <div className="flex justify-center gap-3 mt-6 md:mt-8">
-              {sections.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setActiveSection(index)}
-                  className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all duration-300 ${
-                    activeSection === index 
-                      ? 'bg-electric-500 scale-125' 
-                      : 'bg-neutral-300 hover:bg-neutral-400'
-                  }`}
-                />
+            <div className="text-neutral-700 text-lg leading-relaxed space-y-4">
+              {sections[activeSection].content.split('. ').map((sentence, i, arr) => (
+                <p key={i} className="text-justify">{sentence}{i < arr.length - 1 ? '.' : ''}</p>
               ))}
             </div>
-          </motion.div>
-          {/* KEY CHANGE: Display Stats Card at the bottom on mobile/tablet */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-            className="md:hidden lg:col-span-1 bg-gradient-to-br from-electric-500 to-violet-600 rounded-2xl p-6 text-white shadow-2xl mt-8"
-          >
-            <h4 className="font-black text-lg mb-4">Conference Highlights</h4>
-            <div className="space-y-3">
-              <div className="flex justify-between items-center">
-                <span className="text-electric-100">Edition</span>
-                <span className="font-black text-2xl">2nd</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-electric-100">Students</span>
-                <span className="font-black text-2xl">2000+</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-electric-100">Faculty</span>
-                <span className="font-black text-2xl">40+</span>
-              </div>
-              <div className="flex justify-between items-center">
-                <span className="text-electric-100">Legacy</span>
-                <span className="font-black text-2xl">140+ yrs</span>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mt-12 md:mt-20"
-        >
-          <motion.a
-            href="#call-for-papers"
-            // Reduced padding/text size for mobile
-            className="group inline-flex items-center bg-gradient-to-r from-electric-500 to-violet-600 text-white font-black py-4 px-8 md:py-5 md:px-12 rounded-xl md:rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500 text-base md:text-lg"
-            whileHover={{ scale: 1.05, y: -4 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            Join ICRAC 2026
-            <ChevronRight className="w-5 h-5 md:w-6 md:h-6 ml-2 md:ml-3 group-hover:translate-x-2 transition-transform duration-300" />
-          </motion.a>
+          </div>
         </motion.div>
       </div>
     </section>
   );
 });
+
+
 
 
 const CallForPapers: FC = memo(() => {

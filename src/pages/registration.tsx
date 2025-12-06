@@ -235,7 +235,7 @@ export default function RegistrationPage() {
             </motion.h1>
           </div>
 
-          {/* 2. Pricing Table Card */}
+      {/* 2. Pricing Table Card */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -243,6 +243,7 @@ export default function RegistrationPage() {
             className="relative rounded-[2.5rem] bg-white shadow-2xl overflow-hidden border border-neutral-200 mb-8"
           >
             <div className="h-2 bg-gradient-to-r from-electric-500 via-violet-500 to-electric-600" />
+            
             <div className="overflow-x-auto">
               <table className="w-full min-w-[700px] border-collapse">
                 <thead>
@@ -264,6 +265,16 @@ export default function RegistrationPage() {
                 </tbody>
               </table>
             </div>
+
+            {/* --- NEW FOOTER NOTE --- */}
+            <div className="bg-neutral-50 border-t border-neutral-200 p-6 text-center">
+                <p className="text-sm font-medium text-neutral-600">
+                    <span className="font-bold text-electric-600 mr-1">* Note:</span> 
+                    Certificates for all team participants will be given upon extra payment of 
+                    <span className="font-bold text-neutral-900 ml-1">₹1000</span>.
+                </p>
+            </div>
+
           </motion.div>
 
         
@@ -354,23 +365,32 @@ export default function RegistrationPage() {
           </motion.div>
 
 
-            {/* 3. NEW: Important Notes Section */}
+          {/* 6. Important Notes Section (Updated with Proper Bullets) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="mt-10 rounded-[2.5rem] bg-neutral-100 border border-neutral-200 p-8 md:p-10 mb-16"
+            className="mt-16 rounded-[2.5rem] bg-white border border-neutral-200 p-8 md:p-10 mb-16 shadow-lg"
           >
-            <div className="flex items-center gap-3 mb-6">
-                <AlertCircle className="text-neutral-500" size={24} />
-                <h3 className="text-xl font-bold text-neutral-800">Important Guidelines & Policy</h3>
+            <div className="flex items-center gap-4 mb-8">
+                <div className="p-3 bg-red-50 rounded-xl text-red-500">
+                    <AlertCircle size={24} />
+                </div>
+                <div>
+                    <h3 className="text-xl font-bold text-neutral-900">Important Guidelines & Policy</h3>
+                    <p className="text-sm text-neutral-500">Please read carefully before registering</p>
+                </div>
             </div>
             
             <ul className="grid gap-4">
                 {importantNotes.map((note, i) => (
-                    <li key={i} className="flex items-start gap-3 text-neutral-600 leading-relaxed text-sm md:text-base">
-                        <div className="w-1.5 h-1.5 rounded-full bg-electric-500 mt-2 flex-shrink-0" />
-                        <span>{note}</span>
+                    <li key={i} className="flex items-start gap-3">
+                        {/* Proper Bullet Point */}
+                        <div className="w-2 h-2 rounded-full bg-neutral-800 mt-2.5 flex-shrink-0" />
+                        
+                        <span className="text-neutral-700 text-sm md:text-base leading-relaxed">
+                            {note}
+                        </span>
                     </li>
                 ))}
             </ul>
