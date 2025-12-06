@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState, memo, useCallback } from "react";
 import type { FC } from "react";
 // CORRECTED: Switched to <a> for in-page links instead of react-router's Link
 import { useScroll, useTransform, motion, AnimatePresence } from "framer-motion";
-
+import { ArrowRight, FileText, UserPlus } from "lucide-react"; // Import icons
 // --- ICON IMPORTS ---
 // Using lucide-react for general icons
 import { Menu, X, ArrowUp,   MapPin, ExternalLink,Calendar } from "lucide-react";
@@ -477,7 +477,7 @@ const Hero: FC = memo(() => {
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white mt-2 mb-4"
+                    className="text-6xl sm:text-4xl lg:text-6xl font-black tracking-tight text-white mt-2 mb-4"
                 >
                     <span className="block bg-gradient-to-r from-white via-electric-200 to-violet-200 bg-clip-text text-transparent">
                       Recent Trends in Advanced Computing
@@ -488,7 +488,7 @@ const Hero: FC = memo(() => {
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.4 }}
-                    className="text-7xl sm:text-8xl lg:text-9xl font-black tracking-tighter text-white/90 mb-6"
+                    className="text-6xl sm:text-8xl lg:text-8xl font-black tracking-tighter text-white/90 mb-6"
                 >
                     ICRAC 2026
                 </motion.p>
@@ -503,6 +503,38 @@ const Hero: FC = memo(() => {
                     <p>February 20-21, 2026 | St  Joseph’s University</p>
                     <p className="font-semibold">(Hybrid Mode)</p>
                 </motion.div>
+
+                   {/* 5. NEW: Call to Actions */}
+                <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5, delay: 0.7 }}
+                    className="flex flex-col mt-10 sm:flex-row gap-4 sm:gap-6 mb-12 w-full max-w-md sm:max-w-none justify-center"
+                >
+                    {/* Primary CTA: Submit Paper */}
+                    <motion.a
+                        href="./register"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="group flex items-center justify-center gap-2 px-8 py-4 bg-white text-neutral-900 rounded-xl font-bold text-lg shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] transition-all"
+                    >
+                        <FileText size={20} className="group-hover:rotate-12 transition-transform" />
+                        Register Now
+                    </motion.a>
+
+                    {/* Secondary CTA: Register */}
+                    <motion.a
+                        href="./submission"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="group flex items-center justify-center gap-2 px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white rounded-xl font-bold text-lg hover:bg-white/20 transition-all"
+                    >
+                        <UserPlus size={20} />
+                        Submit Paper
+                        <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                    </motion.a>
+                </motion.div>
+
 
                 {/* UPDATED CONTENT: Collaborating Partners */}
                 <motion.div

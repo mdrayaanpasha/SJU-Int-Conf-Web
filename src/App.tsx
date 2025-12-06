@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/home";
 import SubmissionPortal from "./pages/Submission-portal"
 import CommitteesPage from "./pages/comm-page";
+import RegistrationPage from "./pages/registration";
 
 export default function App() {
   return (
@@ -11,6 +12,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/submission" element={<SubmissionPortal/>} />
                     <Route path="/commities" element={<CommitteesPage/>} />
+          <Route path="/register" element={<RegistrationPage/>} />
 
 
         </Routes>
