@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
-  Users,
+  
   Cpu,
   Monitor,
   Megaphone,
@@ -30,44 +30,55 @@ type Committee = {
 };
 
 const committeesData: Committee[] = [
+  
+     {
+    title: "Organizing Committee",
+    icon: Monitor,
+    members: [
+      "Dr. Asha K",
+      "Dr. Mrinmoyee Bhatacharya",
+      "Dr. Sanjay Dutta"
+    ]
+  },
   {
     title: "Technical Program Committee",
     icon: Cpu,
     members: [
       "Dr. Francis Densil Raj (Coordinator)",
-      "Dr. Sanjay (Coordinator)",
+      "Dr. Sanjay Dutta (Coordinator)",
       "Dr. Sivakannan S",
       "Dr. Asha K",
       "Dr. Puneeth S",
       "Dr. B Nithya",
-      "Dr. Mrinmoyee",
-      "Dr. Shashikala",
+      "Dr. Mrinmoyee Bhattacharya",
+      "Dr. Shashikala D",
       "Dr. Annie Syrien",
       "Dr. Puneeth Kumar B S",
       "Dr. Deepa Nagalavi",
       "Dr. Periyasamy P",
       "Dr. Manivannan T",
       "Dr. P Selvaperumal",
-      "Dr. Shiv Kumar",
-      "Dr. Harish"
+      "Dr. Shivakumar T",
+      "Dr. Harish H",
+      "Dr. Sara Kutty TK"
     ]
   },
   {
     title: "Session Track Monitoring",
     icon: Monitor,
     members: [
-      "Dr. Mrinmoyee (Sending acceptance)",
-      "Dr. Sanjay (Plagiarism check)",
-      "Dr. Asha (Model slides)"
+      "Dr. Mrinmoyee Bhatacharya",
+      "Dr. Sanjay Dutta",
+      "Dr. Asha K"
     ]
   },
   {
     title: "Registration Committee",
     icon: ClipboardList,
     members: [
-      "Ms. Jeshma (Coordinator)",
+      "Ms. Jeshma Nishita Dsouza",
       "Ms. Sruthi Surendran P",
-      "Dr. Deepa Nagalavi (Online registration)"
+      "Dr. Deepa Nagalavi"
     ]
   },
   {
@@ -83,7 +94,7 @@ const committeesData: Committee[] = [
     title: "Finance Committee",
     icon: DollarSign,
     members: [
-      "Dr. Shashikala",
+      "Dr. Shashikala D",
       "Ms. Jeshma Nishitha Dsouza (Coordinator)",
       "Ms. Pooja A"
     ]
@@ -93,14 +104,14 @@ const committeesData: Committee[] = [
     icon: Coffee,
     members: [
       "Mr. Selwyn Paul (Coordinator)",
-      "Mr. Mueen Pasha",
-      "Ms. Junaida"
+      "Mr. Mohammed Mueen Pasha",
+      "Ms. Junaida Nallakkandy" 
     ]
   },
   {
     title: "Brochure & Website",
     icon: Globe,
-    members: ["Mr. Aaran Lawrence (Coordinator)", "Dr. Manivannan", "Mr. Anand"]
+    members: ["Mr. Aaran Lawrence (Coordinator)", "Dr. Manivannan T", "Mr. Anand "]
   },
   {
     title: "IT & Infrastructure",
@@ -128,8 +139,8 @@ const committeesData: Committee[] = [
       "Dr. Annie Syrien (Coordinator)",
       "Mr. Prem Sagar",
       "Dr. Jayati Bhadra",
-      "Dr. Prashanthi",
-      "Dr. Mrinmoyee"
+      "Dr. B G Prashanthi",
+      "Dr. Mrinmoyee Bhattacharya"
     ]
   },
   {
@@ -150,13 +161,9 @@ const committeesData: Committee[] = [
   {
     title: "Documentation",
     icon: FileText,
-    members: ["Ms. Prakruthi Thapa (Coordinator)", "Ms. Pooja A", "Ms. Junaida"]
+    members: ["Ms. Prakruthi Thapa (Coordinator)", "Ms. Pooja A", "Ms. Junaida Nallakkandy"]
   },
-  {
-    title: "Resource Persons",
-    icon: Users,
-    members: ["Core Committee"]
-  }
+ 
 ];
 
 type CommitteeCardProps = Committee & { index: number };

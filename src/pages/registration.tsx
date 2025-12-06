@@ -9,10 +9,10 @@ import {
   Tag,
   Building2,
   QrCode,
-  
-  CheckCircle2
-} from "lucide-react";
+  CheckCircle2,
+  AlertCircle,
 
+} from "lucide-react";
 
 import qrimage from "../assets/IMAGES/QR.png"
 
@@ -46,7 +46,17 @@ const pricingData: PricingRow[] = [
   { category: "Online", price: "₹ 3000" },
 ];
 
-// Bank Data Dictionary for easy mapping
+const importantNotes = [
+  "Registration is mandatory to receive the certificates. Kindly ensure that all the details are accurate.",
+  "Registration fee towards the conference includes conference kit and proceedings, presentation during the conference (online or offline), attendance to all the sessions, and keynote talks.",
+  "Only registered participant will get conference kit and certificate.",
+  "Additional certificates will be issued to co-authors upon payment of an extra amount of ₹ 1000 per certificate.",
+  "Please note that the conference will be held offline mode. All the offline participants have to manage their stay and travel on their own. Conference organizers are not responsible for travel and accommodation of the participants. Only tea/coffee, high tea, working lunch on Day 1 and 2 will be provided at the conference venue.",
+  "All accepted papers will be published in Conference proceedings with ISBN number. Selected papers will be published in Scopus indexed Elsevier publication with an additional fee.",
+  "Refund and Cancellation Policy: A candidate once registered and paid the registration fee is not allowed to cancel the registration. The registration fee for the conference once paid is not refundable."
+];
+
+// Bank Data Dictionary
 const bankDetails = [
   { label: "Account Name", value: "ST JOSEPHS UNIVERSITY COLLECTION ACCOUNT" },
   { label: "Account Number", value: "0964073000000053", highlight: true },
@@ -138,7 +148,6 @@ const Navbar: FC<NavbarProps> = memo(({ isOpen, onToggle, scrolled }) => (
 
 // Pricing Row
 const PricingTableRow = ({ item, index }: { item: PricingRow; index: number }) => (
-
   <motion.tr 
     initial={{ opacity: 0, y: 10 }}
     whileInView={{ opacity: 1, y: 0 }}
@@ -166,7 +175,7 @@ const PricingTableRow = ({ item, index }: { item: PricingRow; index: number }) =
   </motion.tr>
 );
 
-// New Component: Bank Detail Row
+// Bank Detail Row
 const BankDetailRow = ({ label, value, mono, highlight }: any) => (
   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-baseline py-3 border-b border-neutral-100 last:border-0">
     <span className="text-sm font-semibold text-neutral-400 uppercase tracking-wider">{label}</span>
@@ -201,7 +210,7 @@ export default function RegistrationPage() {
         <div className="fixed left-0 bottom-0 w-96 h-96 bg-violet-100/30 rounded-full blur-3xl -z-10" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+           
           {/* 1. Header Section */}
           <div className="text-center max-w-3xl mx-auto mb-12">
             <motion.div
@@ -231,7 +240,7 @@ export default function RegistrationPage() {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            className="relative rounded-[2.5rem] bg-white shadow-2xl overflow-hidden border border-neutral-200 mb-16"
+            className="relative rounded-[2.5rem] bg-white shadow-2xl overflow-hidden border border-neutral-200 mb-8"
           >
             <div className="h-2 bg-gradient-to-r from-electric-500 via-violet-500 to-electric-600" />
             <div className="overflow-x-auto">
@@ -243,35 +252,23 @@ export default function RegistrationPage() {
                     </th>
                     <th className="py-8 text-center pr-8 text-xs font-black text-electric-600 uppercase tracking-widest w-1/3">
                       <span className="flex items-center justify-center gap-2">
-                         Registration Fee
+                          Registration Fee
                       </span>
                     </th>
                   </tr>
                 </thead>
-               <tbody>
-  {pricingData.map((item, idx) => (
-    <PricingTableRow key={idx} item={item} index={idx} />
-  ))}
-
-  {/* Note Section Row */}
-  <tr className="bg-neutral-50 border-t-2 border-dashed border-neutral-200">
-    <td colSpan={2} className="py-4 px-6 text-center">
-      <div className="inline-flex items-center gap-2 text-neutral-600 text-sm font-medium">
-        <span className="w-5 h-5 rounded-full bg-electric-100 text-electric-600 flex items-center justify-center text-xs font-bold">
-          !
-        </span>
-        <span>
-          Additional certificates will be issued to co-authors upon payment of an extra amount of <span className="text-neutral-900 font-black text-base ml-1">₹ 1000 </span> per certificate
-        </span>
-      </div>
-    </td>
-  </tr>
-</tbody>
+                <tbody>
+                  {pricingData.map((item, idx) => (
+                    <PricingTableRow key={idx} item={item} index={idx} />
+                  ))}
+                </tbody>
               </table>
             </div>
           </motion.div>
 
-          {/* 3. NEW: Bank Details & QR Section */}
+        
+
+          {/* 4. Bank Details & QR Section */}
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -318,12 +315,11 @@ export default function RegistrationPage() {
 
                {/* QR IMAGE PLACEHOLDER */}
                <div className="relative z-10 p-4 bg-white rounded-2xl shadow-lg transform transition-transform hover:scale-105 duration-300">
-                  {/* REPLACE src below with your actual QR code image path */}
-                  <img 
-                    src={qrimage} 
-                    alt="Payment QR Code" 
-                    className="w-48 h-48 object-contain"
-                  />
+                 <img 
+                   src={qrimage} 
+                   alt="Payment QR Code" 
+                   className="w-48 h-48 object-contain"
+                 />
                </div>
 
                <p className="relative z-10 text-xs text-neutral-500 mt-6 uppercase tracking-widest font-bold">
@@ -332,7 +328,7 @@ export default function RegistrationPage() {
             </div>
           </motion.div>
 
-          {/* 4. Final CTA */}
+          {/* 5. Final CTA */}
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -355,6 +351,29 @@ export default function RegistrationPage() {
                Fill Registration Form
                <ArrowRight size={20} />
              </motion.a>
+          </motion.div>
+
+
+            {/* 3. NEW: Important Notes Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="mt-10 rounded-[2.5rem] bg-neutral-100 border border-neutral-200 p-8 md:p-10 mb-16"
+          >
+            <div className="flex items-center gap-3 mb-6">
+                <AlertCircle className="text-neutral-500" size={24} />
+                <h3 className="text-xl font-bold text-neutral-800">Important Guidelines & Policy</h3>
+            </div>
+            
+            <ul className="grid gap-4">
+                {importantNotes.map((note, i) => (
+                    <li key={i} className="flex items-start gap-3 text-neutral-600 leading-relaxed text-sm md:text-base">
+                        <div className="w-1.5 h-1.5 rounded-full bg-electric-500 mt-2 flex-shrink-0" />
+                        <span>{note}</span>
+                    </li>
+                ))}
+            </ul>
           </motion.div>
 
         </div>

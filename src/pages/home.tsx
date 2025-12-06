@@ -15,6 +15,7 @@ import {
   FiFileText,
   FiEdit3,
   FiCheckCircle,
+  FiTrendingUp,
 
   FiArrowRight
   
@@ -88,20 +89,54 @@ const Sparkles = () => (
 
 // --- DATA & CONSTANTS ---
 const navItems: NavItem[] = [
+    { name: "HOME", to: "./" },
+
   { name: "ABOUT", to: "#about" },
   { name: "CALL FOR PAPERS", to: "#call-for-papers" },
   { name: "PUBLICATION", to: "#submission" },
   { name: "COMMITTEES", to: "#committees" },
   { name: "CONTACT", to: "#contact" },
-  {name:"MICROSOFT CMT",to:"#"}
+  {name:"MICROSOFT CMT",to:"https://cmt3.research.microsoft.com/ICRAC2026"}
 ];
 const researchAreas = [
-    { icon: BrainCircuit, title: "Machine Learning & Deep Learning", description: "Innovations in image processing, reinforcement learning, computer vision, AR/VR, and signal processing.", color: "from-electric-500 to-violet-600" },
-    { icon: ChartBar, title: "Artificial Intelligence & Data Science", description: "AI in healthcare, business intelligence, bioinformatics, and advanced AI algorithms.", color: "from-emerald-500 to-electric-600" },
-    { icon: ShieldCheck, title: "Networks & Cyber Security", description: "Wireless networks, IoT applications, network security, cryptography, and blockchain technologies.", color: "from-amber-500 to-emerald-600" },
-    { icon: CloudData, title: "Data Mining & Cloud Computing", description: "Distributed computing, quantum computing, large-scale data mining, and sustainable technologies.", color: "from-violet-500 to-electric-600" },
-    { icon: Sparkles, title: "Emerging Technologies", description: "Blockchain, Edge/Fog Computing, Smart Systems, HCI, Augmented Reality, and Digital Twins.", color: "from-amber-400 to-amber-600" },
+  {
+    icon: BrainCircuit,
+    title: "Machine Learning and Deep Learning",
+    description: "Topics include neural networks, model optimization, pattern recognition and intelligent automation.",
+    color: "from-electric-500 to-violet-600"
+  },
+  {
+    icon: ChartBar,
+    title: "Artificial Intelligence & Data Science",
+    description: "Covers AI applications, predictive analytics, data visualization and intelligent decision systems.",
+    color: "from-emerald-500 to-electric-600"
+  },
+  {
+    icon: ShieldCheck,
+    title: "Networks and Cyber Security",
+    description: "Focus on secure communication, IoT systems, cryptographic methods and resilient network design.",
+    color: "from-amber-500 to-emerald-600"
+  },
+  {
+    icon: CloudData,
+    title: "Data Mining and Cloud Computing",
+    description: "Includes scalable computing, cloud architectures, data warehousing and large scale analytics.",
+    color: "from-violet-500 to-electric-600"
+  },
+  {
+    icon: Sparkles,
+    title: "Fuzzy Logic and Mathematical Modelling",
+    description: "Centred on fuzzy systems, optimization models, simulation techniques and intelligent control.",
+    color: "from-amber-400 to-amber-600"
+  },
+  {
+    icon: FiTrendingUp, // new icon added here
+    title: "Emerging Technologies & Business Analytics",
+    description: "Explores new age technologies, strategic analytics, digital transformation and smart solutions.",
+    color: "from-emerald-500 to-violet-600"
+  }
 ];
+
 
 
 const venue = {
@@ -125,16 +160,7 @@ const featuredAcademics: Academic[] = [
 // --- REUSABLE UI COMPONENTS ---
 const SectionHeader: FC<{ title: string; subtitle: string; className?: string }> = memo(({ title, subtitle, className }) => (
   <div className={`text-center mb-20 ${className}`}>
-    <motion.div 
-      className="inline-flex items-center gap-4 text-electric-600 font-semibold text-sm uppercase tracking-widest mb-6"
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-    >
-      <Star className="w-4 h-4" />
-      PREMIER CONFERENCE
-      <Star className="w-4 h-4" />
-    </motion.div>
+    
     <motion.h2 
       className="text-5xl md:text-7xl font-black tracking-tight bg-gradient-to-r from-neutral-900 to-electric-700 bg-clip-text text-transparent mb-8"
       initial={{ opacity: 0, y: 30 }}
@@ -318,7 +344,7 @@ const Navbar: FC<{ isOpen: boolean; onToggle: () => void; scrolled: boolean }> =
           whileHover={{ scale: 1.05 }}
         >
           <div className={`text-2xl font-black ${scrolled ? 'text-neutral-900' : 'text-white'}`}>
-            <span className="text-electric-600">ICRAC</span>
+            <span className="text-electric-600">ICRAC </span>
             <span className="text-electric-600">2026</span>
           </div>
         </motion.a>
@@ -356,7 +382,7 @@ const Navbar: FC<{ isOpen: boolean; onToggle: () => void; scrolled: boolean }> =
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
           >
-            SUBMIT PAPER
+            SUBMISSION GUIDELINES
           </motion.a>
         </div>
 
@@ -607,7 +633,19 @@ const AboutUs: FC = memo(() => {
       icon: "💻",
       color: "from-violet-500 to-electric-600",
       bgColor: "bg-gradient-to-br from-violet-50 to-electric-100",
-      content: `The School of Information Technology (SIT) offers programs related to data analytics, computer science, computer applications, and domain-specific applications. SIT focuses on holistic learning that help students make major contributions to the IT industry and serve society at large. The SIT has more than 2000 students and 40 committed faculty members, besides many visiting professors and working professionals from industry, research and development organizations. Faculty members are highly motivated to do pioneering research and excel in teaching and learning processes. They provide students with the opportunity to apply acquired knowledge to solve real-world problems and gain research experience. The placement record of SIT is always exceptional.`
+      content: `The School of IT consists of the Department of Computer Science and the Department of Advanced Computing. The School of Information Technology (SIT) offers programs related to:
+
+Data analytics
+
+Computer science
+
+Computer applications
+
+Domain-specific applications
+
+SIT focuses on holistic learning that helps students make major contributions to the IT industry and serve society at large. The school has more than 2000 students and 40 committed faculty members, along with many visiting professors and working professionals from industry, research, and development organizations.
+
+Students are provided opportunities to apply acquired knowledge to solve real-world problems and gain research experience. The placement record of SIT is always exceptional.`
     }
   ];
 
@@ -640,12 +678,13 @@ const AboutUs: FC = memo(() => {
 
         {/* Interactive Navigation Tabs */}
         {/* KEY CHANGE: Use flex-col and space-y-3 on small screens, then wrap/center on medium screens */}
-        <motion.div 
-          className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 md:gap-4 mb-8 md:mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-        >
+       <motion.div 
+  className="flex flex-row justify-center gap-3 md:gap-4 mb-8 md:mb-12 overflow-x-auto whitespace-nowrap"
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+>
+
           {sections.map((section, index) => (
             <motion.button
               key={section.id}
@@ -675,60 +714,9 @@ const AboutUs: FC = memo(() => {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
           >
-            {sections.map((section, index) => (
-              <motion.div
-                key={section.id}
-                className={`p-4 md:p-6 rounded-2xl md:rounded-3xl border-2 transition-all duration-500 cursor-pointer ${
-                  activeSection === index
-                    ? `border-electric-500 bg-white shadow-2xl scale-105`
-                    : 'border-neutral-200 bg-white/50 hover:bg-white hover:shadow-lg'
-                }`}
-                onClick={() => setActiveSection(index)}
-                whileHover={{ scale: 1.02 }}
-              >
-                <div className="flex items-center gap-4">
-                  <div className={`w-10 h-10 md:w-12 md:h-12 rounded-xl md:rounded-2xl bg-gradient-to-r ${section.color} flex items-center justify-center text-white text-lg md:text-xl font-bold`}>
-                    {section.icon}
-                  </div>
-                  <div>
-                    <h3 className="font-black text-neutral-900 text-base md:text-lg">{section.title}</h3>
-                    <div className="flex items-center gap-2 mt-1">
-                      <div className={`w-2 h-2 rounded-full ${activeSection === index ? 'bg-electric-500' : 'bg-neutral-300'}`}></div>
-                      <span className="text-xs md:text-sm text-neutral-500">Click to explore</span>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+            
 
-            {/* Stats Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.4 }}
-              className="bg-gradient-to-br from-electric-500 to-violet-600 rounded-2xl md:rounded-3xl p-6 text-white shadow-2xl"
-            >
-              <h4 className="font-black text-lg mb-4">Conference Highlights</h4>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-electric-100">Edition</span>
-                  <span className="font-black text-xl md:text-2xl">2nd</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-electric-100">Students</span>
-                  <span className="font-black text-xl md:text-2xl">2000+</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-electric-100">Faculty</span>
-                  <span className="font-black text-xl md:text-2xl">40+</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-electric-100">Legacy</span>
-                  <span className="font-black text-xl md:text-2xl">140+ yrs</span>
-                </div>
-              </div>
-            </motion.div>
+      
           </motion.div>
 
           {/* Right Side - Content Display */}
@@ -880,79 +868,131 @@ const AboutUs: FC = memo(() => {
 });
 
 
-const CallForPapers: FC = memo(() => (
-  <section id="call-for-papers" className="relative bg-gradient-to-br from-neutral-50 via-white to-electric-50 py-32 overflow-hidden">
-    {/* Background Elements */}
-    <div className="absolute top-0 right-0 w-96 h-96 bg-electric-200/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-    <div className="absolute bottom-0 left-0 w-96 h-96 bg-violet-200/30 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
-    
-    <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <SectionHeader 
-        title="Call For Papers" 
-        subtitle="Join the forefront of technological innovation. ICRAC 2026 invites groundbreaking research that will shape the future of computing and digital transformation." 
-      />
+const CallForPapers: FC = memo(() => {
+  // Extracted data from the uploaded image
+  const importantDates = [
+    { event: "Last Date For Paper Submission", date: "15th January 2026" },
+    { event: "Notifications of paper acceptance", date: "25th January 2026" },
+    { event: "Last date of registration", date: "31st January 2026" },
+    { event: "Last date of camera ready submission", date: "10th February 2026" },
+    { event: "Conference Date", date: "20th – 21st February 2026" },
+  ];
 
-    
+  return (
+    <section id="call-for-papers" className="relative bg-gradient-to-br from-neutral-50 via-white to-electric-50 py-32 overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-electric-200/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-violet-200/30 rounded-full blur-3xl translate-y-1/2 -translate-x-1/2"></div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
-        {researchAreas.map((area, index) => (
-          <motion.div
-            key={area.title}
-            initial={{ opacity: 0, y: 50 }}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionHeader 
+          title="Call For Papers" 
+          subtitle="Join the forefront of technological innovation. ICRAC 2026 invites groundbreaking research that will shape the future of computing and digital transformation." 
+        />
+
+        {/* --- SECTION 1: IMPORTANT DATES (Added Here as requested) --- */}
+        <div className="max-w-4xl mx-auto mb-24">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.6, delay: index * 0.1 }}
+            viewport={{ once: true }}
+            className="bg-white rounded-3xl shadow-xl border border-neutral-100 overflow-hidden"
           >
-            <InfoCard {...area} />
+            {/* Table Header */}
+            <div className="grid grid-cols-1 md:grid-cols-2 bg-gradient-to-r from-electric-600 to-violet-600 p-6">
+              <h3 className="text-xl font-bold text-white tracking-wide uppercase">Event</h3>
+              <h3 className="hidden md:block text-xl font-bold text-white tracking-wide uppercase text-right">Date</h3>
+            </div>
+
+            {/* Table Body */}
+            <div className="divide-y divide-neutral-100">
+              {importantDates.map((item, index) => (
+                <motion.div 
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="grid grid-cols-1 md:grid-cols-2 p-6 hover:bg-neutral-50 transition-colors duration-300 group"
+                >
+                  <div className="flex items-center">
+                    <span className="font-semibold text-neutral-700 text-lg group-hover:text-electric-600 transition-colors">
+                      {item.event}
+                    </span>
+                  </div>
+                  <div className="flex items-center md:justify-end mt-2 md:mt-0">
+                    <span className="font-bold text-lg text-violet-600 bg-violet-50 px-4 py-1 rounded-full border border-violet-100">
+                      {item.date}
+                    </span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
-        ))}
-      </div>
-      
-      <motion.div 
-        className="text-center"
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.3 }}
-      >
-          {/* --- ADDED: Microsoft CMT Acknowledgement --- */}
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        className="max-w-4xl mx-auto mb-16 bg-sky-50 border border-sky-200 rounded-3xl p-6 shadow-sm relative overflow-hidden"
-      >
-         {/* Decorative Azure element */}
-        <div className="absolute top-0 right-0 w-24 h-24 bg-sky-200/40 rounded-full blur-xl translate-x-10 -translate-y-10"></div>
-        
-        <div className="flex flex-col md:flex-row gap-5 items-start md:items-center relative z-10">
-            <div className="p-3 bg-white rounded-xl shadow-sm shrink-0">
-               <FiCheckCircle className="w-6 h-6 text-sky-600" />
-            </div>
-            <div>
-                <h3 className="text-lg font-bold text-sky-900 mb-1">Microsoft CMT Acknowledgement</h3>
-                <p className="text-sky-800/90 text-sm leading-relaxed">
-                    The Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support.
-                </p>
-            </div>
         </div>
-      </motion.div>
-      {/* ------------------------------------------- */}
-        <motion.a 
 
-          href="#submission" 
-          className="group inline-flex items-center bg-gradient-to-r from-electric-500 to-violet-600 text-white font-black py-5 px-12 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 text-lg"
-          whileHover={{ scale: 1.05, y: -4 }}
-          whileTap={{ scale: 0.95 }}
+        {/* --- SECTION 2: RESEARCH AREAS (Moved below table) --- */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+          {researchAreas.map((area, index) => (
+            <motion.div
+              key={area.title}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+            >
+              <InfoCard {...area} />
+            </motion.div>
+          ))}
+        </div>
+        
+        {/* --- SECTION 3: FOOTER ELEMENTS (CMT + Button) --- */}
+        <motion.div 
+          className="text-center"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
         >
-          Submit Your Research
-          <ChevronRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform duration-300" />
-        </motion.a>
+          {/* Microsoft CMT Acknowledgement */}
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-4xl mx-auto mb-16 bg-sky-50 border border-sky-200 rounded-3xl p-6 shadow-sm relative overflow-hidden text-left"
+          >
+             {/* Decorative Azure element */}
+            <div className="absolute top-0 right-0 w-24 h-24 bg-sky-200/40 rounded-full blur-xl translate-x-10 -translate-y-10"></div>
+            
+            <div className="flex flex-col md:flex-row gap-5 items-start md:items-center relative z-10">
+                <div className="p-3 bg-white rounded-xl shadow-sm shrink-0">
+                   <FiCheckCircle className="w-6 h-6 text-sky-600" />
+                </div>
+                <div>
+                    <h3 className="text-lg font-bold text-sky-900 mb-1">Microsoft CMT Acknowledgement</h3>
+                    <p className="text-sky-800/90 text-sm leading-relaxed">
+                        The Microsoft CMT service was used for managing the peer-reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support.
+                    </p>
+                </div>
+            </div>
+          </motion.div>
 
-      </motion.div>
-    </div>
-  </section>
-));
+          {/* Submit Button */}
+          <motion.a 
+            href="./submission" 
+            className="group inline-flex items-center bg-gradient-to-r from-electric-500 to-violet-600 text-white font-black py-5 px-12 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 text-lg"
+            whileHover={{ scale: 1.05, y: -4 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            Submit Paper
+            <ChevronRight className="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform duration-300" />
+          </motion.a>
+
+        </motion.div>
+      </div>
+    </section>
+  );
+});
 
 const FeaturedSpeakers: FC = memo(() => {
     // Combine all speakers into one list for a single, long marquee flow
@@ -1247,7 +1287,7 @@ const Contact: FC = memo(() => {
     { 
       icon: FiPhone, 
       title: "Phone Support", 
-      contact: "+91 9207483215 , +91 9774335503", 
+      contact: "Dr. Asha K: +91 9207483215  +91 9774335503", 
       href: "tel:+919207483215",
       description: "Direct contact with organizing committee members for urgent matters",
       color: "from-emerald-500 to-green-600"
@@ -1369,15 +1409,7 @@ const Contact: FC = memo(() => {
               </div>
             </motion.div>
 
-            {/* CTA Button */}
-            <motion.button
-              onClick={() => setShowContactForm(true)}
-              className="w-full bg-gradient-to-r from-electric-500 to-violet-600 text-white font-black py-4 rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500"
-              whileHover={{ scale: 1.02, y: -2 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              Send Message
-            </motion.button>
+   
           </motion.div>
 
           {/* Middle Column - Active Contact Details */}
@@ -1399,15 +1431,45 @@ const Contact: FC = memo(() => {
               <h3 className="text-2xl font-black text-white mb-4">{contactMethods[activeContact].title}</h3>
               <p className="text-neutral-300 leading-relaxed mb-6">{contactMethods[activeContact].description}</p>
               
-              <motion.a
+              
+<div className="flex flex-wrap gap-4">
+
+  <motion.a
                 href={contactMethods[activeContact].href}
                 className="inline-flex items-center bg-white/10 text-white font-semibold py-3 px-6 rounded-2xl hover:bg-white/20 transition-all duration-300 group"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                {contactMethods[activeContact].contact}
+                Dr. Asha K (Convener) <br />
+                +91 9207483215
                 <ExternalLink className="w-4 h-4 ml-2 group-hover:scale-110 transition-transform duration-300" />
               </motion.a>
+
+  {/* Dr. Sanjay Dutta */}
+  <motion.a
+    href="#" // Add link here (e.g., mailto: or profile link)
+    className="inline-flex items-center bg-white/10 text-white font-semibold py-3 px-6 rounded-2xl hover:bg-white/20 transition-all duration-300 group"
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+  >
+    Dr. Sanjay Dutta (Co-Convener) <br />
+    +91 9774335503
+    <ExternalLink className="w-4 h-4 ml-2 group-hover:scale-110 transition-transform duration-300" />
+  </motion.a>
+
+  {/* Dr. Mrinmoyee Bhattacharya */}
+  <motion.a
+    href="#" // Add link here
+    className="inline-flex items-center bg-white/10 text-white font-semibold py-3 px-6 rounded-2xl hover:bg-white/20 transition-all duration-300 group"
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+  >
+    Dr. Mrinmoyee Bhattacharya (Co-Convener) <br />
+    +91 99023 24482
+    <ExternalLink className="w-4 h-4 ml-2 group-hover:scale-110 transition-transform duration-300" />
+  </motion.a>
+</div>
+              
 
               {/* Additional Info */}
               <div className="mt-8 pt-6 border-t border-white/10">
@@ -1566,13 +1628,7 @@ const Contact: FC = memo(() => {
                   rows={4}
                   className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-2xl text-white placeholder-neutral-400 focus:outline-none focus:border-electric-500 transition-colors resize-none"
                 />
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="w-full bg-gradient-to-r from-electric-500 to-violet-600 text-white font-bold py-3 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
-                >
-                  Send Message
-                </motion.button>
+              
               </div>
             </motion.div>
           </motion.div>
