@@ -15,7 +15,7 @@ import {
   FiFileText,
   FiEdit3,
   FiCheckCircle,
-  FiTrendingUp,
+
 
   FiArrowRight
   
@@ -29,6 +29,8 @@ import SpringerLogo from "../assets/IMAGES/springer.png";
 
 import uttyler from "../assets/IMAGES/uttyler.jpg";
 import acmMeerut from "../assets/IMAGES/ACM merrut.png"
+import ictimage from "../assets/IMAGES/ICT-IMAGES.png";
+import serb from "../assets/IMAGES/SERB-500x500-removebg-preview.png"
 import Marquee from "react-fast-marquee";
 
 // --- TYPE DEFINITIONS ---
@@ -77,7 +79,15 @@ interface NavItem { name: string; to: string; }
 //     </motion.div>
 // );
 
-
+const EmergingTechIcon = () => (
+  <div className="p-3 bg-gradient-to-br from-emerald-500 to-violet-600 rounded-2xl">
+    {/* We use the raw SVG here to ensure it matches the size/style of the others exactly */}
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-white">
+      <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+      <polyline points="17 6 23 6 23 12"></polyline>
+    </svg>
+  </div>
+);
 
 // --- CUSTOM SVG ICONS ---
 // These are custom components for visually distinct icons.
@@ -166,7 +176,8 @@ const researchAreas = [
     color: "from-amber-400 to-amber-600"
   },
   {
-    icon: FiTrendingUp, // new icon added here
+    // UPDATED HERE
+    icon: EmergingTechIcon, 
     title: "Emerging Technologies & Business Analytics",
     description: "Explores new age technologies, strategic analytics, digital transformation and smart solutions.",
     color: "from-emerald-500 to-violet-600"
@@ -431,6 +442,12 @@ const Navbar: FC<{ isOpen: boolean; onToggle: () => void; scrolled: boolean }> =
 
 
 
+// --- IMPORT YOUR IMAGES HERE ---
+// import uttyler from "../assets/IMAGES/uttyler.jpg";
+// import acmMeerut from "../assets/IMAGES/ACM merrut.png";
+// import partner3Image from "../assets/IMAGES/partner3.png"; // <--- Add import
+// import partner4Image from "../assets/IMAGES/partner4.png"; // <--- Add import
+
 const Hero: FC = memo(() => {
     const containerRef = useRef<HTMLDivElement>(null);
     const { scrollYProgress } = useScroll({
@@ -521,39 +538,65 @@ const Hero: FC = memo(() => {
                     </div>
                 </motion.div>
 
-                {/* 4. PARTNERS SECTION (Updated: Massive Logos) */}
+                {/* 4. PARTNERS SECTION (Updated: 4 Logos in Row) */}
                 <motion.div
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 1, delay: 0.4 }}
-                    className="mb-8 w-full max-w-2xl"
+                    className="mb-8 w-full max-w-6xl" // INCREASED max-width to fit 4 items
                 >
                     <p className="text-[10px] font-bold text-neutral-500 uppercase tracking-[0.2em] mb-4">
                         In Association With
                     </p>
-                    <div className="flex justify-center items-center gap-8 sm:gap-16">
-                        {/* Partner 1 */}
+                    <div className="flex flex-wrap justify-center items-center gap-4 md:gap-8">
+                        
+                        {/* --- Partner 1 --- */}
                         <div className="flex flex-col items-center gap-3 group cursor-pointer">
-                            {/* Increased Container: h-24/w-24 mobile, h-32/w-32 desktop */}
                             <div className="h-24 w-24 sm:h-32 sm:w-32 bg-neutral-800/50 rounded-2xl flex items-center justify-center border border-white/5 group-hover:border-electric-500/30 transition-colors p-4">
-                                {/* Increased Image: h-16 mobile, h-24 desktop (approx 96px) */}
+                                {/* Use your actual image variable */}
                                 <img src={uttyler} alt="UT Tyler" className="h-16 sm:h-24 w-auto object-contain" /> 
                             </div>
                             <span className="text-xs text-neutral-400 group-hover:text-white transition-colors font-medium">UT Tyler, USA</span>
                         </div>
 
-                        {/* Divider */}
-                        <div className="h-16 w-px bg-white/10"></div>
+                        {/* Divider (Hidden on mobile) */}
+                        <div className="h-16 w-px bg-white/10 hidden md:block"></div>
 
-                        {/* Partner 2 */}
+                        {/* --- Partner 2 --- */}
                         <div className="flex flex-col items-center gap-3 group cursor-pointer">
-                            {/* Increased Container */}
                             <div className="h-24 w-24 sm:h-32 sm:w-32 bg-neutral-800/50 rounded-2xl flex items-center justify-center border border-white/5 group-hover:border-electric-500/30 transition-colors p-4">
-                                {/* Increased Image */}
+                                {/* Use your actual image variable */}
                                 <img src={acmMeerut} alt="ACM" className="h-16 sm:h-24 w-auto object-contain" />
                             </div>
                             <span className="text-xs text-neutral-400 group-hover:text-white transition-colors font-medium">ACM Meerut</span>
                         </div>
+
+                         {/* Divider (Hidden on mobile) */}
+                         <div className="h-16 w-px bg-white/10 hidden md:block"></div>
+
+                        {/* --- Partner 3 (NEW) --- */}
+                        <div className="flex flex-col items-center gap-3 group cursor-pointer">
+                            <div className="h-24 w-24 sm:h-32 sm:w-32 bg-neutral-800/50 rounded-2xl flex items-center justify-center border border-white/5 group-hover:border-electric-500/30 transition-colors p-4">
+                                {/* Replace with your 3rd image variable */}
+                                <img src={ictimage} alt="Partner 3" className="h-16 sm:h-24 w-auto object-contain" />
+                                {/* <span className="text-white/20 font-bold">Logo 3</span>  */}
+                            </div>
+                            <span className="text-xs text-neutral-400 group-hover:text-white transition-colors font-medium">ICT Academy</span>
+                        </div>
+
+                         {/* Divider (Hidden on mobile) */}
+                         <div className="h-16 w-px bg-white/10 hidden md:block"></div>
+
+                        {/* --- Partner 4 (NEW) --- */}
+                        <div className="flex flex-col items-center gap-3 group cursor-pointer">
+                            <div className="h-24 w-24 sm:h-32 sm:w-32 bg-neutral-800/50 rounded-2xl flex items-center justify-center border border-white/5 group-hover:border-electric-500/30 transition-colors p-4">
+                                {/* Replace with your 4th image variable */}
+                                <img src={serb} alt="Partner 4" className="h-16 sm:h-24 w-auto object-contain" />
+                                {/* <span className="text-white/20 font-bold">Logo 4</span> */}
+                            </div>
+                            <span className="text-xs text-neutral-400 group-hover:text-white transition-colors font-medium">SERB</span>
+                        </div>
+
                     </div>
                 </motion.div>
 
@@ -844,7 +887,7 @@ const internationalCommittee = [
 const nationalCommittee = [
   { name: "Dr. Srinivas Bhogle", role: "Scientist, CSIR-4PI, Delhi" },
   { name: "Dr. Deepak D’Souza", role: "IISc, Bengaluru" },
-  { name: "Dr. Bibhas Ghoshal", role: "IIT Allahabad, Prayagraj" },
+  { name: "Dr. Bibhas Ghoshal", role: "IIIT Allahabad, Prayagraj" },
   { name: "Dr. Narahari", role: "IISc, Bengaluru" },
   { name: "Dr. Prathosh A. P", role: "IIT Delhi" },
   { name: "Dr. Hanumanthappa H", role: "Bangalore University" },
