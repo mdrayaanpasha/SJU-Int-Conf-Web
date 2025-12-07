@@ -1,28 +1,6 @@
 {
-    "routes": [
-      {
-        "src": "/",
-        "dest": "/"
-      },
-    {
-        "src": "/about",
-        "dest": "/"
-    },
-     {
-        "src": "/contact",
-        "dest": "/"
-    },
-    {
-        "src": "/register",
-        "dest": "/"
-    },
-    {
-        "src": "/commities",
-        "dest": "/"
-    },
-    {
-        "src": "/submission",
-        "dest": "/"
-    }
-    ]
+  "bunVersion": "1.x",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/" }
+  ]
 }
