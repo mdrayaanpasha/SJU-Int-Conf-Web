@@ -270,8 +270,8 @@ export default function RegistrationPage() {
             <div className="bg-neutral-50 border-t border-neutral-200 p-6 text-center">
                 <p className="text-sm font-medium text-neutral-600">
                     <span className="font-bold text-electric-600 mr-1">* Note:</span> 
-                    Certificates for all team participants will be given upon extra payment of 
-                    <span className="font-bold text-neutral-900 ml-1">₹1000</span>.
+                    Certificates will be issued to co-authors upon payment of an extra amount of 
+                    <span className="font-bold text-neutral-900 ml-1">₹1000</span> per certificate.
                 </p>
             </div>
 
