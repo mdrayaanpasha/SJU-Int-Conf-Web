@@ -25,12 +25,13 @@ import { Link } from "react-router-dom";
 // --- ASSET IMPORTS ---
 // For larger projects, consider creating an index.ts in the IMAGES folder
 // to export all images from a single file for cleaner imports.
-import SpringerLogo from "../assets/IMAGES/springer.png";
 
 import uttyler from "../assets/IMAGES/uttyler.jpg";
 import acmMeerut from "../assets/IMAGES/ACM merrut.png"
 import ictimage from "../assets/IMAGES/ICT-IMAGES.png";
 import serb from "../assets/IMAGES/SERB-500x500-removebg-preview.png"
+import soit from "../assets/IMAGES/SOIT.jpg"
+import SJU from "../assets/IMAGES/SJU.png"
 import Marquee from "react-fast-marquee";
 
 // --- TYPE DEFINITIONS ---
@@ -553,6 +554,16 @@ const Hero: FC = memo(() => {
                         {/* --- Partner 1 --- */}
                         <div className="flex flex-col items-center gap-3 group cursor-pointer">
                             <div className="h-24 w-24 sm:h-32 sm:w-32 bg-neutral-800/50 rounded-2xl flex items-center justify-center border border-white/5 group-hover:border-electric-500/30 transition-colors p-4">
+                                {/* Replace with your 4th image variable */}
+                                <img src={serb} alt="Partner 4" className="h-16 sm:h-24 w-auto object-contain" />
+                                {/* <span className="text-white/20 font-bold">Logo 4</span> */}
+                            </div>
+                            <span className="text-xs text-neutral-400 group-hover:text-white transition-colors font-medium">SERB</span>
+                        </div>
+
+
+                        <div className="flex flex-col items-center gap-3 group cursor-pointer">
+                            <div className="h-24 w-24 sm:h-32 sm:w-32 bg-neutral-800/50 rounded-2xl flex items-center justify-center border border-white/5 group-hover:border-electric-500/30 transition-colors p-4">
                                 {/* Use your actual image variable */}
                                 <img src={uttyler} alt="UT Tyler" className="h-16 sm:h-24 w-auto object-contain" /> 
                             </div>
@@ -588,14 +599,7 @@ const Hero: FC = memo(() => {
                          <div className="h-16 w-px bg-white/10 hidden md:block"></div>
 
                         {/* --- Partner 4 (NEW) --- */}
-                        <div className="flex flex-col items-center gap-3 group cursor-pointer">
-                            <div className="h-24 w-24 sm:h-32 sm:w-32 bg-neutral-800/50 rounded-2xl flex items-center justify-center border border-white/5 group-hover:border-electric-500/30 transition-colors p-4">
-                                {/* Replace with your 4th image variable */}
-                                <img src={serb} alt="Partner 4" className="h-16 sm:h-24 w-auto object-contain" />
-                                {/* <span className="text-white/20 font-bold">Logo 4</span> */}
-                            </div>
-                            <span className="text-xs text-neutral-400 group-hover:text-white transition-colors font-medium">SERB</span>
-                        </div>
+                        
 
                     </div>
                 </motion.div>
@@ -653,45 +657,48 @@ const FiUsers = (props: React.SVGProps<SVGSVGElement>) => <svg {...props} xmlns=
 const AboutUs: FC = memo(() => {
   const [activeSection, setActiveSection] = useState(0);
 
-  const sections = [
-    {
-      id: 0,
-      title: "ICRAC 2026",
-      icon: "🎯",
-      color: "from-electric-500 to-violet-600",
-      bgColor: "bg-gradient-to-br from-electric-50 to-violet-100",
-      content:
-        "The 2nd International Conference on Recent Trends in Advanced Computing (ICRAC)-2026 will be organized by the School of Information Technology, St Joseph's University, Bengaluru, Karnataka, India, during February 20-21, 2026 (Hybrid Mode). ICRAC-2026 continues the legacy of a premier global platform for researchers and practitioners to share groundbreaking research findings, innovative ideas, and practical experiences in the fields of Data Science and Computer Science fostering collaboration, advancing knowledge, and shaping the future of technology-driven solutions worldwide. The conference proposes publishing research papers on advanced engineering, science and technology techniques, experimental analysis and theoretical reviews. This conference will serve as a platform for academicians, industrialists, and students to learn more about the latest technologies in data science. Selected papers at the conference will be considered for Scopus indexed conference proceedings."
-    },
-    {
-      id: 1,
-      title: "St Joseph's University",
-      icon: "🏛️",
-      color: "from-emerald-500 to-electric-600",
-      bgColor: "bg-gradient-to-br from-emerald-50 to-electric-100",
-      content:
-        "St Joseph's University (SJU) is a Jesuit University at the heart of Bengaluru established in 1882 by Paris Foreign Fathers and handed over to the Jesuit Order in 1937. It was affiliated with the University of Madras and later with Mysore and Bangalore Universities. In 1986, it became the first affiliated college in Karnataka to offer postgraduate courses. In 1988, it became the first in Karnataka to receive a research center and in 2005 received academic autonomy. In 2021 the university bill was placed in the Karnataka Legislative Council and it was inaugurated as India's first Public Private Partnership University on 27 September 2022."
-    },
-    {
-      id: 2,
-      title: "School of Information Technology",
-      icon: "💻",
-      color: "from-violet-500 to-electric-600",
-      bgColor: "bg-gradient-to-br from-violet-50 to-electric-100",
-      content:
-        "The School of IT consists of the Department of Computer Science and the Department of Advanced Computing. SIT offers programs in data analytics, computer science, computer applications and domain specific applications. The school focuses on holistic learning and supports more than 2000 students guided by 40 faculty members along with visiting researchers and industry professionals. Students solve real world problems and gain research experience. Its placement record remains exceptional."
-    }
-  ];
+const sections = [
+  {
+    id: 0,
+    title: "ICRAC 2026",
+    iconType: "emoji",
+    iconValue: "📘", // book icon
+    color: "from-electric-500 to-violet-600",
+    bgColor: "bg-gradient-to-br from-electric-50 to-violet-100",
+    content:
+      "The 2nd International Conference on Recent Trends in Advanced Computing (ICRAC)-2026 will be organized by the School of Information Technology, St Joseph's University, Bengaluru, Karnataka, India, during February 20-21, 2026 (Hybrid Mode). ICRAC-2026 continues the legacy of a premier global platform for researchers and practitioners to share groundbreaking research findings, innovative ideas, and practical experiences in the fields of Data Science and Computer Science fostering collaboration, advancing knowledge, and shaping the future of technology-driven solutions worldwide. The conference proposes publishing research papers on advanced engineering, science and technology techniques, experimental analysis and theoretical reviews. This conference will serve as a platform for academicians, industrialists, and students to learn more about the latest technologies in data science. Selected papers at the conference will be considered for Scopus indexed conference proceedings."
+  },
+  {
+    id: 1,
+    title: "St Joseph's University",
+    iconType: "image",
+    iconValue: SJU, // SJU logo
+    color: "from-emerald-500 to-electric-600",
+    bgColor: "bg-gradient-to-br from-emerald-50 to-electric-100",
+    content:
+      "St Joseph's University (SJU) is a Jesuit University at the heart of Bengaluru established in 1882 by Paris Foreign Fathers and handed over to the Jesuit Order in 1937. It was affiliated with the University of Madras and later with Mysore and Bangalore Universities. In 1986, it became the first affiliated college in Karnataka to offer postgraduate courses. In 1988, it became the first in Karnataka to receive a research center and in 2005 received academic autonomy. In 2021 the university bill was placed in the Karnataka Legislative Council and it was inaugurated as India's first Public Private Partnership University on 27 September 2022."
+  },
+  {
+    id: 2,
+    title: "School of Information Technology",
+    iconType: "image",
+    iconValue: soit, // SOIT logo
+    color: "from-violet-500 to-electric-600",
+    bgColor: "bg-gradient-to-br from-violet-50 to-electric-100",
+    content:
+      "The School of IT consists of the Department of Computer Science and the Department of Advanced Computing. SIT offers programs in data analytics, computer science, computer applications and domain specific applications. The school focuses on holistic learning and supports more than 2000 students guided by 40 faculty members along with visiting researchers and industry professionals. Students solve real world problems and gain research experience. Its placement record remains exceptional."
+  }
+];
+
+
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-white via-neutral-50 to-electric-50 py-16 md:py-32 overflow-hidden">
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="about"  className="relative min-h-screen bg-gradient-to-br from-white via-neutral-50 to-electric-50 py-16 md:py-32 overflow-hidden">
+      <div  className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div className="text-center mb-12 md:mb-20" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <div className="inline-flex items-center gap-4 text-electric-600 font-semibold text-xs md:text-sm uppercase tracking-widest mb-4 md:mb-6">
-            ABOUT THE CONFERENCE
-          </div>
+         
           <h2 className="text-4xl md:text-5xl lg:text-7xl font-black tracking-tight bg-gradient-to-r from-neutral-900 to-electric-700 bg-clip-text text-transparent mb-4 md:mb-8">
-            Our Story
+            About Us
           </h2>
           <p className="max-w-3xl mx-auto text-base md:text-xl text-neutral-600 leading-relaxed px-2">
             Discover the institutions and vision behind Asia's premier computing conference
@@ -711,7 +718,17 @@ const AboutUs: FC = memo(() => {
               }`}
               whileHover={{ scale: 1.02 }}
             >
-              <span className="mr-2">{section.icon}</span>
+<span className="mr-2 flex items-center justify-center">
+  {section.iconType === "emoji" ? (
+    <span className="text-xl">{section.iconValue}</span>
+  ) : (
+    <img
+      src={section.iconValue}
+      alt={section.title}
+      className="w-6 h-6 object-contain"
+    />
+  )}
+</span>
               {section.title}
             </motion.button>
           ))}
@@ -721,7 +738,21 @@ const AboutUs: FC = memo(() => {
         <motion.div key={activeSection} initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
           <div className={`rounded-2xl p-8 border border-neutral-200 shadow-xl ${sections[activeSection].bgColor}`}>
             <h3 className="text-3xl md:text-4xl font-black text-neutral-900 mb-4 flex items-center gap-3">
-              <div className={`w-14 h-14 rounded-xl bg-gradient-to-r ${sections[activeSection].color} flex items-center justify-center text-2xl text-white`}>{sections[activeSection].icon}</div>
+<div
+  className={`w-14 h-14 rounded-xl bg-gradient-to-r ${sections[activeSection].color} flex items-center justify-center`}
+>
+  {sections[activeSection].iconType === "emoji" ? (
+    <span className="text-2xl text-white">
+      {sections[activeSection].iconValue}
+    </span>
+  ) : (
+    <img
+      src={sections[activeSection].iconValue}
+      alt={sections[activeSection].title}
+      className="w-9 h-9 object-contain"
+    />
+  )}
+</div>
               {sections[activeSection].title}
             </h3>
 
@@ -1078,8 +1109,7 @@ const Submission: FC = memo(() => {
             Submission Process
           </h2>
           <p className="max-w-3xl mx-auto text-xl text-neutral-600 leading-relaxed">
-            Follow our streamlined process to get your research published in prestigious Springer proceedings
-          </p>
+Selected papers at the conference will be considered for Scopus indexed conference proceedings.          </p>
         </motion.div>
 
         {/* --- 1. Microsoft Acknowledgement (Full Width) --- */}
@@ -1165,7 +1195,6 @@ const Submission: FC = memo(() => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                {/* Springer */}
                <div className="bg-white rounded-3xl p-6 border border-neutral-200 shadow-lg flex flex-col items-center justify-center text-center hover:scale-[1.02] transition-transform">
-                  <img src={SpringerLogo} alt="Springer" className="h-10 mb-4 object-contain" />
                   <span className="px-3 py-1 bg-electric-50 text-electric-700 rounded-lg text-xs font-bold uppercase tracking-wide">
                     Scopus Indexed
                   </span>
