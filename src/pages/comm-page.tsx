@@ -76,7 +76,7 @@ const committeesData: Committee[] = [
     title: "Registration Committee",
     icon: ClipboardList,
     members: [
-      "Ms. Jeshma Nishita Dsouza",
+      "Ms. Jeshma Nishita Dsouza (Coordinator)",
       "Ms. Sruthi Surendran P",
       "Dr. Deepa Nagalavi"
     ]
@@ -94,8 +94,8 @@ const committeesData: Committee[] = [
     title: "Finance Committee",
     icon: DollarSign,
     members: [
-      "Dr. Shashikala D",
       "Ms. Jeshma Nishitha Dsouza (Coordinator)",
+      "Dr. Shashikala D",
       "Ms. Pooja A"
     ]
   },
