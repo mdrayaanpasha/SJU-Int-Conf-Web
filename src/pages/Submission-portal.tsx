@@ -238,7 +238,7 @@ export default function SubmissionPage() {
                 </span>
               </h2>
               <p className="text-lg text-neutral-600 mb-8 leading-relaxed">
-                Authors are invited to submit research or review papers. Accepted and registered papers will be presented during the conference and published in the proceedings.
+                Authors are invited to submit research or review papers. Selected papers of ICRAC 2026 will be published in <b>Scopus</b> Indexed conference proceedings (with an additional processing fee)
               </p>
 
               {/* Crucial Notes */}

@@ -52,7 +52,7 @@ const importantNotes = [
   "Only registered participant will get conference kit and certificate.",
   "Additional certificates will be issued to co-authors upon payment of an extra amount of ₹ 1000 per certificate.",
   "Please note that the conference will be held offline mode. All the offline participants have to manage their stay and travel on their own. Conference organizers are not responsible for travel and accommodation of the participants. Only tea/coffee, high tea, working lunch on Day 1 and 2 will be provided at the conference venue.",
-  "All accepted papers will be published in Conference proceedings with ISBN number. Selected papers will be published in Scopus indexed Elsevier publication with an additional fee.",
+  "All accepted papers will be published in Conference proceedings with ISBN number. Selected papers will be published in Scopus indexed Elsevier publication with an additional fee limited for 5 authors only",
   "Refund and Cancellation Policy: A candidate once registered and paid the registration fee is not allowed to cancel the registration. The registration fee for the conference once paid is not refundable."
 ];
 

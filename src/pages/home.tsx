@@ -1201,12 +1201,12 @@ const steps = [
                   </div>
                   <div className="space-y-3">
                      <div className="flex justify-between items-center text-sm border-b border-white/20 pb-2">
-                       <span>Submission</span>
+                       <span>Paper Submission</span>
                        <span className="font-bold text-lg">Jan 15</span>
                      </div>
                      <div className="flex justify-between items-center text-sm pt-1">
-                       <span>Conference</span>
-                       <span className="font-bold text-lg">Feb 20</span>
+                       <span>Conference Dates</span>
+                       <span className="font-bold text-lg">Feb 20 & 21</span>
                      </div>
                   </div>
                </div>
@@ -1248,8 +1248,8 @@ const Contact: FC = memo(() => {
     { 
       icon: FiMail, 
       title: "General Inquiries", 
-      contact: "icrac2026@gmail.com", 
-      href: "mailto:icrac2026@gmail.com",
+      contact: "icrac2026@office.sju.edu.in", 
+      href: "mailto:icrac2026@office.sju.edu.in",
       description: "For general questions about the conference, registration, and participation",
       color: "from-electric-500 to-blue-600"
     },
@@ -1617,7 +1617,7 @@ const Footer: FC = memo(() => (
         <div>
           <h3 className="text-3xl font-black mb-6 bg-gradient-to-r from-white to-electric-200 bg-clip-text text-transparent">ICRAC 2026</h3>
           <p className="text-white/60 text-lg leading-relaxed mb-6 font-medium">
-            Premier International Conference on Recent Trends in Advanced Computing
+            2nd International Conference on Recent Trends in Advanced Computing
           </p>
           <div className="flex space-x-3">
             {[1, 2, 3].map((i) => (
@@ -1663,9 +1663,9 @@ const Footer: FC = memo(() => (
         <div>
           <h4 className="font-black text-white text-lg mb-6">Contact</h4>
           <div className="text-white/60 text-lg space-y-3 font-medium">
-            <p>icrac2026@gmail.com</p>
+            <p>icrac2026@office.sju.edu.in</p>
             <p>St  Joseph's University</p>
-            <p>Bengaluru, India</p>
+            <p>Bengaluru, Karnataka, India</p>
           </div>
         </div>
       </div>
