@@ -648,7 +648,7 @@ const Star = (props: React.SVGProps<SVGSVGElement>) => (
   </svg>
 );
 const ChevronRight = (props: React.SVGProps<SVGSVGElement>) => <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M9 18l6-6-6-6"/></svg>;
-const FiAward = (props: React.SVGProps<SVGSVGElement>) => <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="7"/><path d="M15.4 12.97a3 3 0 010 4.06c-.88.88-2.3.88-3.18 0l-1.42-1.42a3 3 0 010-4.06c.88-.88 2.3-.88 3.18 0L14 11.55"/><path d="M8.6 11.03a3 3 0 000-4.06c.88-.88 2.3-.88 3.18 0l1.42 1.42a3 3 0 000 4.06c-.88.88-2.3.88-3.18 0L10 12.45"/></svg>;
+// const FiAward = (props: React.SVGProps<SVGSVGElement>) => <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="7"/><path d="M15.4 12.97a3 3 0 010 4.06c-.88.88-2.3.88-3.18 0l-1.42-1.42a3 3 0 010-4.06c.88-.88 2.3-.88 3.18 0L14 11.55"/><path d="M8.6 11.03a3 3 0 000-4.06c.88-.88 2.3-.88 3.18 0l1.42 1.42a3 3 0 000 4.06c-.88.88-2.3.88-3.18 0L10 12.45"/></svg>;
 const FiUsers = (props: React.SVGProps<SVGSVGElement>) => <svg {...props} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>;
 // End Placeholder components/icons
 
@@ -1046,32 +1046,34 @@ const FeaturedSpeakers: FC = memo(() => {
 const Submission: FC = memo(() => {
   const [activeStep, setActiveStep] = useState(0);
 
-  const steps = [
-    { 
-      icon: FiFileText, 
-      title: "Original Research", 
-      description: "Papers must be original and not previously published.",
-      color: "from-electric-500 to-blue-600"
-    },
-    { 
-      icon: FiEdit3, 
-      title: "Springer Format", 
-      description: "Manuscripts must follow the official Springer format.",
-      color: "from-emerald-500 to-green-600"
-    },
-    { 
-      icon: FiUsers, 
-      title: "Rigorous Peer-Review", 
-      description: "Strict peer-review process by domain experts.",
-      color: "from-amber-500 to-orange-600"
-    },
-    { 
-      icon: FiAward, 
-      title: "Scopus Publication", 
-      description: "Published in Scopus indexed Springer book series.",
-      color: "from-violet-500 to-purple-600"
-    }
-  ];
+const steps = [
+  { 
+    icon: FiFileText, 
+    title: "Original Research", 
+    description: "Papers must be original and not previously published.",
+    color: "from-electric-500 to-blue-600"
+  },
+  { 
+    icon: FiEdit3, 
+    title: "IEEE Format", 
+    description: (
+      <span>
+        Manuscripts must use the IEEE LaTeX class: 
+        {/* <code className="bg-neutral-100 px-1 mx-1 rounded text-electric-600 font-mono text-sm">
+          {"\\documentclass[conference]{IEEEtran}"}
+        </code>.  */}
+        Get the template at <a href="https://www.overleaf.com/gallery/tagged/ieee-official" target="_blank" rel="noreferrer" className="text-electric-600 underline hover:text-electric-700">Overleaf IEEE Gallery</a>.
+      </span>
+    ),
+    color: "from-emerald-500 to-green-600"
+  },
+  { 
+    icon: FiUsers, 
+    title: "Rigorous Peer-Review", 
+    description: "Strict peer-review process by domain experts.",
+    color: "from-amber-500 to-orange-600"
+  },
+];
 
   return (
     <section id="submission" className="relative bg-gradient-to-br from-white via-neutral-50 to-electric-50 py-24 overflow-hidden">
@@ -1093,7 +1095,7 @@ const Submission: FC = memo(() => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* --- Original Header Styling --- */}
+        {/* --- Header --- */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -1109,17 +1111,17 @@ const Submission: FC = memo(() => {
             Submission Process
           </h2>
           <p className="max-w-3xl mx-auto text-xl text-neutral-600 leading-relaxed">
-Selected papers at the conference will be considered for Scopus indexed conference proceedings.          </p>
+            Selected papers at the conference will be considered for Scopus indexed conference proceedings.
+          </p>
         </motion.div>
 
-        {/* --- 1. Microsoft Acknowledgement (Full Width) --- */}
+        {/* --- Microsoft Acknowledgement --- */}
         <motion.div 
             initial={{ opacity: 0, scale: 0.98 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             className="w-full bg-sky-50 border border-sky-200 rounded-3xl p-8 mb-12 shadow-sm relative overflow-hidden"
         >
-             {/* Decorative Azure bg element */}
             <div className="absolute top-0 right-0 w-32 h-32 bg-sky-200/30 rounded-full blur-2xl translate-x-10 -translate-y-10"></div>
             
             <div className="flex flex-col md:flex-row gap-6 items-start md:items-center relative z-10">
@@ -1135,14 +1137,12 @@ Selected papers at the conference will be considered for Scopus indexed conferen
             </div>
         </motion.div>
 
-        {/* --- 2. Compact Grid Layout --- */}
+        {/* --- Main Content Grid --- */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
           
-          {/* Left Column: Interactive Steps (Compact) */}
           <div className="space-y-6">
             <h3 className="text-2xl font-bold text-neutral-900 px-2">Steps to Publish</h3>
             
-            {/* Horizontal Tabs */}
             <div className="flex gap-3 overflow-x-auto pb-2 no-scrollbar">
               {steps.map((step, index) => (
                 <button
@@ -1159,7 +1159,6 @@ Selected papers at the conference will be considered for Scopus indexed conferen
               ))}
             </div>
 
-            {/* Active Card */}
             <motion.div
               key={activeStep}
               initial={{ opacity: 0, y: 10 }}
@@ -1173,11 +1172,10 @@ Selected papers at the conference will be considered for Scopus indexed conferen
                 </div>
                 <h3 className="text-2xl font-black text-neutral-900">{steps[activeStep].title}</h3>
               </div>
-              <p className="text-lg text-neutral-600 leading-relaxed mb-6">
+              <div className="text-lg text-neutral-600 leading-relaxed mb-6">
                 {steps[activeStep].description}
-              </p>
+              </div>
               
-              {/* Simple Progress Bar */}
               <div className="w-full bg-neutral-100 rounded-full h-2">
                 <motion.div
                   initial={{ width: 0 }}
@@ -1188,19 +1186,14 @@ Selected papers at the conference will be considered for Scopus indexed conferen
             </motion.div>
           </div>
 
-          {/* Right Column: Other Info & CTA */}
           <div className="space-y-6 lg:pt-14">
-            
-            {/* Springer & Timeline Split */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-               {/* Springer */}
                <div className="bg-white rounded-3xl p-6 border border-neutral-200 shadow-lg flex flex-col items-center justify-center text-center hover:scale-[1.02] transition-transform">
                   <span className="px-3 py-1 bg-electric-50 text-electric-700 rounded-lg text-xs font-bold uppercase tracking-wide">
                     Scopus Indexed
                   </span>
                </div>
 
-               {/* Timeline */}
                <div className="bg-gradient-to-br from-electric-600 to-violet-700 rounded-3xl p-6 text-white shadow-lg hover:scale-[1.02] transition-transform">
                   <div className="flex items-center gap-2 mb-4 opacity-90">
                     <FiClock className="w-5 h-5" />
@@ -1219,7 +1212,6 @@ Selected papers at the conference will be considered for Scopus indexed conferen
                </div>
             </div>
 
-            {/* CTA Button Link */}
             <Link to="/submission" className="block group">
               <motion.div 
                 whileHover={{ scale: 1.02 }}
@@ -1235,19 +1227,15 @@ Selected papers at the conference will be considered for Scopus indexed conferen
                         <FiArrowRight className="w-6 h-6" />
                     </div>
                  </div>
-                 {/* Button Hover Glow */}
                  <div className="absolute inset-0 bg-gradient-to-r from-electric-600 to-violet-600 opacity-0 group-hover:opacity-20 transition-opacity duration-500" />
               </motion.div>
             </Link>
-
           </div>
         </div>
-
       </div>
     </section>
   );
 });
-
 
 
 
@@ -1561,7 +1549,7 @@ const Contact: FC = memo(() => {
           <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-6 border border-white/10 text-center">
             <MapPin className="w-8 h-8 text-violet-400 mx-auto mb-3" />
             <h4 className="font-black text-white text-lg mb-2">Venue</h4>
-            <p className="text-neutral-300">St  Joseph's University</p>
+            <p className="text-neutral-300">St Joseph's University, 36, Lalbagh Road, Bengaluru-560027 </p>
           </div>
         </motion.div>
       </div>
