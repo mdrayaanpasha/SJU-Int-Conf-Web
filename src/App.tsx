@@ -11,8 +11,8 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/submission" element={<SubmissionPortal/>} />
-                    <Route path="/commities" element={<CommitteesPage/>} />
-          <Route path="/register" element={<RegistrationPage/>} />
+          <Route path="/committees" element={<CommitteesPage/>} />
+          <Route path="/registration" element={<RegistrationPage/>} />
 
 
         </Routes>

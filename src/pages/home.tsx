@@ -612,7 +612,7 @@ const Hero: FC = memo(() => {
                     className="flex flex-col sm:flex-row gap-4 w-full justify-center"
                 >
                     <motion.a
-                        href="./register"
+                        href="./registration"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                         className="group flex items-center justify-center gap-2 px-8 py-3.5 bg-white text-neutral-950 rounded-xl font-bold text-base sm:text-lg shadow-[0_0_30px_-10px_rgba(255,255,255,0.3)] hover:shadow-[0_0_40px_-5px_rgba(255,255,255,0.5)] transition-all"
@@ -1027,7 +1027,7 @@ const FeaturedSpeakers: FC = memo(() => {
         {/* CTA */}
         <div className="text-center mt-12">
             <motion.a 
-                href="/commities"
+                href="/committees"
                 className="inline-flex items-center gap-2 text-neutral-400 hover:text-white transition-colors duration-300 font-semibold border-b border-transparent hover:border-electric-500 pb-1"
                 whileHover={{ x: 5 }}
             >
