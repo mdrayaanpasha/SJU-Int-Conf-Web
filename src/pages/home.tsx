@@ -676,7 +676,10 @@ const sections = [
     color: "from-emerald-500 to-electric-600",
     bgColor: "bg-gradient-to-br from-emerald-50 to-electric-100",
     content:
-      "St Joseph's University (SJU) is a Jesuit University at the heart of Bengaluru established in 1882 by Paris Foreign Fathers and handed over to the Jesuit Order in 1937. It was affiliated with the University of Madras and later with Mysore and Bangalore Universities. In 1986, it became the first affiliated college in Karnataka to offer postgraduate courses. In 1988, it became the first in Karnataka to receive a research center and in 2005 received academic autonomy. In 2021 the university bill was placed in the Karnataka Legislative Council and it was inaugurated as India's first Public Private Partnership University on 27 September 2022."
+      "St Joseph's University (SJU) is a Jesuit University at the heart of Bengaluru established in 1882 by Paris Foreign Fathers and handed over to the Jesuit Order in 1937. It was affiliated with the University of Madras and later with Mysore and Bangalore Universities. In 1986, it became the first affiliated college in Karnataka to offer postgraduate courses. In 1988, it became the first in Karnataka to receive a research center and in 2005 received academic autonomy. In 2021 the university bill was placed in the Karnataka Legislative Council and it was inaugurated as India's first Public Private Partnership University on 27 September 2022.",
+    links: [
+      { text: "Visit St. Joseph's University", url: "https://www.sju.edu.in/" }
+    ]
   },
   {
     id: 2,
@@ -686,7 +689,12 @@ const sections = [
     color: "from-violet-500 to-electric-600",
     bgColor: "bg-gradient-to-br from-violet-50 to-electric-100",
     content:
-      "The School of IT consists of the Department of Computer Science and the Department of Advanced Computing. SIT offers programs in data analytics, computer science, computer applications and domain specific applications. The school focuses on holistic learning and supports more than 2000 students guided by 40 faculty members along with visiting researchers and industry professionals. Students solve real world problems and gain research experience. Its placement record remains exceptional."
+      "The School of IT consists of the Department of Computer Science and the Department of Advanced Computing. SIT offers programs in data analytics, computer science, computer applications and domain specific applications. The school focuses on holistic learning and supports more than 2000 students guided by 40 faculty members along with visiting researchers and industry professionals. Students solve real world problems and gain research experience. Its placement record remains exceptional.",
+    links: [
+      { text: "School of Information Technology", url: "https://www.sju.edu.in/academics/st-joseph-university/school--of-information-technology" },
+      { text: "Department of Advanced Computing", url: "https://www.sju.edu.in/departments/st-joseph-university/school--of-information-technology/advanced-computing" },
+      { text: "Department of Computer Science", url: "https://www.sju.edu.in/departments/st-joseph-university/school--of-information-technology/computer-science-and-computer-application" }
+    ]
   }
 ];
 
@@ -760,6 +768,25 @@ const sections = [
               {sections[activeSection].content.split('. ').map((sentence, i, arr) => (
                 <p key={i} className="text-justify">{sentence}{i < arr.length - 1 ? '.' : ''}</p>
               ))}
+              {sections[activeSection].links && (
+                <div className="mt-6 pt-6 border-t border-neutral-300/50">
+                  <p className="text-sm font-semibold text-neutral-600 mb-3">Learn More:</p>
+                  <div className="flex flex-wrap gap-3">
+                    {sections[activeSection].links.map((link, idx) => (
+                      <a
+                        key={idx}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 hover:bg-white border border-neutral-300 hover:border-electric-500 rounded-lg text-sm font-medium text-neutral-700 hover:text-electric-600 transition-all duration-200 shadow-sm hover:shadow-md"
+                      >
+                        {link.text}
+                        <ExternalLink className="w-4 h-4" />
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </motion.div>
@@ -1672,7 +1699,17 @@ const Footer: FC = memo(() => (
       
       <div className="border-t border-white/10 pt-8 text-center space-y-4">
         <p className="text-white/40 text-lg font-medium">
-          &copy; 2026 ICRAC - St  Joseph's University, Bengaluru. All rights reserved.
+          &copy; 2026 ICRAC -{' '}
+          <a 
+            href="https://www.sju.edu.in/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="hover:text-electric-400 transition-colors underline inline-flex items-center gap-1"
+          >
+            St. Joseph's University
+            <ExternalLink className="w-3 h-3" />
+          </a>
+          , Bengaluru. All rights reserved.
         </p>
         <p className="text-white/40 text-sm max-w-3xl mx-auto">
           The Microsoft CMT service was used for managing the peer reviewing process for this conference. This service was provided for free by Microsoft and they bore all expenses, including costs for Azure cloud services as well as for software development and support.
