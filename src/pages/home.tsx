@@ -801,10 +801,10 @@ const sections = [
 const CallForPapers: FC = memo(() => {
   // Extracted data from the uploaded image
   const importantDates = [
-    { event: "Last Date For Paper Submission", date: "15th January 2026" },
+    { event: "Extended Date For Paper Submission", date: "30th January 2026" },
     { event: "Notifications of paper acceptance", date: "25th January 2026" },
-    { event: "Last date of registration", date: "31st January 2026" },
-    { event: "Last date of camera ready submission", date: "10th February 2026" },
+    { event: "Last date of registration", date: "26th January 2026" },
+    { event: "Last date of camera ready submission", date: "8th February 2026" },
     { event: "Conference Date", date: "20th – 21st February 2026" },
   ];
 
