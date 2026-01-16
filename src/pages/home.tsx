@@ -1229,7 +1229,7 @@ const steps = [
                   <div className="space-y-3">
                      <div className="flex justify-between items-center text-sm border-b border-white/20 pb-2">
                        <span>Paper Submission</span>
-                       <span className="font-bold text-lg">Jan 15</span>
+                       <span className="font-bold text-lg">Jan 30</span>
                      </div>
                      <div className="flex justify-between items-center text-sm pt-1">
                        <span>Conference Dates</span>
