@@ -2,6 +2,8 @@
 <html lang="en">
   <head>
     <!-- Google Tag Manager -->
+    <!-- IMPORTANT: Only GTM is loaded here. Configure GA4 inside GTM to avoid duplicate pageviews. -->
+    <!-- Do NOT add direct gtag.js or Google Analytics scripts here - use GTM tags instead. -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -35,6 +37,66 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="ICRAC 2026 – International Conference on Computing" />
     <meta name="twitter:description" content="International academic conference on recent advances in computing hosted by St Joseph's University." />
+
+    <!-- Structured Data (JSON-LD Schema) -->
+    <!-- Event Schema -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "ICRAC 2026 – International Conference on Recent Advances in Computing",
+  "description": "ICRAC 2026 is an international academic conference focusing on Artificial Intelligence, Machine Learning, Data Science, and emerging computing technologies.",
+  "startDate": "2026-02-20",
+  "endDate": "2026-02-20",
+  "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+  "eventStatus": "https://schema.org/EventScheduled",
+  "url": "https://icrac-2026.vercel.app/",
+  "location": {
+    "@type": "Place",
+    "name": "St. Joseph's University",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Bengaluru",
+      "addressRegion": "Karnataka",
+      "addressCountry": "IN"
+    }
+  },
+  "organizer": {
+    "@type": "Organization",
+    "name": "St. Joseph's University, Bengaluru",
+    "url": "https://www.sju.edu.in/"
+  }
+}
+</script>
+
+    <!-- Organization Schema -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "St. Joseph's University, Bengaluru",
+  "url": "https://www.sju.edu.in/",
+  "logo": "https://www.sju.edu.in/uploads/userfiles/image/St%20Joseph's%20University%20Emblem.png",
+  "sameAs": [
+    "https://www.linkedin.com/school/st-josephs-university-bangalore/",
+    "https://www.facebook.com/sjubangalore"
+  ]
+}
+</script>
+
+    <!-- Website Schema -->
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "ICRAC 2026 Conference Website",
+  "url": "https://icrac-2026.vercel.app/",
+  "publisher": {
+    "@type": "Organization",
+    "name": "St. Joseph's University, Bengaluru"
+  }
+}
+</script>
   </head>
   <body>
     <!-- Google Tag Manager (noscript) -->
